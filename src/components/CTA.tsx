@@ -15,12 +15,9 @@ const CTA = () => {
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
             See how easy it is to give your clients the instant service they're looking for. Book a quick demo—no pressure, just a friendly walkthrough.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center">
             <Button size="lg" variant="warm" className="text-lg" onClick={() => setIsContactModalOpen(true)}>
               Book Your Free Demo
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg">
-              Learn More
             </Button>
           </div>
         </div>
