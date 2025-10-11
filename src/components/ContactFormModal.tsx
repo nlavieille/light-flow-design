@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+import { getSupabase } from "@/integrations/supabase/client";
 
 interface ContactFormModalProps {
   open: boolean;
@@ -46,6 +46,7 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
+      const supabase = getSupabase();
       const { error } = await supabase.functions.invoke("send-contact-email", {
         body: { name: name.trim(), email: email.trim(), message: message.trim() },
       });
@@ -62,11 +63,14 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
       setEmail("");
       setMessage("");
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
+      const description = error?.message?.includes("Missing Supabase environment variables")
+        ? "Setup is finishing. Please reload and try again in a moment."
+        : "Please try again or email us directly";
       toast({
         title: "Something went wrong",
-        description: "Please try again or email us directly",
+        description,
         variant: "destructive",
       });
     } finally {
