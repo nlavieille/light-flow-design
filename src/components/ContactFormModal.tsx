@@ -46,12 +46,17 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
-      // First attempt: official client invocation
       const supabase = getSupabase();
-      const { error } = await supabase.functions.invoke("send-contact-email", {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
         body: { name: name.trim(), email: email.trim(), message: message.trim() },
       });
-      if (error) throw error;
+
+      if (error) {
+        console.error("Edge function error:", error);
+        throw error;
+      }
+
+      console.log("Email sent successfully:", data);
 
       toast({
         title: "Message Sent!",
@@ -63,47 +68,13 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
       setEmail("");
       setMessage("");
       onOpenChange(false);
-    } catch (invokeError: any) {
-      // Second attempt: direct call using the full URL if available
-      try {
-        const base = (import.meta.env as any).VITE_SUPABASE_URL as string | undefined;
-        const anon = ((import.meta.env as any).VITE_SUPABASE_ANON_KEY || (import.meta.env as any).VITE_SUPABASE_PUBLISHABLE_KEY) as string | undefined;
-        if (!base) throw new Error("missing-supabase-url");
-        const headers: Record<string, string> = { "Content-Type": "application/json" };
-        if (anon) headers["apikey"] = anon;
-
-        const res = await fetch(`${base}/functions/v1/send-contact-email`, {
-          method: "POST",
-          headers,
-          body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({} as any));
-          throw new Error(data?.error || `Request failed with status ${res.status}`);
-        }
-
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for reaching out. We'll get back to you soon!",
-        });
-
-        // Reset form
-        setName("");
-        setEmail("");
-        setMessage("");
-        onOpenChange(false);
-      } catch (directErr: any) {
-        console.error("Error submitting form:", directErr);
-        // Final fallback: open the user's email client with a pre-filled message
-        const subject = encodeURIComponent(`New Contact Form: ${name.trim()}`);
-        const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`);
-        window.location.href = `mailto:noel@princesslight.com?subject=${subject}&body=${body}`;
-        toast({
-          title: "Couldn’t reach the server",
-          description: "Opened your email app with the message pre-filled as a backup.",
-          variant: "destructive",
-        });
-      }
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Something went wrong",
+        description: error?.message || "Please try again later",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }
