@@ -46,30 +46,12 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
-      // Try preferred: Supabase client invoke
-      let invokeError: any = null;
-      try {
-        const supabase = getSupabase();
-        const { error } = await supabase.functions.invoke("send-contact-email", {
-          body: { name: name.trim(), email: email.trim(), message: message.trim() },
-        });
-        if (error) invokeError = error;
-      } catch (e: any) {
-        invokeError = e;
-      }
-
-      // Fallback: direct call to the Edge Function using full URL
-      if (invokeError) {
-        const res = await fetch(`${window.location.origin}/functions/v1/send-contact-email`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({} as any));
-          throw new Error(data?.error || `Request failed with status ${res.status}`);
-        }
-      }
+      // First attempt: official client invocation
+      const supabase = getSupabase();
+      const { error } = await supabase.functions.invoke("send-contact-email", {
+        body: { name: name.trim(), email: email.trim(), message: message.trim() },
+      });
+      if (error) throw error;
 
       toast({
         title: "Message Sent!",
@@ -81,16 +63,47 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
       setEmail("");
       setMessage("");
       onOpenChange(false);
-    } catch (error: any) {
-      console.error("Error submitting form:", error);
-      const description = error?.message?.includes("Missing Supabase environment variables")
-        ? "Setup is finishing. Please reload and try again in a moment."
-        : "Please try again or email us directly";
-      toast({
-        title: "Something went wrong",
-        description,
-        variant: "destructive",
-      });
+    } catch (invokeError: any) {
+      // Second attempt: direct call using the full URL if available
+      try {
+        const base = (import.meta.env as any).VITE_SUPABASE_URL as string | undefined;
+        const anon = ((import.meta.env as any).VITE_SUPABASE_ANON_KEY || (import.meta.env as any).VITE_SUPABASE_PUBLISHABLE_KEY) as string | undefined;
+        if (!base) throw new Error("missing-supabase-url");
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (anon) headers["apikey"] = anon;
+
+        const res = await fetch(`${base}/functions/v1/send-contact-email`, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({} as any));
+          throw new Error(data?.error || `Request failed with status ${res.status}`);
+        }
+
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for reaching out. We'll get back to you soon!",
+        });
+
+        // Reset form
+        setName("");
+        setEmail("");
+        setMessage("");
+        onOpenChange(false);
+      } catch (directErr: any) {
+        console.error("Error submitting form:", directErr);
+        // Final fallback: open the user's email client with a pre-filled message
+        const subject = encodeURIComponent(`New Contact Form: ${name.trim()}`);
+        const body = encodeURIComponent(`Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`);
+        window.location.href = `mailto:noel@princesslight.com?subject=${subject}&body=${body}`;
+        toast({
+          title: "Couldn’t reach the server",
+          description: "Opened your email app with the message pre-filled as a backup.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
