@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { getSupabase } from "@/integrations/supabase/client";
 
 interface ContactFormModalProps {
   open: boolean;
@@ -46,17 +45,21 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
-      const supabase = getSupabase();
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: { name: name.trim(), email: email.trim(), message: message.trim() },
+      const response = await fetch("https://formspree.io/f/mldpwbjn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          message: message.trim(),
+        }),
       });
 
-      if (error) {
-        console.error("Edge function error:", error);
-        throw error;
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
-
-      console.log("Email sent successfully:", data);
 
       toast({
         title: "Message Sent!",
@@ -72,7 +75,7 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
       console.error("Error submitting form:", error);
       toast({
         title: "Something went wrong",
-        description: error?.message || "Please try again later",
+        description: "Please try again later",
         variant: "destructive",
       });
     } finally {
