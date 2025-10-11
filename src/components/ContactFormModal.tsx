@@ -46,12 +46,30 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
-      const supabase = getSupabase();
-      const { error } = await supabase.functions.invoke("send-contact-email", {
-        body: { name: name.trim(), email: email.trim(), message: message.trim() },
-      });
+      // Try preferred: Supabase client invoke
+      let invokeError: any = null;
+      try {
+        const supabase = getSupabase();
+        const { error } = await supabase.functions.invoke("send-contact-email", {
+          body: { name: name.trim(), email: email.trim(), message: message.trim() },
+        });
+        if (error) invokeError = error;
+      } catch (e: any) {
+        invokeError = e;
+      }
 
-      if (error) throw error;
+      // Fallback: direct call to the Edge Function using full URL
+      if (invokeError) {
+        const res = await fetch(`${window.location.origin}/functions/v1/send-contact-email`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({} as any));
+          throw new Error(data?.error || `Request failed with status ${res.status}`);
+        }
+      }
 
       toast({
         title: "Message Sent!",
