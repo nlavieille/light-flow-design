@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import ContactFormModal from "./ContactFormModal";
 
 const CTA = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
   return (
     <section className="py-20 bg-secondary/50">
       <div className="container mx-auto px-4">
@@ -12,7 +16,7 @@ const CTA = () => {
             See how easy it is to give your clients the instant service they're looking for. Book a quick demo—no pressure, just a friendly walkthrough.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="warm" className="text-lg">
+            <Button size="lg" variant="warm" className="text-lg" onClick={() => setIsContactModalOpen(true)}>
               Book Your Free Demo
             </Button>
             <Button size="lg" variant="outline" className="text-lg">
@@ -21,6 +25,7 @@ const CTA = () => {
           </div>
         </div>
       </div>
+      <ContactFormModal open={isContactModalOpen} onOpenChange={setIsContactModalOpen} />
     </section>
   );
 };

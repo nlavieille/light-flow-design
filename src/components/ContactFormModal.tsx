@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { getSupabase } from "@/integrations/supabase/client";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ContactFormModalProps {
   open: boolean;
@@ -46,7 +46,6 @@ const ContactFormModal = ({ open, onOpenChange }: ContactFormModalProps) => {
     setIsSubmitting(true);
 
     try {
-      const supabase = getSupabase();
       const { error } = await supabase.functions.invoke("send-contact-email", {
         body: { name: name.trim(), email: email.trim(), message: message.trim() },
       });
