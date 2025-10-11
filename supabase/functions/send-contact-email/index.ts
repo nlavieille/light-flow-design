@@ -53,7 +53,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send email notification to you
     const emailResponse = await resend.emails.send({
       from: "Princess Light <onboarding@resend.dev>",
-      to: ["your-email@example.com"], // Replace with your actual email
+      to: "noel@princesslight.com", // Replace with your actual email
       replyTo: email,
       subject: `New Contact Form: ${name}`,
       html: `
