@@ -24,10 +24,6 @@
       --chat--message--bot--color: #ffffff;
       --chat--message--user--background: #f2f4f8;
       --chat--message--user--color: #333333;
-
-      /* Minimize subtitle presence */
-      --chat--subtitle--font-size: 0;
-      --chat--subtitle--line-height: 0;
     }
 
     body {
@@ -165,7 +161,7 @@
 
   </div>
 
-  <!-- Container target (not visually intrusive; widget uses window mode) -->
+  <!-- Target container for n8n chat (widget uses window mode) -->
   <div id="n8n-chat"></div>
 
   <!-- n8n Chat widget script -->
@@ -173,7 +169,7 @@
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
     // Initialize the chat widget
-    createChat({
+    const widget = createChat({
       webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
       webhookConfig: {
         method: 'POST',
@@ -186,25 +182,36 @@
       metadata: {},
       showWelcomeScreen: false,
       defaultLanguage: 'en',
-      initialMessages: [],     // no initial text bubbles
+      initialMessages: [
+        "My name is Artoo. Can I schedule a demo for you?"
+      ],
       i18n: {
         en: {
-          title: '',           // strip title
-          subtitle: '',        // strip subtitle
-          footer: '',
-          getStarted: 'New Conversation'
+          title: "Beep-boop-DEET-doo. Whirrrr-beep-beep bwoop-dee-doo-beep?",
+          subtitle: "[Translator: Enabled]",
+          footer: "",
+          getStarted: "New Conversation",
+          inputPlaceholder: "Type your question..."
         }
       }
     });
 
-    // Make ALL buttons/CTAs open the chatbot
+    // Helper to get the chat toggle button, regardless of class variant
+    function getChatToggleButton() {
+      return (
+        document.querySelector('.n8n-chat-widget-toggle') ||
+        document.querySelector('.n8n-chat-widget__toggle')
+      );
+    }
+
+    // Make ALL CTA buttons (and any <button>) open the chatbot
     document.addEventListener('click', function (event) {
       const button = event.target.closest('a.cta-button, button');
       if (!button) return;
 
       event.preventDefault();
 
-      const toggleButton = document.querySelector('.n8n-chat-widget__toggle');
+      const toggleButton = getChatToggleButton();
       if (toggleButton) {
         toggleButton.click(); // open (or toggle) the chat widget
         toggleButton.focus();
