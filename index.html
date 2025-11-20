@@ -94,6 +94,52 @@
       font-style: italic;
       color: #666;
     }
+
+    /* Fullscreen chat overlay */
+    #chat-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none; /* hidden by default */
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #chat-overlay-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      background: #ffffff;
+    }
+
+    #n8n-chat {
+      width: 100%;
+      height: 100%;
+    }
+
+    #chat-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      font-size: 20px;
+      line-height: 32px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #chat-close-btn:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
   </style>
 </head>
 <body>
@@ -161,14 +207,19 @@
 
   </div>
 
-  <!-- Target container for n8n chat (widget uses window mode) -->
-  <div id="n8n-chat"></div>
+  <!-- Fullscreen chat overlay -->
+  <div id="chat-overlay">
+    <div id="chat-overlay-inner">
+      <button id="chat-close-btn" aria-label="Close chat">&times;</button>
+      <div id="n8n-chat"></div>
+    </div>
+  </div>
 
   <!-- n8n Chat widget script -->
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-    // Initialize the chat widget
+    // Initialize the chat widget in FULLSCREEN mode inside our overlay container
     const widget = createChat({
       webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
       webhookConfig: {
@@ -176,7 +227,7 @@
         headers: {}
       },
       target: '#n8n-chat',
-      mode: 'window',          // floating widget style
+      mode: 'fullscreen',        // Use fullscreen mode so the chat fills the overlay
       chatInputKey: 'chatInput',
       chatSessionKey: 'sessionId',
       metadata: {},
@@ -196,25 +247,35 @@
       }
     });
 
-    // Helper to get the chat toggle button, regardless of class variant
-    function getChatToggleButton() {
-      return (
-        document.querySelector('.n8n-chat-widget-toggle') ||
-        document.querySelector('.n8n-chat-widget__toggle')
-      );
+    const overlay = document.getElementById('chat-overlay');
+    const closeBtn = document.getElementById('chat-close-btn');
+
+    function openChatOverlay() {
+      overlay.style.display = 'flex';
     }
 
-    // Make ALL CTA buttons (and any <button>) open the chatbot
+    function closeChatOverlay() {
+      overlay.style.display = 'none';
+    }
+
+    // Make ALL CTA buttons (and any <button>) open the chatbot overlay
     document.addEventListener('click', function (event) {
       const button = event.target.closest('a.cta-button, button');
       if (!button) return;
 
       event.preventDefault();
+      openChatOverlay();
+    });
 
-      const toggleButton = getChatToggleButton();
-      if (toggleButton) {
-        toggleButton.click(); // open (or toggle) the chat widget
-        toggleButton.focus();
+    // Close button in the overlay
+    closeBtn.addEventListener('click', function () {
+      closeChatOverlay();
+    });
+
+    // Optional: close overlay when clicking outside the chat inner panel
+    overlay.addEventListener('click', function (event) {
+      if (event.target === overlay) {
+        closeChatOverlay();
       }
     });
   </script>
