@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Princess Light Media | AI Assistant for Clinics</title>
-  <script type="module">
-    import Chat from 'https://cdn.jsdelivr.net/npm/@n8n/chat@0.1.13/dist/web.js';
-    Chat.init({
-      webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
-      theme: {
-        color: '#0077cc'
-      }
-    });
-  </script>
+
+  <!-- n8n Chat widget styles -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
   <style>
+    :root {
+      /* Match chat colors to CTA button blues */
+      --chat--color-primary: #0077cc;
+      --chat--color-primary-shade-50: #005fa3;
+      --chat--color-primary-shade-100: #004b82;
+      --chat--color-secondary: #0077cc;
+      --chat--color-light: #f2f4f8;
+      --chat--color-dark: #2c3e50;
+      --chat--header--background: #0077cc;
+      --chat--header--color: #ffffff;
+      --chat--message--bot--background: #0077cc;
+      --chat--message--bot--color: #ffffff;
+      --chat--message--user--background: #f2f4f8;
+      --chat--message--user--color: #333333;
+
+      /* Minimize subtitle presence */
+      --chat--subtitle--font-size: 0;
+      --chat--subtitle--line-height: 0;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
@@ -90,7 +106,7 @@
     <section class="section">
       <h1>You’re Burned Out. So Were We.</h1>
       <p><strong>That’s why we built this.</strong> An AI assistant that handles bookings, answers questions, and helps your clinic stay available—without adding to your team or your stress.</p>
-      <a class="cta-button" onclick="window.n8nChat.open()">Book a Free Demo</a>
+      <a class="cta-button" href="#">Book a Free Demo</a>
     </section>
 
     <section class="section">
@@ -138,16 +154,62 @@
       <h2>Want to See It in Action?</h2>
       <p><strong>Book a Free Demo</strong><br>
       No pressure. No jargon. Just a simple tour to show you what’s possible.</p>
-      <a class="cta-button" onclick="window.n8nChat.open()">Book Your Demo</a>
+      <a class="cta-button" href="#">Book Your Demo</a>
     </section>
 
     <div class="footer">
       <p><strong>Princess Light Media</strong><br>
       Helping physiotherapy clinics stay connected—without running themselves ragged.<br>
       Even if we occasionally break the calendar. ❤️</p>
-      <em>“Bru 2:24”</em>
     </div>
 
   </div>
+
+  <!-- Container target (not visually intrusive; widget uses window mode) -->
+  <div id="n8n-chat"></div>
+
+  <!-- n8n Chat widget script -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    // Initialize the chat widget
+    createChat({
+      webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
+      webhookConfig: {
+        method: 'POST',
+        headers: {}
+      },
+      target: '#n8n-chat',
+      mode: 'window',          // floating widget style
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      metadata: {},
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [],     // no initial text bubbles
+      i18n: {
+        en: {
+          title: '',           // strip title
+          subtitle: '',        // strip subtitle
+          footer: '',
+          getStarted: 'New Conversation'
+        }
+      }
+    });
+
+    // Make ALL buttons/CTAs open the chatbot
+    document.addEventListener('click', function (event) {
+      const button = event.target.closest('a.cta-button, button');
+      if (!button) return;
+
+      event.preventDefault();
+
+      const toggleButton = document.querySelector('.n8n-chat-widget__toggle');
+      if (toggleButton) {
+        toggleButton.click(); // open (or toggle) the chat widget
+        toggleButton.focus();
+      }
+    });
+  </script>
 </body>
 </html>
