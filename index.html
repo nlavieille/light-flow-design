@@ -52,6 +52,7 @@
       border-radius: 6px;
       font-weight: bold;
       transition: background-color 0.3s;
+      cursor: pointer;
     }
     .cta-button:hover {
       background-color: #005fa3;
@@ -73,6 +74,18 @@
       font-style: italic;
       color: #666;
     }
+    iframe.chatbot-frame {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 400px;
+      height: 600px;
+      border: none;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+      border-radius: 10px;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
@@ -81,7 +94,7 @@
     <section class="section">
       <h1>You’re Burned Out. So Were We.</h1>
       <p><strong>That’s why we built this.</strong> An AI assistant that handles bookings, answers questions, and helps your clinic stay available—without adding to your team or your stress.</p>
-      <a class="cta-button" href="#">Book a Free Demo</a>
+      <button class="cta-button" onclick="toggleChatbot()">Book a Free Demo</button>
     </section>
 
     <section class="section">
@@ -129,16 +142,23 @@
       <h2>Want to See It in Action?</h2>
       <p><strong>Book a Free Demo</strong><br>
       No pressure. No jargon. Just a simple tour to show you what’s possible.</p>
-      <a class="cta-button" href="#">Book Your Demo</a>
+      <button class="cta-button" onclick="toggleChatbot()">Book Your Demo</button>
     </section>
 
     <div class="footer">
       <p><strong>Princess Light Media</strong><br>
       Helping physiotherapy clinics stay connected—without running themselves ragged.<br>
       Even if we occasionally break the calendar. ❤️</p>
-      
+      <em>“Clarity saves calls.”</em>
     </div>
-
   </div>
+
+  <iframe id="chatbot" class="chatbot-frame" src="https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat"></iframe>
+  <script>
+    function toggleChatbot() {
+      const chatbot = document.getElementById('chatbot');
+      chatbot.style.display = chatbot.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
