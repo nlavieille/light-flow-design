@@ -1,71 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Floating Chatbot (Artoo)</title>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- n8n Chat styles -->
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-
+  <title>Princess Light Media | AI Assistant for Clinics</title>
   <style>
     body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background: #f7f7f7;
+      background-color: #fffdf8;
+      color: #333;
     }
-
     .container {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #777;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.75rem;
+      margin-top: 2rem;
+    }
+    h3 {
       font-size: 1.2rem;
+      margin-top: 1.5rem;
     }
-
-    /* ----- REMOVE HEADER COMPLETELY ----- */
-    n8n-chat window-header,
-    n8n-chat .window-header,
-    .n8n-chat-window-header {
-      display: none !important;
-      height: 0 !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      border: none !important;
+    p, ul {
+      font-size: 1.05rem;
     }
-
-    /* Remove padding where header used to be */
-    n8n-chat .window-container {
-      margin-top: 0 !important;
+    ul {
+      padding-left: 1.2rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+    .cta-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #0077cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #005fa3;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #888;
+      padding: 2rem 1rem;
+      border-top: 1px solid #eee;
+      margin-top: 3rem;
+    }
+    .footer em {
+      display: block;
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #666;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
-    This page is blank. Your Artoo chatbot floats in the corner.
+
+    <section class="section">
+      <h1>You’re Burned Out. So Were We.</h1>
+      <p><strong>That’s why we built this.</strong> An AI assistant that handles bookings, answers questions, and helps your clinic stay available—without adding to your team or your stress.</p>
+      <a class="cta-button" href="#">Book a Free Demo</a>
+    </section>
+
+    <section class="section">
+      <h2>Meet the Brand</h2>
+      <p>At <strong>Princess Light Media</strong>, we’re not a big tech firm or an agency with a shiny slide deck. We’re a scrappy little crew that got tired of watching small clinics drown in repetitive admin, missed calls, and chaotic schedules.</p>
+      <p>We’ve seen amazing therapists spend more time answering “Do you take Blue Cross?” than helping patients heal. That’s backwards. So we built a friendly AI assistant that actually lightens the load.</p>
+      <p>It’s not magic. But it works—and it keeps getting better.</p>
+    </section>
+
+    <section class="section">
+      <h2>Sound familiar?</h2>
+      <ul>
+        <li>You miss calls and lose bookings when you’re with a patient</li>
+        <li>No-shows and cancellations cost you hours every week</li>
+        <li>Your team is answering the same 5 questions over and over</li>
+        <li>You want to market better but don’t have time or energy</li>
+      </ul>
+      <h3>Here’s how we help:</h3>
+      <ul>
+        <li>Your AI assistant chats naturally with patients 24/7</li>
+        <li>Answers questions about services, pricing, and insurance</li>
+        <li>Books appointments straight into your calendar</li>
+        <li>Sends confirmations and reminders automatically</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>We’re Not Fancy. We’re Focused.</h2>
+      <p>We’ve broken our own calendar more than once. We don’t use words like “synergy.” But we care deeply about solving real problems for real businesses—especially small ones.</p>
+      <p>If you’re a hands-on clinic owner tired of duct-taping together systems, we see you. We built this for you.</p>
+    </section>
+
+    <section class="section">
+      <h2>What You’ll Actually Get Out of This</h2>
+      <ul>
+        <li>✅ Fewer no-shows and more completed plans of care</li>
+        <li>✅ Less chaos at the front desk</li>
+        <li>✅ Happier patients who don’t have to wait for answers</li>
+        <li>✅ More time for the work you actually love</li>
+        <li>✅ A partner who gives a damn (and responds to emails quickly)</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Want to See It in Action?</h2>
+      <p><strong>Book a Free Demo</strong><br>
+      No pressure. No jargon. Just a simple tour to show you what’s possible.</p>
+      <a class="cta-button" href="#">Book Your Demo</a>
+    </section>
+
+    <div class="footer">
+      <p><strong>Princess Light Media</strong><br>
+      Helping physiotherapy clinics stay connected—without running themselves ragged.<br>
+      Even if we occasionally break the calendar. ❤️</p>
+      
+    </div>
+
   </div>
-
-  <script type="module">
-    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
-
-    createChat({
-      webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
-      mode: "window",
-      chatPosition: "bottom-right",
-      theme: {
-        fontFamily: "Inter, sans-serif",
-        baseColor: "#006CFF"
-      },
-      metadata: {
-        assistantName: "Artoo",   // rename Nathan → Artoo
-        title: "",                // remove
-        subtitle: ""              // remove
-      }
-    });
-  </script>
-
 </body>
 </html>
