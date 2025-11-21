@@ -74,6 +74,29 @@
       color: #666;
     }
   </style>
+
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({
+      webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
+      initialMessages: [
+        'My name is Artoo.',
+        'When would you like your free demo?'
+      ],
+      i18n: {
+        en: {
+          title: '',
+          subtitle: "",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'When is good?...',
+        },
+      }
+    });
+  </script>
+
 </head>
 <body>
   <div class="container">
