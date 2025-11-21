@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Floating Chatbot</title>
+  <title>Floating Chatbot (Artoo)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- n8n Chat styles -->
@@ -16,7 +16,6 @@
       background: #f7f7f7;
     }
 
-    /* Entire page is basically blank */
     .container {
       height: 100vh;
       display: flex;
@@ -25,25 +24,45 @@
       color: #777;
       font-size: 1.2rem;
     }
+
+    /* ----- REMOVE HEADER COMPLETELY ----- */
+    n8n-chat window-header,
+    n8n-chat .window-header,
+    .n8n-chat-window-header {
+      display: none !important;
+      height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+    }
+
+    /* Remove padding where header used to be */
+    n8n-chat .window-container {
+      margin-top: 0 !important;
+    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    This page is intentionally blank. The chatbot floats in the corner.
+    This page is blank. Your Artoo chatbot floats in the corner.
   </div>
 
-  <!-- n8n Chat embed -->
   <script type="module">
     import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
 
     createChat({
       webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
-      mode: "window",            // floating window mode
-      chatPosition: "bottom-right", // default spot
+      mode: "window",
+      chatPosition: "bottom-right",
       theme: {
         fontFamily: "Inter, sans-serif",
-        baseColor: "#006CFF"      // optional – matches n8n blue
+        baseColor: "#006CFF"
+      },
+      metadata: {
+        assistantName: "Artoo",   // rename Nathan → Artoo
+        title: "",                // remove
+        subtitle: ""              // remove
       }
     });
   </script>
