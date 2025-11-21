@@ -18,12 +18,17 @@
       --chat--color-secondary: #0077cc;
       --chat--color-light: #f2f4f8;
       --chat--color-dark: #2c3e50;
+
       --chat--header--background: #0077cc;
       --chat--header--color: #ffffff;
       --chat--message--bot--background: #0077cc;
       --chat--message--bot--color: #ffffff;
       --chat--message--user--background: #f2f4f8;
       --chat--message--user--color: #333333;
+
+      /* Keep window to a nice size, not full screen */
+      --chat--window--width: 420px;
+      --chat--window--height: 620px;
     }
 
     body {
@@ -95,51 +100,31 @@
       color: #666;
     }
 
-    /* Fullscreen chat overlay */
-    #chat-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      display: none; /* hidden by default */
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
+  /* R2-D2 dome header background */
+  .n8n-chat-widget-header {
+    /* Image of the dome */
+    background-image:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, 0.25)
+      ),
+      url('/public/r2d2-dome.png'); /* <-- put your image URL here */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    #chat-overlay-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      max-height: 100%;
-      background: #ffffff;
-    }
+    /* Make sure our styles win over defaults */
+    background-color: transparent !important;
+    color: #ffffff !important;
+  }
 
-    #n8n-chat {
-      width: 100%;
-      height: 100%;
-    }
-
-    #chat-close-btn {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      z-index: 10000;
-      background: rgba(0, 0, 0, 0.4);
-      color: #ffffff;
-      border: none;
-      border-radius: 999px;
-      width: 32px;
-      height: 32px;
-      font-size: 20px;
-      line-height: 32px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    #chat-close-btn:hover {
-      background: rgba(0, 0, 0, 0.6);
-    }
+  /* Optional: help the text pop over the image */
+  .n8n-chat-widget-header-title,
+  .n8n-chat-widget-header-subtitle {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  }  
+  
   </style>
 </head>
 <body>
@@ -207,27 +192,23 @@
 
   </div>
 
-  <!-- Fullscreen chat overlay -->
-  <div id="chat-overlay">
-    <div id="chat-overlay-inner">
-      <button id="chat-close-btn" aria-label="Close chat">&times;</button>
-      <div id="n8n-chat"></div>
-    </div>
-  </div>
+  <!-- Target container for n8n chat widget -->
+  <div id="n8n-chat"></div>
 
   <!-- n8n Chat widget script -->
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-    // Initialize the chat widget in FULLSCREEN mode inside our overlay container
-    const widget = createChat({
+    let chatToggle = null;
+
+    const CHAT_CONFIG = {
       webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
       webhookConfig: {
         method: 'POST',
         headers: {}
       },
       target: '#n8n-chat',
-      mode: 'fullscreen',        // Use fullscreen mode so the chat fills the overlay
+      mode: 'window',               // floating widget + window
       chatInputKey: 'chatInput',
       chatSessionKey: 'sessionId',
       metadata: {},
@@ -238,44 +219,36 @@
       ],
       i18n: {
         en: {
-          title: "Beep-boop-DEET-doo. Whirrrr-beep-beep bwoop-dee-doo-beep?",
+          title: "",
           subtitle: "[Translator: Enabled]",
           footer: "",
           getStarted: "New Conversation",
           inputPlaceholder: "Type your question..."
         }
       }
+    };
+
+    // Initialize chat widget
+    createChat(CHAT_CONFIG);
+
+    // After widget renders, grab its toggle button
+    window.addEventListener('load', () => {
+      // Give n8n a moment to inject the widget DOM
+      setTimeout(() => {
+        chatToggle = document.querySelector('.n8n-chat-widget-toggle');
+      }, 800);
     });
 
-    const overlay = document.getElementById('chat-overlay');
-    const closeBtn = document.getElementById('chat-close-btn');
-
-    function openChatOverlay() {
-      overlay.style.display = 'flex';
-    }
-
-    function closeChatOverlay() {
-      overlay.style.display = 'none';
-    }
-
-    // Make ALL CTA buttons (and any <button>) open the chatbot overlay
+    // Make ALL CTA buttons (and any <button>) open/close the chatbot
     document.addEventListener('click', function (event) {
       const button = event.target.closest('a.cta-button, button');
       if (!button) return;
 
       event.preventDefault();
-      openChatOverlay();
-    });
 
-    // Close button in the overlay
-    closeBtn.addEventListener('click', function () {
-      closeChatOverlay();
-    });
-
-    // Optional: close overlay when clicking outside the chat inner panel
-    overlay.addEventListener('click', function (event) {
-      if (event.target === overlay) {
-        closeChatOverlay();
+      if (chatToggle) {
+        chatToggle.click(); // toggles the chat open/closed
+        chatToggle.focus();
       }
     });
   </script>
