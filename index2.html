@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Floating Chatbot (Artoo)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- n8n Chat styles -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #f7f7f7;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #777;
+      font-size: 1.2rem;
+    }
+
+    /* ----- REMOVE HEADER COMPLETELY ----- */
+    n8n-chat window-header,
+    n8n-chat .window-header,
+    .n8n-chat-window-header {
+      display: none !important;
+      height: 0 !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+    }
+
+    /* Remove padding where header used to be */
+    n8n-chat .window-container {
+      margin-top: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    This page is blank. Your Artoo chatbot floats in the corner.
+  </div>
+
+  <script type="module">
+    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+    createChat({
+      webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+      mode: "window",
+      chatPosition: "bottom-right",
+      theme: {
+        fontFamily: "Inter, sans-serif",
+        baseColor: "#006CFF"
+      },
+      metadata: {
+        assistantName: "Artoo",   // rename Nathan → Artoo
+        title: "",                // remove
+        subtitle: ""              // remove
+      }
+    });
+  </script>
+
+</body>
+</html>
