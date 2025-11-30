@@ -41,7 +41,6 @@
 			--chat--message--user--color: #2a2a2a;      /* Same as Header Bg        */
 		}
 
-
         body {
             background: #f8f5f0;
             font-family: 'Courier New', monospace;
@@ -238,14 +237,12 @@
             color: #8b6f47;
         }
 
-
-
     /* Chat container toggled by CTA buttons */
     #chewy-chat-container {
       position: fixed;
       bottom: 110px;
       right: 20px;
-      width: 370px;
+      width: 330px;
       height: 600px;
       max-width: 95vw;
       max-height: 80vh;
@@ -271,8 +268,8 @@
       position: fixed;
       right: 20px;
       bottom: 20px;
-      width: 85px;
-      height: 85px;
+      width: 75px;
+      height: 75px;
       background: #ffe6e6;
       border-radius: 50%;
       display: flex;
@@ -298,7 +295,7 @@
       bottom: 120px;
       background: #ffe6e6;
       color: #2a2a2a;
-      padding: 10px 16px;
+      padding: 5px 16px;
       font-size: 16px;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
@@ -320,8 +317,6 @@
       transform: translateY(8px);
       pointer-events: none;
     }
-
-
 
     </style>
 </head>
@@ -517,66 +512,62 @@
         </div>
     </div>
 
+	<!-- Tooltip -->
+	<div class="chewy-tooltip" id="chewy-tooltip">
+		Book a Free Demo?
+	</div>
 
+	<!-- Chewy floating launcher -->
+	<div class="chewy-launcher" id="chewy-launcher">
+		<img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="Chewy Bot" />
+	</div>
 
-  <!-- Tooltip -->
-  <div class="chewy-tooltip" id="chewy-tooltip">
-    Book a Free Demo?
-  </div>
+	<!-- Chat container -->
+	<div id="chewy-chat-container"></div>
 
-  <!-- Chewy floating launcher -->
-  <div class="chewy-launcher" id="chewy-launcher">
-    <img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="Chewy Bot" />
-  </div>
+	<script type="module">
+		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
 
-  <!-- Chat container -->
-  <div id="chewy-chat-container"></div>
+		const chatContainer = document.getElementById("chewy-chat-container");
+		const launcher = document.getElementById("chewy-launcher");
+		const tooltip = document.getElementById("chewy-tooltip");
+		const ctaButtons = document.querySelectorAll(".open-chat");
 
-  <script type="module">
-    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+		// Create official n8n chat
+		createChat({
+			webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+			target: "#chewy-chat-container",
+			mode: "fullscreen",
+			showWelcomeScreen: false,
+			initialMessages: ["Arrgh! Chewie here! I'm ready to book your free demo."],
+			i18n: {
+				en: {
+					title: "Chewie Chat",
+					subtitle: "24/7 Wookie Support",
+					inputPlaceholder: "Ask Chewie anything..."
+				}
+			}
+		});
 
-    const chatContainer = document.getElementById("chewy-chat-container");
-    const launcher = document.getElementById("chewy-launcher");
-    const tooltip = document.getElementById("chewy-tooltip");
-    const ctaButtons = document.querySelectorAll(".open-chat");
+		// Open chat function
+		function openChat() {
+			chatContainer.classList.toggle("chewy-open");
+			tooltip.classList.add("hidden");
+		}
 
-    // Create official n8n chat
-    createChat({
-      webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
-      target: "#chewy-chat-container",
-      mode: "fullscreen",
-      showWelcomeScreen: false,
-      initialMessages: ["Arrgh! Chewie here! I'm ready 24/7 to book your free demo."],
-      i18n: {
-        en: {
-          title: "Chewie Chat",
-          subtitle: "Wookie translator ON.",
-          inputPlaceholder: "Ask Chewie anything..."
-        }
-      }
-    });
+		// CTA buttons open chat
+		ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
 
-    // Open chat function
-    function openChat() {
-      chatContainer.classList.toggle("chewy-open");
-      tooltip.classList.add("hidden");
-    }
+		// Floating Chewy icon opens chat
+		launcher.addEventListener("click", openChat);
 
-    // CTA buttons open chat
-    ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
-
-    // Floating Chewy icon opens chat
-    launcher.addEventListener("click", openChat);
-
-    // Clicking anywhere hides tooltip
-    window.addEventListener("click", (e) => {
-      if (!launcher.contains(e.target)) {
-        tooltip.classList.add("hidden");
-      }
-    });
-  </script>
-
-
+		// Clicking anywhere hides tooltip
+		window.addEventListener("click", (e) => {
+			if (!launcher.contains(e.target)) {
+				tooltip.classList.add("hidden");
+			}
+		});
+	</script>
 
 </body>
 </html>
