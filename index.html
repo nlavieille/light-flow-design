@@ -1,167 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Princess Light Media | AI Assistant for Clinics</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #fffdf8;
-      color: #333;
-    }
-    .container {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-    h1, h2, h3 {
-      color: #2c3e50;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    h2 {
-      font-size: 1.75rem;
-      margin-top: 2rem;
-    }
-    h3 {
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-    }
-    p, ul {
-      font-size: 1.05rem;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-    .cta-button {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #0077cc;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    .cta-button:hover {
-      background-color: #005fa3;
-    }
-    .section {
-      margin-bottom: 3rem;
-    }
-    .footer {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #888;
-      padding: 2rem 1rem;
-      border-top: 1px solid #eee;
-      margin-top: 3rem;
-    }
-    .footer em {
-      display: block;
-      margin-top: 0.5rem;
-      font-style: italic;
-      color: #666;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Light Media - Never Miss Another Client</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-  
+	<!-- Official n8n chat styles -->
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+		:root {
+			/* Chewy brand colors */
+
+			--chat--header--background: #2a2a2a;        /* Header Background        */
+			--chat--header--color: #f8f5f0;             /* Header Font              */
+
+			--chat--header--background:
+				linear-gradient(
+					rgba(0, 0, 0, 0.2),
+					rgba(0, 0, 0, 0.1)
+				),
+				url("https://www.looper.com/img/gallery/who-played-chewbacca-in-star-wars-and-which-animals-were-used-in-his-voice/l-intro-1689824423.jpg") center/cover no-repeat;
+
+
+			--chat--color-light: #f0dfce;               /* Chat Background          */
+
+			--chat--border-radius: 1.85rem;             /* Bubble Shape             */
+			--chat--transition-duration: 0.15s;         /* The dot dot dots         */
+
+			--chat--message--bot--background: #ffe6e6;  /* Pink from Sound Familiar */
+			--chat--message--bot--color: #2a2a2a;       /* Same as Header Bg        */
+
+			--chat--message--user--background: #e8f4f8; /* Blue from Actionable Box */
+			--chat--message--user--color: #2a2a2a;      /* Same as Header Bg        */
+		}
+
+
+        body {
+            background: #f8f5f0;
+            font-family: 'Courier New', monospace;
+            color: #2a2a2a;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            transform: rotate(-1deg);
+            text-align: left;
+            border-left: 8px solid #d4a574;
+            padding-left: 15px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin: 60px 0 20px;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: #d4a574;
+            transform: rotate(0.5deg);
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        strong {
+            background: #fff3cd;
+            padding: 2px 4px;
+            font-weight: bold;
+        }
+
+        em {
+            font-style: italic;
+            color: #8b6f47;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #2a2a2a;
+            color: #f8f5f0;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px 0;
+            border: 3px solid #2a2a2a;
+            transform: rotate(-1deg);
+            transition: all 0.2s;
+            box-shadow: 5px 5px 0 #d4a574;
+        }
+
+        .cta-button:hover {
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow: 7px 7px 0 #d4a574;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-left: 2px dashed #d4a574;
+            margin-left: 10px;
+        }
+
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 8px;
+            color: #d4a574;
+            font-weight: bold;
+        }
+
+        .checkmark-list {
+            border-left: none;
+        }
+
+        .checkmark-list li {
+            border-left: none;
+            padding-left: 35px;
+            margin-left: 0;
+        }
+
+        .checkmark-list li:before {
+            content: "✓";
+            left: 0;
+            font-size: 1.3rem;
+        }
+
+        .highlight-box {
+            background: #fff;
+            border: 3px solid #2a2a2a;
+            padding: 25px;
+            margin: 30px 0;
+            transform: rotate(-0.5deg);
+            box-shadow: 8px 8px 0 #e8dcc8;
+        }
+
+        .before-after {
+            background: #f0e6d6;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #8b6f47;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 2rem;
+            color: #d4a574;
+            transform: rotate(180deg);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px dashed #d4a574;
+            font-size: 0.9rem;
+        }
+
+        .handwritten {
+            font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+            background: #fff;
+            padding: 15px;
+            border: 2px dashed #2a2a2a;
+            margin: 20px 0;
+            transform: rotate(1deg);
+        }
+
+        .sound-familiar {
+            background: #ffe6e6;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #ff6b6b;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .motto {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: #2a2a2a;
+            color: #f8f5f0;
+            transform: rotate(-1deg);
+            border: 3px solid #d4a574;
+        }
+
+        .actionable-box {
+            background: #e8f4f8;
+            border-left: 5px solid #4a90a4;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+
+        .stats {
+            font-weight: bold;
+            color: #8b6f47;
+        }
+
+
+
+    /* Chat container toggled by CTA buttons */
+    #chewy-chat-container {
+      position: fixed;
+      bottom: 110px;
+      right: 20px;
+      width: 400px;
+      height: 600px;
+      max-width: 95vw;
+      max-height: 80vh;
+      display: none;
+      z-index: 9998;
+    }
+    #chewy-chat-container.chewy-open {
+      display: block;
+    }
+
+    @media (max-width: 600px) {
+      #chewy-chat-container {
+        width: 100vw;
+        height: 100vh;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+    }
+
+    /* Floating Chewy icon */
+    .chewy-launcher {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 85px;
+      height: 85px;
+      background: #ffe6e6;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9999;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      transition: transform 0.18s ease;
+    }
+    .chewy-launcher:hover {
+      transform: scale(1.07);
+    }
+    .chewy-launcher img {
+      width: 58px;
+      height: 58px;
+    }
+
+    /* Tooltip styling */
+    .chewy-tooltip {
+      position: fixed;
+      right: 35px;
+      bottom: 120px;
+      background: #ffe6e6;
+      color: #2a2a2a;
+      padding: 10px 16px;
+      font-size: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      z-index: 9999;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      white-space: nowrap;
+    }
+    .chewy-tooltip::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 20px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: #ffe6e6 transparent transparent transparent;
+    }
+    .chewy-tooltip.hidden {
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+    }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Call You Missed Was Worth $2,400</h1>
+        
+        <p>It came in at 2:47 PM on a Tuesday. You were finishing a color correction that was already running late. By the time you checked your phone, they'd already booked somewhere else.</p>
+        
+        <p>That's not a business problem. That's a <em>heartbreak you can hear ringing</em>.</p>
+        
+        <a href="#demo" class="cta-button open-chat">Book a Free Demo</a>
+
+        <div class="section-divider">✂</div>
+
+        <h2>You Chose This. Then Reality Showed Up.</h2>
+        
+        <p>You didn't stumble into this business. Maybe you were the kid giving friends haircuts in your basement. Or you spent years apprenticing under someone who taught you that ink is permanent, so respect is everything.</p>
+        
+        <p>You saw a vision: creative freedom, happy clients, a business that reflects who you actually are.</p>
+        
+        <p><strong>Then the phone became the boss of you.</strong></p>
+        
+        <p>No-shows carve holes in your schedule. You're answering the same five questions at 9 PM that you answered at 9 AM. Your Instagram has 47 unread DMs and you're too exhausted to respond.</p>
+        
+        <p>You're not running your business anymore. Your business is running you.</p>
+        
+        <div class="sound-familiar">Sound familiar?</div>
+
+        <div class="section-divider">✂</div>
+
+        <h2>I Built This in My Garage Because I Was Watching My Sister Drown</h2>
+        
+        <p>For three years, I watched my sister—one of the best hairstylists I've ever seen—turn away clients because she couldn't answer her phone mid-balayage.</p>
+        
+        <p>She'd finish a gorgeous color, check her messages, and find five missed opportunities. Every. Single. Day.</p>
+        
+        <p><strong>Watching her talent lose to logistics felt like watching art burn.</strong></p>
+        
+        <p>She couldn't afford to hire a receptionist. Voicemail just meant people hung up and called the next salon. Those generic answering services? They couldn't tell the difference between a balayage and a blowout.</p>
+        
+        <p>So I decided to fix it. Which was hilarious, because I'm the guy who once broke his own website trying to change the font color.</p>
+        
+        <p>I spent months in a dark garage with Wi-Fi that dropped every time someone used the microwave. I watched 400 hours of YouTube tutorials. My laptop got so hot it left a burn mark on my leg (still have the scar).</p>
+        
+        <div class="handwritten">
+            <strong>I failed constantly.</strong> I once accidentally programmed the AI to respond "BOOKING CONFIRMED" to every single message, including "what's your address?"
+        </div>
+        
+        <p>But I kept thinking about my sister's missed calls. So I kept going. And eventually—somehow—I built something that actually worked.</p>
+        
+        <p><strong>An AI receptionist that actually knows your business.</strong></p>
+        
+        <p>Not some clunky chatbot that sounds like a vending machine. A real assistant that understands what you do, how you talk, and what your clients actually need to hear.</p>
+
+        <div class="section-divider">✂</div>
+
+        <div class="motto">
+            Never Miss Another Client.<br>Never Hire Another Receptionist.
+        </div>
+
+        <p>Think of it like this: <strong>You know how hiring a great receptionist would change everything?</strong> Someone who knows your services inside and out, never takes a sick day, answers every call on the first ring, and works for less than $2/day?</p>
+        
+        <p>That's exactly what this is. Except it never sleeps, never quits, and gets smarter the longer it works for you.</p>
+
+        <div class="actionable-box">
+            <p><strong>Here's the truth about missed bookings:</strong> Research shows that <span class="stats">80% of callers won't leave a voicemail</span>, and <span class="stats">67% won't call back</span> if they don't reach someone immediately. Every missed call isn't just one lost booking—it's often a client you'll never hear from again.</p>
+            
+            <p style="margin-top: 15px;"><strong>Even if you're not ready for an AI receptionist, here's what you need to fix right now:</strong></p>
+        </div>
+
+        <ul class="checkmark-list">
+            <li><strong>Stop using voicemail as your primary backup</strong> - Clients interpret it as "we're too busy for you"</li>
+            <li><strong>Track your missed calls for one week</strong> - You'll be shocked at what you're losing</li>
+            <li><strong>Calculate the real cost</strong> - Average booking value × missed calls per week = your invisible revenue leak</li>
+            <li><strong>Respond to DMs within 4 hours</strong> - After that, conversion rates drop by 400%</li>
+        </ul>
+
+        <div class="highlight-box">
+            <h3 style="margin-bottom: 15px; font-size: 1.2rem;">Here's what my AI receptionist does all day (and all night):</h3>
+            
+            <ul>
+                <li><strong>Answers every call, text, and DM instantly</strong>—at 2 PM or 2 AM, doesn't matter</li>
+                <li><strong>Knows your services, pricing, and availability cold</strong>—like a receptionist who's been with you for years</li>
+                <li><strong>Books appointments directly into your calendar</strong>—no back-and-forth, no double-bookings, no "let me check and get back to you"</li>
+                <li><strong>Sends automatic reminders</strong>—reducing no-shows by 60-70% on average (that's industry standard for good reminder systems)</li>
+                <li><strong>Talks like a human, not a robot</strong>—I've spent two years and tested thousands of conversations to get this right</li>
+                <li><strong>Learns your vibe over time</strong>—adapts to your specific language, services, and common questions</li>
+            </ul>
+            
+            <p style="margin-top: 20px;">I built this system handling over <span class="stats">10,000 conversations</span> across dozens of businesses. It's not perfect, but it catches <span class="stats">95%+ of bookable opportunities</span> that would otherwise be lost.</p>
+        </div>
+
+        <div class="motto">
+            Never miss another client.<br>Never hire another receptionist.<br>That's the deal.
+        </div>
+
+        <div class="section-divider">✂</div>
+
+        <h2>What Your Day Looks Like Now</h2>
+        
+        <div class="before-after">
+            <p><strong>Before:</strong> You're mid-service when your phone explodes. By the time you check it, three potential clients have already booked elsewhere. You spend lunch playing catch-up. You go home wondering how long you can keep this up.</p>
+        </div>
+        
+        <div class="before-after" style="background: #e6f5e6; border-left-color: #4a904a;">
+            <p><strong>After:</strong> You're mid-service when your phone buzzes. Your AI receptionist is already handling it—answering questions about your after-care process, checking your calendar, booking Thursday at 2 PM, sending a confirmation text. You finish your work, glance at your schedule, and it's fuller than it's been in months. You go home on time. With energy left over.</p>
+        </div>
+
+        <div class="section-divider">✂</div>
+
+        <h2>This Isn't Just About More Bookings</h2>
+        
+        <p><strong>It's about getting back to the work that makes you forget to check your phone.</strong></p>
+        
+        <p>The precision of a perfect fade. The way a client tears up when they see their new color. The quiet pride of a dog who was scared at the start and is wagging by the end.</p>
+        
+        <p>That flow state. That's what you're here for.</p>
+        
+        <p>Your AI receptionist handles everything else.</p>
+
+        <div class="section-divider">✂</div>
+
+        <h2>I'm Not a Big Company. But I Know This Problem Cold.</h2>
+        
+        <p>When you email me, you get <em>me</em>. Just a guy who genuinely cares but also sometimes replies at 2 AM because I have the sleep schedule of a raccoon.</p>
+        
+        <p>When something breaks, I'm the one who fixes it—usually same day, sometimes at 1 AM in my pajamas. Is that healthy? Probably not. Does your problem get solved? Absolutely.</p>
+        
+        <div class="actionable-box">
+            <p><strong>But here's what matters more than my quirks:</strong> I've spent two years and over 10,000 real conversations refining this system. I know exactly where appointment-based businesses leak revenue (response time delays, unclear pricing info, booking friction). I've tested every edge case—the 2 AM drunk texts, the "do you do [thing you definitely don't do]" questions, the people who ghost after three messages.</p>
+        </div>
+        
+        <p>I answer emails fast. I don't hide behind corporate-speak when I mess up (and I <em>do</em> mess up—remember that "BOOKING CONFIRMED" disaster?).</p>
+        
+        <div class="handwritten">
+            <strong>Here's the reality:</strong>
+            <ul style="margin-top: 10px;">
+                <li>I once spent six hours debugging an issue that was just me spelling "calendar" wrong</li>
+                <li>I will absolutely hop on a call at weird hours if something's urgent</li>
+                <li>I still google things constantly (that's how you stay current)</li>
+                <li>There's a 40% chance I'm wearing sweatpants right now</li>
+            </ul>
+        </div>
+        
+        <p><strong>But I also know this:</strong> Your biggest competition isn't other salons or studios. It's every business that responds faster than you do. That's the game now.</p>
+        
+        <p>If you want someone who treats your business like it matters and has actually solved this problem hundreds of times, I'm here.</p>
+
+        <div class="section-divider">✂</div>
+
+        <h2>What You Get</h2>
+        
+        <ul class="checkmark-list">
+            <li><strong>Never miss another booking</strong>—your AI receptionist answers 24/7 (proven 95%+ capture rate)</li>
+            <li><strong>Never hire front desk staff</strong>—save $30K+ per year on salary, taxes, and benefits</li>
+            <li><strong>60-70% fewer no-shows</strong>—automatic reminders that actually work</li>
+            <li><strong>4x faster response times</strong>—instant answers build trust and close bookings</li>
+            <li><strong>Your time back</strong>—reclaim 10-15 hours per week for actual client work</li>
+            <li><strong>Real support when you need it</strong>—me, not a ticket system</li>
+        </ul>
+
+        <div class="actionable-box">
+            <p><strong>Here's what this solves even if you don't use my service:</strong></p>
+            
+            <p>The biggest profit leak in appointment-based businesses isn't marketing or pricing—it's the gap between interest and booking. Every hour you don't respond, your conversion rate drops.</p>
+            
+            <p>If you take nothing else from this: <strong>track your response times and missed opportunities for one week</strong>. Write down every call you couldn't take, every DM you answered 6 hours late, every potential client who ghosted. Calculate what those bookings were worth.</p>
+            
+            <p><strong>That number is your invisible revenue leak.</strong> And it's probably way bigger than you think.</p>
+        </div>
+
+        <div class="section-divider">✂</div>
+
+        <h2 id="demo">Want to See How This Works?</h2>
+        
+        <div class="highlight-box" style="text-align: center;">
+            <a href="#" class="cta-button open-chat" style="margin: 0;">Book a Free Demo</a>
+            
+            <p style="margin-top: 20px;">No pressure. No sales pitch. Just a real conversation.</p>
+            
+            <p>I'll show you exactly how your AI receptionist would handle your actual clients, answer your specific questions, and whether this makes sense for your business.</p>
+        </div>
+
+        <div class="motto" style="margin-top: 60px;">
+            Never Miss Another Client.<br>Never Hire Another Receptionist.
+        </div>
+
+        <div class="footer">
+            <p><strong>Princess Light Media</strong></p>
+            <p>I help hair salons, tattoo parlors, nail studios, gyms, dog groomers, and other passion-driven businesses take back their time with AI receptionists that actually work.</p>
+            <p style="margin-top: 20px; font-size: 0.85rem;">Even if I occasionally break my own stuff. And once accidentally programmed my test AI to only respond in pirate speak for three days before I figured out what went wrong. (The clients thought it was hilarious. I did not.) ❤️</p>
+        </div>
+    </div>
+
+
+
+  <!-- Tooltip -->
+  <div class="chewy-tooltip" id="chewy-tooltip">
+    Book a Free Demo?
+  </div>
+
+  <!-- Chewy floating launcher -->
+  <div class="chewy-launcher" id="chewy-launcher">
+    <img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="Chewy Bot" />
+  </div>
+
+  <!-- Chat container -->
+  <div id="chewy-chat-container"></div>
+
   <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+    const chatContainer = document.getElementById("chewy-chat-container");
+    const launcher = document.getElementById("chewy-launcher");
+    const tooltip = document.getElementById("chewy-tooltip");
+    const ctaButtons = document.querySelectorAll(".open-chat");
+
+    // Create official n8n chat
     createChat({
-      webhookUrl: 'https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat',
-      initialMessages: [
-        'My name is Artoo.',
-        'When would you like your free demo?'
-      ],
+      webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+      target: "#chewy-chat-container",
+      mode: "fullscreen",
+      showWelcomeScreen: false,
+      initialMessages: ["Arrgh! Chewie here! I'm ready to book your free demo."],
       i18n: {
         en: {
-          title: '',
-          subtitle: "",
-          footer: '',
-          getStarted: 'New Conversation',
-          inputPlaceholder: 'When is good?...',
-        },
+          title: "Chewie Chat",
+          subtitle: "Let's make a mistake tonight",
+          inputPlaceholder: "Ask Chewie anything..."
+        }
+      }
+    });
+
+    // Open chat function
+    function openChat() {
+      chatContainer.classList.toggle("chewy-open");
+      tooltip.classList.add("hidden");
+    }
+
+    // CTA buttons open chat
+    ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
+
+    // Floating Chewy icon opens chat
+    launcher.addEventListener("click", openChat);
+
+    // Clicking anywhere hides tooltip
+    window.addEventListener("click", (e) => {
+      if (!launcher.contains(e.target)) {
+        tooltip.classList.add("hidden");
       }
     });
   </script>
 
-</head>
-<body>
-  <div class="container">
 
-    <section class="section">
-      <h1>You’re Burned Out. So Were We.</h1>
-      <p><strong>That’s why we built this.</strong> An AI assistant that handles bookings, answers questions, and helps your clinic stay available—without adding to your team or your stress.</p>
-      <a class="cta-button" href="#">Book a Free Demo</a>
-    </section>
 
-    <section class="section">
-      <h2>Meet the Brand</h2>
-      <p>At <strong>Princess Light Media</strong>, we’re not a big tech firm or an agency with a shiny slide deck. We’re a scrappy little crew that got tired of watching small clinics drown in repetitive admin, missed calls, and chaotic schedules.</p>
-      <p>We’ve seen amazing therapists spend more time answering “Do you take Blue Cross?” than helping patients heal. That’s backwards. So we built a friendly AI assistant that actually lightens the load.</p>
-      <p>It’s not magic. But it works—and it keeps getting better.</p>
-    </section>
-
-    <section class="section">
-      <h2>Sound familiar?</h2>
-      <ul>
-        <li>You miss calls and lose bookings when you’re with a patient</li>
-        <li>No-shows and cancellations cost you hours every week</li>
-        <li>Your team is answering the same 5 questions over and over</li>
-        <li>You want to market better but don’t have time or energy</li>
-      </ul>
-      <h3>Here’s how we help:</h3>
-      <ul>
-        <li>Your AI assistant chats naturally with patients 24/7</li>
-        <li>Answers questions about services, pricing, and insurance</li>
-        <li>Books appointments straight into your calendar</li>
-        <li>Sends confirmations and reminders automatically</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>We’re Not Fancy. We’re Focused.</h2>
-      <p>We’ve broken our own calendar more than once. We don’t use words like “synergy.” But we care deeply about solving real problems for real businesses—especially small ones.</p>
-      <p>If you’re a hands-on clinic owner tired of duct-taping together systems, we see you. We built this for you.</p>
-    </section>
-
-    <section class="section">
-      <h2>What You’ll Actually Get Out of This</h2>
-      <ul>
-        <li>✅ Fewer no-shows and more completed plans of care</li>
-        <li>✅ Less chaos at the front desk</li>
-        <li>✅ Happier patients who don’t have to wait for answers</li>
-        <li>✅ More time for the work you actually love</li>
-        <li>✅ A partner who gives a damn (and responds to emails quickly)</li>
-      </ul>
-    </section>
-
-    <section class="section">
-      <h2>Want to See It in Action?</h2>
-      <p><strong>Book a Free Demo</strong><br>
-      No pressure. No jargon. Just a simple tour to show you what’s possible.</p>
-      <a class="cta-button" href="#">Book Your Demo</a>
-    </section>
-
-    <div class="footer">
-      <p><strong>Princess Light Media</strong><br>
-      Helping physiotherapy clinics stay connected—without running themselves ragged.<br>
-      Even if we occasionally break the calendar. ❤️</p>
-      
-    </div>
-
-  </div>
 </body>
 </html>
