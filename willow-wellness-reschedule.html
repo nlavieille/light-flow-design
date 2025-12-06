@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Willow Wellness Demo - Reschedule Booking</title>
+	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+
+	<!-- Official n8n chat styles -->
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+		:root {
+			/* WillowWellnesss brand colors */
+
+			--chat--header--background: #1a4d3e;        /* Header Background        */
+			--chat--header--color: #f9f7f4;             /* Header Font              */
+
+			--chat--color-light: #f9f7f4;               /* Chat Background          */
+
+			--chat--border-radius: 1.85rem;             /* Bubble Shape             */
+			--chat--transition-duration: 0.15s;         /* The dot dot dots         */
+
+			--chat--message--bot--background: #a8b8a8;  
+			--chat--message--bot--color: #1a4d3e;       
+
+			--chat--message--user--background: #d4a574; 
+			--chat--message--user--color: #f9f7f4;      
+		}
+
+        body {
+            background: #f9f7f4;
+            font-family: 'DM Sans', 'Segoe UI', sans-serif;
+            color: #1a4d3e;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            transform: rotate(-1deg);
+            text-align: left;
+            border-left: 8px solid #d4a574;
+            padding-left: 15px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin: 60px 0 20px;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: #d4a574;
+            transform: rotate(0.5deg);
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        strong {
+            background: #d4a574;
+            padding: 2px 4px;
+            font-weight: bold;
+        }
+
+        em {
+            font-style: italic;
+            color: #7a9b8e;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a4d3e;
+            color: #f9f7f4;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 30px 0;
+            border: 3px solid #1a4d3e;
+            transform: rotate(-1deg);
+            transition: all 0.2s;
+            box-shadow: 5px 5px 0 #d4a574;
+        }
+
+        .cta-button:hover {
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow: 7px 7px 0 #d4a574;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            border-left: 2px dashed #d4a574;
+            margin-left: 10px;
+        }
+
+        ul li:before {
+            content: "→";
+            position: absolute;
+            left: 8px;
+            color: #d4a574;
+            font-weight: bold;
+        }
+
+        .checkmark-list {
+            border-left: none;
+        }
+
+        .checkmark-list li {
+            border-left: none;
+            padding-left: 35px;
+            margin-left: 0;
+        }
+
+        .checkmark-list li:before {
+            content: "✓";
+            left: 0;
+            font-size: 1.3rem;
+        }
+
+        .highlight-box {
+            background: #fff;
+            border: 3px solid #1a4d3e;
+            padding: 25px;
+            margin: 30px 0;
+            transform: rotate(-0.5deg);
+            box-shadow: 8px 8px 0 #e8dcc8;
+        }
+
+        .before-after {
+            background: #f0e6d6;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #7a9b8e;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 50px 0;
+            font-size: 2rem;
+            color: #d4a574;
+            transform: rotate(180deg);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 2px dashed #d4a574;
+            font-size: 0.9rem;
+        }
+
+        .handwritten {
+            font-family: 'Segoe Print', 'Comic Sans MS', cursive;
+            background: #fff;
+            padding: 15px;
+            border: 2px dashed #1a4d3e;
+            margin: 20px 0;
+            transform: rotate(1deg);
+        }
+
+        .sound-familiar {
+            background: #d4a574;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid #d4a574;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        .motto {
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 40px 0;
+            padding: 20px;
+            background: #1a4d3e;
+            color: #f9f7f4;
+            transform: rotate(-1deg);
+            border: 3px solid #d4a574;
+        }
+
+        .actionable-box {
+            background: #a8b8a8;
+            border-left: 5px solid #7a9b8e;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.95rem;
+        }
+
+        .stats {
+            font-weight: bold;
+            color: #7a9b8e;
+        }
+
+		/* Chat container toggled by CTA buttons */
+		#WillowWellnesss-chat-container {
+			position: fixed;
+			bottom: 110px;
+			right: 10px;
+			width: 400px;
+			height: 600px;
+			max-width: 95vw;
+			max-height: 80vh;
+			display: none;
+			z-index: 9998;
+		}
+		#WillowWellnesss-chat-container.WillowWellnesss-open {
+			display: block;
+		}
+
+		@media (max-width: 600px) {
+			#WillowWellnesss-chat-container {
+				width: 100vw;
+				height: 100vh;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+		}
+
+		/* Floating WillowWellnesss icon */
+		.WillowWellnesss-launcher {
+			position: fixed;
+			right: 20px;
+			bottom: 35px;
+			width: 75px;
+			height: 75px;
+			background: #d4a574;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			z-index: 9999;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+			transition: transform 0.18s ease;
+		}
+		.WillowWellnesss-launcher:hover {
+			transform: scale(1.07);
+		}
+		.WillowWellnesss-launcher img {
+			width: 58px;
+			height: 58px;
+		}
+
+		/* Tooltip styling */
+		.WillowWellnesss-tooltip {
+			position: fixed;
+			right: 35px;
+			bottom: 120px;
+			background: #d4a574;
+			color: #0f3028;
+			padding: 5px 16px;
+			font-size: 16px;
+			border-radius: 12px;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+			z-index: 9999;
+			transition: opacity 0.25s ease, transform 0.25s ease;
+			white-space: nowrap;
+		}
+		.WillowWellnesss-tooltip::after {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			right: 20px;
+			border-width: 10px;
+			border-style: solid;
+			border-color: #d4a574 transparent transparent transparent;
+		}
+		.WillowWellnesss-tooltip.hidden {
+			opacity: 0;
+			transform: translateY(8px);
+			pointer-events: none;
+		}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Willow Wellness Demo Site</h1>
+        
+        <h2 id="demo">Want to Reshedule Your Booking?</h2>
+        
+        <div class="highlight-box" style="text-align: center;">
+            <a href="#" class="cta-button open-chat" style="margin: 0;">Reschedule Your Booking</a>
+            
+            <p style="margin-top: 20px;">Click the <strong>button</strong><span style='font-size:33px'>↑</span> or the <strong>chat bubble</strong><span style='font-size:33px'>→</span></p>
+        </div>
+
+        <div class="footer">
+            <p><strong>Willow Wellness Demo</strong></p>
+            <p>This is a demo site intended to show possible features.</p>
+            <p style="margin-top: 20px; font-size: 0.85rem;">Thank you for visiting. ❤️</p>
+        </div>
+    </div>
+
+	<!-- Tooltip -->
+	<div class="WillowWellnesss-tooltip" id="WillowWellnesss-tooltip">
+		Want to Reschedule?
+	</div>
+
+	<!-- WillowWellnesss floating launcher -->
+	<div class="WillowWellnesss-launcher" id="WillowWellnesss-launcher">
+		<img src="https://www.svgrepo.com/show/264457/willow.svg" alt="WillowWellnesss Bot" />
+	</div>
+
+	<!-- Chat container -->
+	<div id="WillowWellnesss-chat-container"></div>
+
+	<script type="module">
+		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+		const chatContainer = document.getElementById("WillowWellnesss-chat-container");
+		const launcher = document.getElementById("WillowWellnesss-launcher");
+		const tooltip = document.getElementById("WillowWellnesss-tooltip");
+		const ctaButtons = document.querySelectorAll(".open-chat");
+
+		// Create official n8n chat
+		createChat({
+			webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+			target: "#WillowWellnesss-chat-container",
+			mode: "fullscreen",
+			showWelcomeScreen: false,
+			initialMessages: [
+				"Welcome to Willow Wellness! 🌿",
+				"I'm here to help reschedule your booking for physiotherapy, massage, acupuncture or kinesiology services.",
+				"May I please get your email and the date of the booking?"
+			],
+			i18n: {
+				en: {
+					title: "Willow Wellness Chat (Demo)",
+					subtitle: "Ask us anything - 24/7 support",
+					inputPlaceholder: "Type your question..."
+				}
+			}
+		});
+
+		// Open chat function
+		function openChat() {
+			chatContainer.classList.toggle("WillowWellnesss-open");
+			tooltip.classList.add("hidden");
+		}
+
+		// CTA buttons open chat
+		ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
+
+		// Floating WillowWellnesss icon opens chat
+		launcher.addEventListener("click", openChat);
+
+		// Clicking anywhere hides tooltip
+		window.addEventListener("click", (e) => {
+			if (!launcher.contains(e.target)) {
+				tooltip.classList.add("hidden");
+			}
+		});
+	</script>
+
+</body>
+</html>
