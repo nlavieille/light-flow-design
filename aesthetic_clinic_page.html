@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI for Your Weird Business Habits</title>
+    <title>AI for Aesthetic Clinics</title>
 	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
 
 	<!-- Official n8n chat styles -->
@@ -48,7 +48,7 @@
             color: #2a2a2a;
             min-height: 100vh;
             padding: 40px 20px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         .container {
@@ -56,115 +56,129 @@
             margin: 0 auto;
         }
 
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 2px;
+        }
+
+        .back-btn:hover {
+            border-bottom-style: solid;
+        }
+
         header {
-            margin-bottom: 60px;
             border: 3px dashed #2a2a2a;
             padding: 30px;
-            background: #fff;
+            background: #ffeef8;
             box-shadow: 8px 8px 0 #d4af37;
             transform: rotate(-1deg);
+            margin-bottom: 40px;
         }
 
         h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            transform: rotate(1deg);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             font-weight: 900;
             letter-spacing: -2px;
-        }
-
-        strong {
-            background: #fff3cd;
-            padding: 2px 4px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            border-bottom: 3px wavy #2a2a2a;
-        }
-
-        .disclaimer {
-            font-size: 0.9rem;
-            font-style: italic;
-            padding: 15px;
-            background: #ffe8d6;
-            border-left: 4px solid #2a2a2a;
-            margin-top: 20px;
             transform: rotate(0.5deg);
         }
 
         .scissors {
             text-align: center;
             font-size: 2rem;
-            margin: 40px 0;
+            margin: 30px 0;
             opacity: 0.3;
         }
 
-        .service-list {
-            margin-top: 40px;
-        }
-
-        .service-item {
-            margin-bottom: 20px;
-            padding: 20px;
+        .intro {
             background: #fff;
+            padding: 25px;
             border: 2px solid #2a2a2a;
-            text-decoration: none;
-            color: #2a2a2a;
-            display: block;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .service-item:nth-child(odd) {
-            transform: rotate(-0.5deg);
+            margin-bottom: 30px;
+            transform: rotate(0.8deg);
             border-style: dashed;
         }
 
-        .service-item:nth-child(even) {
-            transform: rotate(0.5deg);
-            border-style: solid;
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
-        .service-item:hover {
-            transform: rotate(0deg) translateX(10px);
-            box-shadow: 6px 6px 0 #d4af37;
-        }
-
-        .service-item h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            font-weight: 900;
-        }
-
-        .service-item h2::before {
-            content: "→ ";
-            opacity: 0.5;
-        }
-
-        .service-item p {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .handwritten {
-            font-family: 'Comic Sans MS', cursive;
-            background: #e8f4f8;
+        .problem-box {
+            background: #e8d4f8;
             padding: 20px;
-            border: 2px solid #2a2a2a;
-            margin: 40px 0;
+            border: 4px solid #2a2a2a;
+            margin: 30px 0;
             transform: rotate(-1.5deg);
-            box-shadow: 5px 5px 0 #c9a9e8;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1rem;
+            box-shadow: 6px 6px 0 #c9a9e8;
+        }
+
+        .feature {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            position: relative;
+        }
+
+        .feature:nth-child(odd) {
+            transform: rotate(-0.7deg);
+            box-shadow: 5px 5px 0 #ffd4e5;
+        }
+
+        .feature:nth-child(even) {
+            transform: rotate(0.7deg);
+            box-shadow: 5px 5px 0 #ffe8d6;
+            border-style: dashed;
+        }
+
+        .feature strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 2px wavy #2a2a2a;
+            padding-bottom: 5px;
+        }
+
+        .feature strong::before {
+            content: "→ ";
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .callout {
+            background: #ffeef8;
+            padding: 20px;
+            border: 3px solid #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(1deg);
+            box-shadow: 6px 6px 0 #e8d4f8;
+        }
+
+        .bottom-note {
+            font-style: italic;
+            opacity: 0.7;
+            padding: 20px;
+            background: #fff;
+            border: 2px dashed #2a2a2a;
+            transform: rotate(-0.8deg);
+            margin-top: 30px;
         }
 
         @media (max-width: 600px) {
             h1 {
                 font-size: 2rem;
             }
-            header {
-                padding: 20px;
+            header, .intro, .feature, .callout {
+                padding: 15px;
             }
         }
 
@@ -253,71 +267,57 @@
 </head>
 <body>
     <div class="container">
+        <a href="./index.html" class="back-btn">← Back to all services</a>
+        
         <header>
-            <h1>AI for <em>your</em> local biz...</h1>
-            <p class="subtitle"><strong>We will make your business more money or save your business money with AI.</strong></p><p>Look, we automate all those weird business habits you'd rather offload to a robot.</p>
-            <div class="disclaimer">
-                ✓ This is not some fancy AI agency that consults for Fortune 500 companies.<br>
-                ✓ We're here for the real MVPs doing real work.
-            </div>
+            <h1>Aesthetic Clinics</h1>
         </header>
 
-        <div class="scissors">✂ ✂ ✂</div>
+        <div class="problem-box">
+            "Beauty is pain. Admin work is worse."
+        </div>
 
-        <div class="handwritten">
-            <strong>A note from us:</strong> We build AI stuff for businesses that don't have "Chief Innovation Officers" or whatever. If you're covered in dog hair, paint, or massage oil by 2pm, this is for you.
+        <div class="intro">
+            <p>You're out here making people look flawless with Botox, fillers, lasers, and whatever else medical science has blessed us with. But the paperwork? The consent forms? The "can I come in tomorrow for an emergency lip flip?" texts? That's the real nightmare.</p>
+
+            <p>Your clients expect luxury and discretion. Your inbox expects you to respond instantly to a million questions. Something's gotta give, and it shouldn't be your sanity.</p>
         </div>
 
         <div class="scissors">✂ ✂ ✂</div>
 
-        <div class="service-list">
-            <a href="hair_salon_page.html" class="service-item">
-                <h2>Hair Salons</h2>
-                <p>Because your clients need reminders</p>
-            </a>
+        <div class="feature">
+            <strong>Consultation Booking That Feels Bougie</strong>
+            <p>Elegant, automated scheduling that matches your clinic's vibe. No more playing calendar Tetris over text.</p>
+        </div>
 
-            <a href="tattoo_parlor_page.html" class="service-item">
-                <h2>Tattoo Parlors</h2>
-                <p>Ink is permanent, scheduling isn't</p>
-            </a>
+        <div class="feature">
+            <strong>Pre-Appointment Forms Nobody Forgets</strong>
+            <p>Medical history, consent forms, all that fun legal stuff collected before they walk in. You're welcome.</p>
+        </div>
 
-            <a href="aesthetic_clinic_page.html" class="service-item">
-                <h2>Aesthetic Clinics</h2>
-                <p>Beauty is pain, admin is worse</p>
-            </a>
+        <div class="feature">
+            <strong>Treatment Tracking & Follow-Ups</strong>
+            <p>"When should I come back for a touch-up?" The robot knows. Automatic reminders for follow-up appointments and maintenance.</p>
+        </div>
 
-            <a href="massage_therapy_page.html" class="service-item">
-                <h2>Massage Therapy</h2>
-                <p>Relax, we'll handle the chaos</p>
-            </a>
+        <div class="feature">
+            <strong>Package & Membership Management</strong>
+            <p>Keep track of who bought what package, how many sessions they have left, when their membership renews. Zero spreadsheets required.</p>
+        </div>
 
-            <a href="nail_salon_page.html" class="service-item">
-                <h2>Nail Salons</h2>
-                <p>Polish off your admin work</p>
-            </a>
-
-            <a href="gym_fitness_page.html" class="service-item">
-                <h2>Gyms & Fitness Studios</h2>
-                <p>No pain, no gain, no paperwork</p>
-            </a>
-
-            <a href="dog_groomer_page.html" class="service-item">
-                <h2>Dog Groomers</h2>
-                <p>Good boys deserve good booking</p>
-            </a>
+        <div class="feature">
+            <strong>Discreet Client Communication</strong>
+            <p>Professional, private messaging that doesn't make your clients feel like they're texting their doctor about Botox at 11pm. Even though they are.</p>
         </div>
 
         <div class="scissors">✂ ✂ ✂</div>
 
-        <div class="danger-zone">
-            <div class="warning-label">⚠ WARNING ZONE ⚠</div>
-            <a href="problems_solutions_page.html" class="danger-link">
-                <div class="danger-content">
-                    <strong>→ See ALL the problems →</strong>
-                    <p>(It's worse than you think. But also fixable.)</p>
-                </div>
-            </a>
-            <div class="tape">⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠</div>
+        <div class="callout">
+            <strong>Real talk:</strong> Your clients are paying for a premium experience. They shouldn't have to chase you for appointment confirmations, and you shouldn't be drowning in admin.
+        </div>
+
+        <div class="bottom-note">
+            ✓ No judgment on the procedures. We've all got our things. Ours is hating repetitive tasks.
         </div>
     </div>
 
@@ -334,74 +334,6 @@
 
 	<!-- Chat container -->
 	<div id="chewie-chat-container"></div>
-
-    <style>
-        .danger-zone {
-            margin-top: 50px;
-            border: 4px solid #2a2a2a;
-            background: #fff;
-            transform: rotate(-1.5deg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .warning-label {
-            background: #2a2a2a;
-            color: #f5f1e8;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
-
-        .danger-link {
-            display: block;
-            padding: 30px;
-            text-decoration: none;
-            color: #2a2a2a;
-            background: repeating-linear-gradient(
-                45deg,
-                #ffeb3b,
-                #ffeb3b 10px,
-                #2a2a2a 10px,
-                #2a2a2a 20px
-            );
-            transition: all 0.2s ease;
-        }
-
-        .danger-link:hover {
-            transform: scale(1.02);
-        }
-
-        .danger-content {
-            background: #fff;
-            padding: 20px;
-            border: 3px dashed #8b0000;
-            text-align: center;
-        }
-
-        .danger-content strong {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .danger-content p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        .tape {
-            background: #2a2a2a;
-            color: #ffeb3b;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-        }
-    </style>
 
 	<script type="module">
 		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
