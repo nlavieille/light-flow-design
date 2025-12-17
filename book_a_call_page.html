@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Hair Salons</title>
+	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+
+	<!-- Official n8n chat styles -->
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+		:root {
+			/* chewie brand colors */
+
+			--chat--header--background: #2a2a2a;        /* Header Background        */
+			--chat--header--color: #f8f5f0;             /* Header Font              */
+
+			--chat--header--background:
+				linear-gradient(
+					rgba(0, 0, 0, 0.5),
+					rgba(0, 0, 0, 0.3)
+				),
+				url("https://www.looper.com/img/gallery/who-played-chewbacca-in-star-wars-and-which-animals-were-used-in-his-voice/l-intro-1689824423.jpg") center/cover no-repeat;
+
+
+			--chat--color-light: #f0dfce;               /* Chat Background          */
+
+			--chat--border-radius: 1.85rem;             /* Bubble Shape             */
+			--chat--transition-duration: 0.15s;         /* The dot dot dots         */
+
+			--chat--message--bot--background: #ffe6e6;  /* Old Pink = ffe6e6        */
+			--chat--message--bot--color: #2a2a2a;       /* Same as Header Bg        */
+
+			--chat--message--user--background: #e8f4f8; /* Blue from Actionable Box */
+			--chat--message--user--color: #2a2a2a;      /* Same as Header Bg        */
+		}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 2px;
+        }
+
+        .back-btn:hover {
+            border-bottom-style: solid;
+        }
+
+        header {
+            border: 3px solid #2a2a2a;
+            padding: 30px;
+            background: #ffd4e5;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(-1.5deg);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            transform: rotate(1deg);
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        .intro {
+            background: #fff;
+            padding: 25px;
+            border: 2px dashed #2a2a2a;
+            margin-bottom: 30px;
+            transform: rotate(0.5deg);
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .problem-box {
+            background: #ffe8d6;
+            padding: 20px;
+            border-left: 5px solid #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(-0.8deg);
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1rem;
+        }
+
+        .feature {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            position: relative;
+        }
+
+        .feature:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            box-shadow: 5px 5px 0 #e8d4f8;
+        }
+
+        .feature:nth-child(even) {
+            transform: rotate(0.5deg);
+            box-shadow: 5px 5px 0 #d4f8e8;
+        }
+
+        .feature strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-decoration: underline wavy #2a2a2a;
+        }
+
+        .feature strong::before {
+            content: "→ ";
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .callout {
+            background: #e8f4f8;
+            padding: 20px;
+            border: 3px dashed #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(1deg);
+            box-shadow: 6px 6px 0 #c9a9e8;
+        }
+
+        .bottom-note {
+            font-style: italic;
+            opacity: 0.7;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            transform: rotate(-0.5deg);
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            header, .intro, .feature, .callout {
+                padding: 15px;
+            }
+        }
+
+		/* Chat container toggled by CTA buttons */
+		#chewie-chat-container {
+			position: fixed;
+			bottom: 110px;
+			right: 10px;
+			width: 330px;
+			height: 600px;
+			max-width: 95vw;
+			max-height: 80vh;
+			display: none;
+			z-index: 9998;
+		}
+		#chewie-chat-container.chewie-open {
+			display: block;
+		}
+
+		@media (max-width: 600px) {
+			#chewie-chat-container {
+				width: 100vw;
+				height: 100vh;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+		}
+
+		/* Floating chewie icon */
+		.chewie-launcher {
+			position: fixed;
+			right: 20px;
+			bottom: 35px;
+			width: 75px;
+			height: 75px;
+			background: #ffe6e6;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			z-index: 9999;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+			transition: transform 0.18s ease;
+		}
+		.chewie-launcher:hover {
+			transform: scale(1.07);
+		}
+		.chewie-launcher img {
+			width: 58px;
+			height: 58px;
+		}
+
+		/* Tooltip styling */
+		.chewie-tooltip {
+			position: fixed;
+			right: 35px;
+			bottom: 120px;
+			background: #ffe6e6;
+			color: #2a2a2a;
+			padding: 5px 16px;
+			font-size: 16px;
+			border-radius: 12px;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+			z-index: 9999;
+			transition: opacity 0.25s ease, transform 0.25s ease;
+			white-space: nowrap;
+		}
+		.chewie-tooltip::after {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			right: 20px;
+			border-width: 10px;
+			border-style: solid;
+			border-color: #ffe6e6 transparent transparent transparent;
+		}
+		.chewie-tooltip.hidden {
+			opacity: 0;
+			transform: translateY(8px);
+			pointer-events: none;
+		}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h1>Book a Free 15-Minute Call</h1>
+			<h2>Chewie will help you book - Noel will handle the call</h2>
+        </header>
+
+        <div class="intro">
+            <p><strong>What's happening here (quick heads-up)</strong></p>
+			
+			<p>You'll see <b>Chewie</b>, our friendly AI assistant, pop up in the corner.</p>
+
+            <p>Chewie's only job is to:
+			<br>✓ Ask a couple of simple questions
+			<br>✓ Help you pick a time
+			<br>✓ Make booking easy</p>
+			<p>That's it.</p>
+			<p>You're not locked into anything, and you're not talking to a salesperson.</p>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+    </div>
+
+	<!-- Tooltip -->
+	<div class="chewie-tooltip" id="chewie-tooltip">
+		Book a Call?
+	</div>
+
+	<!-- chewie floating launcher -->
+	<div class="chewie-launcher" id="chewie-launcher">
+		<img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="chewie Bot" />
+	</div>
+
+	<!-- Chat container -->
+	<div id="chewie-chat-container"></div>
+
+	<script type="module">
+		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+		const chatContainer = document.getElementById("chewie-chat-container");
+		const launcher = document.getElementById("chewie-launcher");
+		const tooltip = document.getElementById("chewie-tooltip");
+		const ctaButtons = document.querySelectorAll(".open-chat");
+
+		// Create official n8n chat
+		createChat({
+			webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+			target: "#chewie-chat-container",
+			mode: "fullscreen",
+			showWelcomeScreen: false,
+			initialMessages: ["Chewie here! What date and time work best for you?"],
+			i18n: {
+				en: {
+					title: "Chewie Chat",
+					subtitle: "Start a chat. I'm here to help you 24/7.",
+					inputPlaceholder: "Ready when you are..."
+				}
+			}
+		});
+
+		// Open chat function
+		function openChat() {
+			chatContainer.classList.toggle("chewie-open");
+			tooltip.classList.add("hidden");
+		}
+
+		// CTA buttons open chat
+		ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
+
+		// Floating chewie icon opens chat
+		launcher.addEventListener("click", openChat);
+
+		// Clicking anywhere hides tooltip
+		window.addEventListener("click", (e) => {
+			if (!launcher.contains(e.target)) {
+				tooltip.classList.add("hidden");
+			}
+		});
+	</script>
+
+</body>
+</html>
