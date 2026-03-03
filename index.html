@@ -1,450 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI for Your Weird Business Habits </title>
-	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Princess Light Media | AI Receptionist for Vancouver Salons, Tattoo Studios & Groomers</title>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+  <meta name="description" content="Vancouver's #1 AI receptionist service for hair salons, tattoo studios, dog groomers & more. Never miss a booking again. 24/7 call answering — your phone answers itself while you work. Serving all of Metro Vancouver, Surrey, Burnaby & beyond." />
+  <meta name="keywords" content="AI receptionist Vancouver, automated booking Vancouver, hair salon AI receptionist, tattoo studio booking system, dog groomer AI phone, 24/7 receptionist Surrey BC, missed calls salon Vancouver, AI answering service Vancouver, appointment booking automation BC" />
+  <link rel="canonical" href="https://princesslight.com" />
+  <meta property="og:title" content="Your Phone Answers Itself. Your Books Fill Up. You Just Work. | Princess Light Media" />
+  <meta property="og:description" content="Vancouver AI receptionist for salons, tattoo studios, dog groomers & clinics. Never lose another booking to voicemail. 24/7, no sick days, no attitude." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://princesslight.com" />
 
-	<!-- Official n8n chat styles -->
-	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Princess Light Media",
+    "description": "AI Receptionist and booking automation for appointment-based businesses in Metro Vancouver",
+    "url": "https://princesslight.com",
+    "telephone": "+17782380206",
+    "email": "noel@princesslight.com",
+    "areaServed": [
+      {"@type": "City", "name": "Vancouver"},
+      {"@type": "City", "name": "Surrey"},
+      {"@type": "City", "name": "Burnaby"},
+      {"@type": "City", "name": "Richmond"},
+      {"@type": "City", "name": "North Vancouver"},
+      {"@type": "City", "name": "Coquitlam"},
+      {"@type": "City", "name": "Langley"},
+      {"@type": "City", "name": "Abbotsford"}
+    ],
+    "serviceType": ["AI Receptionist", "Automated Appointment Booking", "24/7 Call Answering", "Voice Agent"],
+    "priceRange": "$$"
+  }
+  </script>
 
-    <style>
-		:root {
-			/* chewie brand colors */
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
-			--chat--header--background: #2a2a2a;        /* Header Background        */
-			--chat--header--color: #f8f5f0;             /* Header Font              */
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f4f0e8;
+      --cream: #faf7f2;
+      --hot: #ff3c2f;
+      --gold: #f5c842;
+      --muted: #6b6560;
+      --border: #2a2a2a;
+    }
 
-			--chat--header--background:
-				linear-gradient(
-					rgba(0, 0, 0, 0.5),
-					rgba(0, 0, 0, 0.3)
-				),
-				url("https://www.looper.com/img/gallery/who-played-chewbacca-in-star-wars-and-which-animals-were-used-in-his-voice/l-intro-1689824423.jpg") center/cover no-repeat;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
+    body {
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
 
-			--chat--color-light: #f0dfce;               /* Background   old=#f0dfce */
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.3;
+    }
 
-			--chat--border-radius: 1.85rem;             /* Bubble Shape             */
-			--chat--transition-duration: 0.15s;         /* The dot dot dots         */
+    /* STICKY BAR */
+    .sticky-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: var(--hot);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0.55rem 1.5rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .sticky-bar a { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.2s; }
+    .sticky-bar a:hover { opacity: 0.8; }
+    .sticky-bar .div { color: rgba(255,255,255,0.35); }
 
-			--chat--message--bot--background: #ffe6e6;  /* Old Pink = ffe6e6        */
-			--chat--message--bot--color: #2a2a2a;       /* Same as Header Bg        */
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.3rem 5vw;
+      margin-top: 36px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+    .logo span { color: rgba(244,240,232,0.5); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { font-family: 'Syne', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(244,240,232,0.55); text-decoration: none; transition: color 0.2s; }
+    nav ul a:hover { color: var(--gold); }
+    .nav-cta { background: var(--hot) !important; color: #fff !important; padding: 0.45rem 1.1rem; border-radius: 2px; }
 
-			--chat--message--user--background: #e8f4f8; /* Blue from Actionable Box */
-			--chat--message--user--color: #2a2a2a;      /* Same as Header Bg        */
-		}
+    /* HERO */
+    .hero { padding: 6rem 5vw 5rem; position: relative; overflow: hidden; }
+    .hero::after {
+      content: 'PRINCESS LIGHT';
+      position: absolute; bottom: -0.05em; right: -0.02em;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 16vw, 18rem);
+      color: rgba(255,255,255,0.022);
+      line-height: 1; pointer-events: none; white-space: nowrap;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Syne', sans-serif; font-size: 0.73rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem;
+    }
+    .hero-tag::before { content: ''; display: block; width: 22px; height: 2px; background: var(--gold); }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.2rem, 8.5vw, 8.5rem);
+      line-height: 0.92; letter-spacing: 0.01em;
+      max-width: 14ch; margin-bottom: 1.8rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--hot); }
+    .hero h1 .gold { color: var(--gold); }
+    .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.18rem); color: rgba(244,240,232,0.7); max-width: 52ch; line-height: 1.75; margin-bottom: 2.8rem; }
+    .hero-sub strong { color: var(--paper); font-weight: 500; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 4rem; }
+    .btn-primary {
+      background: var(--hot); color: #fff;
+      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.88rem;
+      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+      padding: 0.95rem 2rem; border-radius: 2px; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 4px 4px 0 var(--gold);
+    }
+    .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--gold); }
+    .btn-secondary {
+      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.83rem;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper); text-decoration: none;
+      border-bottom: 2px solid var(--gold); padding-bottom: 2px; transition: color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--gold); }
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: #f5f1e8;
-            color: #2a2a2a;
-            min-height: 100vh;
-            padding: 40px 20px;
-            line-height: 1.6;
-        }
+    .hero-proof { display: flex; flex-wrap: wrap; gap: 2.5rem; }
+    .proof-item { display: flex; flex-direction: column; gap: 0.12rem; }
+    .proof-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; color: var(--gold); }
+    .proof-label { font-size: 0.76rem; color: rgba(244,240,232,0.45); font-family: 'Syne', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
 
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-        }
+    /* MARQUEE */
+    .marquee-wrap { overflow: hidden; border-top: 1px solid rgba(255,255,255,0.09); border-bottom: 1px solid rgba(255,255,255,0.09); padding: 0.75rem 0; background: rgba(245,200,66,0.05); }
+    .marquee-track { display: flex; animation: marquee 22s linear infinite; width: max-content; }
+    .marquee-track span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.12em; color: rgba(245,200,66,0.5); padding: 0 1.8rem; white-space: nowrap; }
+    .marquee-track span.hot { color: var(--hot); opacity: 0.65; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-        header {
-            margin-bottom: 60px;
-            border: 3px dashed #2a2a2a;
-            padding: 30px;
-            background: #fff;
-            box-shadow: 8px 8px 0 #d4af37;
-            transform: rotate(-1deg);
-        }
+    /* SECTIONS */
+    section { padding: 5.5rem 5vw; }
+    .section-label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.7rem; }
+    h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 5.5vw, 5rem); line-height: 0.95; margin-bottom: 1.4rem; }
+    h2 em { font-style: normal; color: var(--hot); }
+    h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.45rem; }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            transform: rotate(1deg);
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
+    /* PROBLEM */
+    .problem { background: var(--paper); color: var(--ink); }
+    .problem .section-label { color: var(--hot); }
+    .problem h2 { color: var(--ink); }
+    .problem h2 em { color: var(--hot); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 2.8rem; border: 2px solid var(--ink); }
+    .problem-item { padding: 1.8rem 2rem; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); position: relative; }
+    .problem-item:nth-child(even) { border-right: none; }
+    .problem-item:nth-child(5), .problem-item:nth-child(6) { border-bottom: none; }
+    .problem-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; color: rgba(13,13,13,0.07); position: absolute; top: 0.4rem; right: 0.8rem; }
+    .problem-item h3 { font-size: 0.97rem; color: var(--ink); }
+    .problem-item p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+    .problem-cta { margin-top: 2.8rem; padding: 2.2rem; background: var(--hot); color: #fff; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .problem-cta p { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; max-width: 52ch; }
+    .btn-dark { background: var(--ink); color: #fff; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.83rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 1.8rem; border-radius: 2px; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 3px 3px 0 var(--gold); white-space: nowrap; }
+    .btn-dark:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--gold); }
 
-        strong {
-            background: #fff3cd;
-            padding: 2px 4px;
-            font-weight: bold;
-        }
+    /* HOW IT WORKS */
+    .how-it-works { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-top: 3rem; border: 1px solid rgba(255,255,255,0.09); }
+    .step { padding: 2.2rem 1.8rem; border-right: 1px solid rgba(255,255,255,0.09); transition: background 0.22s; }
+    .step:last-child { border-right: none; }
+    .step:hover { background: rgba(255,255,255,0.025); }
+    .step-n { font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; line-height: 1; color: rgba(245,200,66,0.13); margin-bottom: 0.4rem; }
+    .step h3 { color: var(--gold); font-size: 0.95rem; margin-bottom: 0.55rem; }
+    .step p { font-size: 0.85rem; color: rgba(244,240,232,0.55); line-height: 1.65; }
 
-        .subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            border-bottom: 3px wavy #2a2a2a;
-        }
+    /* NICHES */
+    .niches { background: #111; }
+    .niche-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: end; margin-bottom: 3.5rem; }
+    .niche-intro p { color: rgba(244,240,232,0.62); font-size: 1rem; line-height: 1.78; }
+    .niche-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1px; background: rgba(255,255,255,0.07); }
+    .niche-card { background: #111; padding: 2rem 1.8rem; transition: background 0.2s; }
+    .niche-card:hover { background: #181818; }
+    .niche-icon { font-size: 2rem; margin-bottom: 0.9rem; display: block; }
+    .niche-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 0.05em; color: var(--paper); margin-bottom: 0.25rem; }
+    .niche-tagline { font-size: 0.75rem; font-family: 'Syne', sans-serif; font-weight: 600; color: var(--hot); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .niche-card p { font-size: 0.85rem; color: rgba(244,240,232,0.52); line-height: 1.65; }
+    .niche-features { margin-top: 0.9rem; list-style: none; display: flex; flex-direction: column; gap: 0.28rem; }
+    .niche-features li { font-size: 0.8rem; color: rgba(244,240,232,0.42); display: flex; align-items: flex-start; gap: 0.45rem; }
+    .niche-features li::before { content: '→'; color: var(--gold); font-weight: bold; flex-shrink: 0; }
 
-        .disclaimer {
-            font-size: 0.9rem;
-            font-style: italic;
-            padding: 15px;
-            background: #ffe8d6;
-            border-left: 4px solid #2a2a2a;
-            margin-top: 20px;
-            transform: rotate(0.5deg);
-        }
+    /* WHAT YOU GET */
+    .what-you-get { background: var(--paper); color: var(--ink); }
+    .what-you-get .section-label { color: var(--hot); }
+    .what-you-get h2 { color: var(--ink); }
+    .features-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 2.5rem; margin-top: 2.8rem; }
+    .feature { display: flex; flex-direction: column; gap: 0.45rem; }
+    .feature-icon { width: 42px; height: 42px; background: var(--ink); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 0.4rem; flex-shrink: 0; }
+    .feature h3 { font-size: 0.97rem; color: var(--ink); }
+    .feature p { font-size: 0.85rem; color: #666; line-height: 1.62; }
 
-        .scissors {
-            text-align: center;
-            font-size: 2rem;
-            margin: 40px 0;
-            opacity: 0.3;
-        }
+    /* PROOF */
+    .proof-section { border-top: 1px solid rgba(255,255,255,0.07); }
+    .proof-banner { background: var(--gold); color: var(--ink); padding: 1.1rem 5vw; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.1rem, 2.8vw, 1.85rem); letter-spacing: 0.08em; }
+    .proof-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.4rem; margin-top: 2.8rem; }
+    .proof-card { border: 1px solid rgba(255,255,255,0.09); padding: 1.8rem; position: relative; }
+    .proof-card::before { content: '"'; font-family: 'Bebas Neue', sans-serif; font-size: 5.5rem; line-height: 1; color: rgba(245,200,66,0.1); position: absolute; top: -0.15rem; left: 1rem; pointer-events: none; }
+    .proof-card p { font-size: 0.92rem; line-height: 1.72; color: rgba(244,240,232,0.75); margin-bottom: 1.1rem; padding-top: 0.9rem; }
+    .proof-card-attr { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        .service-list {
-            margin-top: 40px;
-        }
+    /* VANCOUVER */
+    .vancouver { background: #0d0d0d; border-top: 4px solid var(--gold); border-bottom: 4px solid var(--gold); }
+    .vancouver-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: center; }
+    .vancouver p { color: rgba(244,240,232,0.62); line-height: 1.82; margin-bottom: 1.1rem; }
+    .areas { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.3rem; }
+    .area-tag { font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(245,200,66,0.09); border: 1px solid rgba(245,200,66,0.28); color: var(--gold); padding: 0.3rem 0.75rem; }
+    .van-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.07); }
+    .van-stat { background: #111; padding: 2rem 1.8rem; }
+    .vs-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1; color: var(--gold); }
+    .vs-label { font-size: 0.8rem; color: rgba(244,240,232,0.45); font-family: 'Syne', sans-serif; line-height: 1.45; margin-top: 0.3rem; }
 
-        .service-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #fff;
-            border: 2px solid #2a2a2a;
-            text-decoration: none;
-            color: #2a2a2a;
-            display: block;
-            transition: all 0.2s ease;
-            position: relative;
-        }
+    /* PRICING */
+    .pricing { background: var(--ink); }
+    .pricing h2 { text-align: center; margin-bottom: 0.4rem; }
+    .pricing-sub { text-align: center; color: rgba(244,240,232,0.5); font-size: 0.98rem; margin-bottom: 3.2rem; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.4rem; max-width: 1080px; margin: 0 auto; }
+    .pricing-card { border: 1px solid rgba(255,255,255,0.1); padding: 2.3rem 2rem; position: relative; transition: border-color 0.2s; }
+    .pricing-card:hover { border-color: rgba(245,200,66,0.35); }
+    .pricing-card.featured { border: 2px solid var(--gold); background: rgba(245,200,66,0.035); }
+    .featured-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--ink); font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.22rem 0.9rem; }
+    .plan-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.05em; color: var(--paper); margin-bottom: 0.25rem; }
+    .plan-desc { font-size: 0.8rem; color: rgba(244,240,232,0.42); margin-bottom: 1.3rem; }
+    .plan-price { display: flex; align-items: baseline; gap: 0.3rem; margin-bottom: 0.35rem; }
+    .price-amount { font-family: 'Bebas Neue', sans-serif; font-size: 3.2rem; line-height: 1; color: var(--gold); }
+    .price-period { font-size: 0.8rem; color: rgba(244,240,232,0.4); }
+    .plan-note { font-size: 0.76rem; color: var(--hot); font-family: 'Syne', sans-serif; font-weight: 600; margin-bottom: 1.6rem; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.8rem; }
+    .plan-features li { font-size: 0.85rem; color: rgba(244,240,232,0.62); display: flex; align-items: flex-start; gap: 0.55rem; line-height: 1.42; }
+    .plan-features li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+    .btn-full { display: block; text-align: center; background: var(--hot); color: #fff; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.83rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 0.88rem 1.5rem; transition: opacity 0.2s; }
+    .btn-full:hover { opacity: 0.85; }
+    .pricing-card.featured .btn-full { background: var(--gold); color: var(--ink); }
+    .pricing-note { text-align: center; margin-top: 2.2rem; font-size: 0.83rem; color: rgba(244,240,232,0.38); }
 
-        .service-item:nth-child(odd) {
-            transform: rotate(-0.5deg);
-            border-style: dashed;
-        }
+    /* FAQ */
+    .faq { background: #0e0e0e; }
+    .faq h2 { margin-bottom: 2.8rem; }
+    .faq-list { max-width: 760px; }
+    .faq-item { border-top: 1px solid rgba(255,255,255,0.09); padding: 1.5rem 0; }
+    .faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
+    .faq-q { font-family: 'Syne', sans-serif; font-size: 0.97rem; font-weight: 700; color: var(--paper); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; user-select: none; }
+    .faq-q::after { content: '+'; font-size: 1.35rem; color: var(--gold); font-weight: 300; flex-shrink: 0; transition: transform 0.25s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a { font-size: 0.9rem; color: rgba(244,240,232,0.57); line-height: 1.78; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding-top 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 400px; padding-top: 0.9rem; }
 
-        .service-item:nth-child(even) {
-            transform: rotate(0.5deg);
-            border-style: solid;
-        }
+    /* CONTACT */
+    .contact { background: var(--paper); color: var(--ink); text-align: center; padding: 7rem 5vw; }
+    .contact .section-label { color: var(--hot); }
+    .contact h2 { color: var(--ink); max-width: 16ch; margin: 0 auto 0.9rem; }
+    .contact h2 em { color: var(--hot); }
+    .contact-sub { color: #666; max-width: 50ch; margin: 0 auto 3.2rem; font-size: 1.02rem; line-height: 1.72; }
+    .contact-cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4rem; margin-bottom: 2.8rem; }
+    .contact-card { background: var(--ink); color: var(--paper); text-decoration: none; padding: 1.8rem 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.45rem; min-width: 250px; transition: transform 0.15s, box-shadow 0.15s; box-shadow: 4px 4px 0 var(--hot); }
+    .contact-card:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--hot); }
+    .contact-card-icon { font-size: 1.9rem; }
+    .contact-card-label { font-family: 'Syne', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .contact-card-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.05em; color: var(--paper); }
+    .contact-card-sub { font-size: 0.75rem; color: rgba(244,240,232,0.42); }
+    .contact-guarantee { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.83rem; color: #888; border: 1px solid #ddd; padding: 0.65rem 1.4rem; }
+    .contact-guarantee strong { color: var(--ink); }
 
-        .service-item:hover {
-            transform: rotate(0deg) translateX(10px);
-            box-shadow: 6px 6px 0 #d4af37;
-        }
+    /* FOOTER */
+    footer { background: var(--ink); padding: 2.8rem 5vw; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
+    .footer-logo span { color: rgba(244,240,232,0.35); }
+    .footer-tagline { font-size: 0.77rem; color: rgba(244,240,232,0.32); margin-top: 0.25rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 1.4rem; list-style: none; }
+    .footer-links a { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(244,240,232,0.38); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.76rem; color: rgba(244,240,232,0.22); }
 
-        .service-item h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            font-weight: 900;
-        }
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .service-item h2::before {
-            content: "→ ";
-            opacity: 0.5;
-        }
-
-        .service-item p {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .handwritten {
-            font-family: 'Comic Sans MS', cursive;
-            background: #e8f4f8;
-            padding: 20px;
-            border: 2px solid #2a2a2a;
-            margin: 40px 0;
-            transform: rotate(-1.5deg);
-            box-shadow: 5px 5px 0 #c9a9e8;
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-            header {
-                padding: 20px;
-            }
-        }
-
-		/* Chat container toggled by CTA buttons */
-		#chewie-chat-container {
-			position: fixed;
-			bottom: 110px;
-			right: 10px;
-			width: 330px;
-			height: 600px;
-			max-width: 95vw;
-			max-height: 80vh;
-			display: none;
-			z-index: 9998;
-		}
-		#chewie-chat-container.chewie-open {
-			display: block;
-		}
-
-		@media (max-width: 600px) {
-			#chewie-chat-container {
-				width: 100vw;
-				height: 100vh;
-				bottom: 0;
-				right: 0;
-				left: 0;
-			}
-		}
-
-		/* Floating chewie icon */
-		.chewie-launcher {
-			position: fixed;
-			right: 20px;
-			bottom: 35px;
-			width: 75px;
-			height: 75px;
-			background: #ffe6e6;
-			border-radius: 50%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			z-index: 9999;
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-			transition: transform 0.18s ease;
-		}
-		.chewie-launcher:hover {
-			transform: scale(1.07);
-		}
-		.chewie-launcher img {
-			width: 58px;
-			height: 58px;
-		}
-
-		/* Tooltip styling */
-		.chewie-tooltip {
-			position: fixed;
-			right: 35px;
-			bottom: 120px;
-			background: #ffe6e6;
-			color: #2a2a2a;
-			padding: 5px 16px;
-			font-size: 16px;
-			border-radius: 12px;
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-			z-index: 9999;
-			transition: opacity 0.25s ease, transform 0.25s ease;
-			white-space: nowrap;
-		}
-		.chewie-tooltip::after {
-			content: "";
-			position: absolute;
-			bottom: -10px;
-			right: 20px;
-			border-width: 10px;
-			border-style: solid;
-			border-color: #ffe6e6 transparent transparent transparent;
-		}
-		.chewie-tooltip.hidden {
-			opacity: 0;
-			transform: translateY(8px);
-			pointer-events: none;
-		}
-
-    </style>
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hero h1 { font-size: clamp(2.8rem, 13vw, 4.5rem); }
+      .problem-grid { grid-template-columns: 1fr; }
+      .problem-item { border-right: none; }
+      .problem-item:nth-child(5) { border-bottom: 2px solid var(--ink); }
+      .niche-intro { grid-template-columns: 1fr; gap: 1.3rem; }
+      .vancouver-inner { grid-template-columns: 1fr; gap: 2.8rem; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .step { border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .sticky-bar { font-size: 0.68rem; gap: 0.7rem; }
+    }
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+      .hero-proof { gap: 1.3rem; }
+      .sticky-bar .div { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>AI for <em>your</em> local biz...</h1>
-            <p class="subtitle"><strong>We will make your business more money or save your business money with AI.</strong></p><p>Look, we automate all those weird business habits you'd rather offload to a robot.</p>
-            <div class="disclaimer">
-                ✓ This is not some fancy AI agency that consults for Fortune 500 companies.<br>
-                ✓ We're here for the real MVPs doing real work.
-            </div>
-        </header>
 
-        <div class="scissors">✂ ✂ ✂</div>
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <a href="tel:7782380206">📞 778-238-0206</a>
+  <span class="div">|</span>
+  <a href="mailto:noel@princesslight.com">✉ noel@princesslight.com</a>
+  <span class="div">|</span>
+  <a href="#contact">Free trial — get started →</a>
+</div>
 
-        <div class="handwritten">
-            <strong>A note from us:</strong> We build AI stuff for businesses that don't have "Chief Innovation Officers" or whatever. If you're covered in dog hair, paint, or massage oil by 2pm, this is for you.
-        </div>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Princess Light <span>Media</span></a>
+  <ul>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#niches">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Talk to Noel</a></li>
+  </ul>
+</nav>
 
-        <div class="scissors">✂ ✂ ✂</div>
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="hero-tag">Vancouver's AI Receptionist Service</div>
+  <h1>Your Phone <em>Answers Itself.</em> Your Books <span class="gold">Fill Up.</span></h1>
+  <p class="hero-sub">
+    While you're elbow-deep in a colour treatment, doing a tattoo sleeve, or bathing a golden retriever —
+    <strong>your AI receptionist is answering calls, booking appointments, and collecting deposits.</strong>
+    24 hours a day. No sick days. No drama.
+  </p>
+  <div class="hero-actions">
+    <a href="tel:7782380206" class="btn-primary">📞 Call Noel — 778-238-0206</a>
+    <a href="#how-it-works" class="btn-secondary">See how it works ↓</a>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-item"><span class="proof-num">24/7</span><span class="proof-label">Call Coverage</span></div>
+    <div class="proof-item"><span class="proof-num">$0</span><span class="proof-label">Lost to Voicemail</span></div>
+    <div class="proof-item"><span class="proof-num">1 Day</span><span class="proof-label">To Go Live</span></div>
+    <div class="proof-item"><span class="proof-num">7</span><span class="proof-label">Business Types Served</span></div>
+  </div>
+</section>
 
-        <div class="service-list">
-            <a href="hair_salon_page.html" class="service-item">
-                <h2>Hair Salons</h2>
-                <p>Because your clients need reminders</p>
-            </a>
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Hair Salons</span><span class="hot">✂</span><span>Tattoo Parlors</span><span class="hot">⚡</span><span>Dog Groomers</span><span class="hot">🐾</span><span>Nail Salons</span><span class="hot">✦</span><span>Aesthetic Clinics</span><span class="hot">✦</span><span>Massage Therapy</span><span class="hot">✦</span><span>Gyms & Fitness</span><span class="hot">✦</span><span>Vancouver</span><span class="hot">✦</span><span>Surrey</span><span class="hot">✦</span><span>Burnaby</span><span class="hot">✦</span><span>Richmond</span><span class="hot">✦</span><span>North Van</span><span class="hot">✦</span>
+    <span>Hair Salons</span><span class="hot">✂</span><span>Tattoo Parlors</span><span class="hot">⚡</span><span>Dog Groomers</span><span class="hot">🐾</span><span>Nail Salons</span><span class="hot">✦</span><span>Aesthetic Clinics</span><span class="hot">✦</span><span>Massage Therapy</span><span class="hot">✦</span><span>Gyms & Fitness</span><span class="hot">✦</span><span>Vancouver</span><span class="hot">✦</span><span>Surrey</span><span class="hot">✦</span><span>Burnaby</span><span class="hot">✦</span><span>Richmond</span><span class="hot">✦</span><span>North Van</span><span class="hot">✦</span>
+  </div>
+</div>
 
-            <a href="tattoo_parlor_page.html" class="service-item">
-                <h2>Tattoo Parlors</h2>
-                <p>Ink is permanent, scheduling isn't</p>
-            </a>
+<!-- ════════════════════ PROBLEM ════════════════════ -->
+<section class="problem reveal">
+  <div class="section-label">The Real Problem</div>
+  <h2>Every <em>Missed Call</em> Is a Booking That Walked Out the Door</h2>
+  <p style="max-width:60ch; color:#555; margin-top:0.4rem; font-size:0.95rem;">You didn't start your business to answer phones. But every call that hits voicemail is a client who called the next place on Google. Here's exactly what's costing you right now:</p>
+  <div class="problem-grid">
+    <div class="problem-item"><span class="problem-num">01</span><h3>📵 Calls During Services</h3><p>You can't stop mid-cut, mid-ink, or mid-groom to answer the phone. So you don't. And they don't call back.</p></div>
+    <div class="problem-item"><span class="problem-num">02</span><h3>🌙 After-Hours Bookings Lost</h3><p>Most clients want to book after 6pm when they're off work. Your voicemail is your competition's best friend.</p></div>
+    <div class="problem-item"><span class="problem-num">03</span><h3>😤 No-Shows Kill Your Day</h3><p>Without automated reminders and deposit collection, no-shows bleed you dry — especially for long appointments.</p></div>
+    <div class="problem-item"><span class="problem-num">04</span><h3>📋 Endless Back-and-Forth</h3><p>"What times do you have?" "Does 3pm work?" "What about Thursday?" It's endless — and it's all on you.</p></div>
+    <div class="problem-item"><span class="problem-num">05</span><h3>💸 Real Receptionists Cost a Fortune</h3><p>$20–$28/hr in Metro Vancouver. That's $3,000+/month for someone who still takes sick days and quits in February.</p></div>
+    <div class="problem-item"><span class="problem-num">06</span><h3>😓 You're Doing Everything</h3><p>Marketing, booking, client care, cleaning, supplies — and answering calls. Something has to give. It shouldn't be your sanity.</p></div>
+  </div>
+  <div class="problem-cta">
+    <p>Most Vancouver salon owners lose 8–15 bookings a week just from missed calls. That's $500–$2,000 walking out the door. Every. Single. Week.</p>
+    <a href="tel:7782380206" class="btn-dark">📞 Let's Fix This Now</a>
+  </div>
+</section>
 
-            <a href="aesthetic_clinic_page.html" class="service-item">
-                <h2>Aesthetic Clinics</h2>
-                <p>Beauty is pain, admin is worse</p>
-            </a>
+<!-- ════════════════════ HOW IT WORKS ════════════════════ -->
+<section class="how-it-works reveal" id="how-it-works">
+  <div class="section-label">The Solution</div>
+  <h2>How <em>It</em> Works</h2>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><h3>We Set You Up in a Day</h3><p>One quick call with Noel. We configure your AI voice agent with your services, prices, hours, and personality. Done faster than training a new hire.</p></div>
+    <div class="step"><div class="step-n">02</div><h3>Your AI Answers Every Call</h3><p>Rain or shine, 3am or 3pm — your AI picks up, speaks naturally, and handles the conversation. Clients think they're talking to your front desk.</p></div>
+    <div class="step"><div class="step-n">03</div><h3>Bookings Go Into Your Calendar</h3><p>Directly into Google Calendar in real-time. No double-bookings. No gaps. Deposits collected automatically when you want them.</p></div>
+    <div class="step"><div class="step-n">04</div><h3>Reminders Go Out Automatically</h3><p>SMS and email confirmations sent the moment they hang up. Reminders 24 hours before. Rescheduling handled without you lifting a finger.</p></div>
+    <div class="step"><div class="step-n">05</div><h3>You Just Do What You Do</h3><p>Cut hair. Do tattoos. Groom dogs. Your calendar fills up. You get a daily summary. No new software to learn. That's it.</p></div>
+  </div>
+</section>
 
-            <a href="massage_therapy_page.html" class="service-item">
-                <h2>Massage Therapy</h2>
-                <p>Relax, we'll handle the chaos</p>
-            </a>
-
-            <a href="nail_salon_page.html" class="service-item">
-                <h2>Nail Salons</h2>
-                <p>Polish off your admin work</p>
-            </a>
-
-            <a href="gym_fitness_page.html" class="service-item">
-                <h2>Gyms & Fitness Studios</h2>
-                <p>No pain, no gain, no paperwork</p>
-            </a>
-
-            <a href="dog_groomer_page.html" class="service-item">
-                <h2>Dog Groomers</h2>
-                <p>Good boys deserve good booking</p>
-            </a>
-        </div>
-
-        <div class="scissors">✂ ✂ ✂</div>
-
-        <div class="danger-zone">
-            <div class="warning-label">⚠ WARNING ZONE ⚠</div>
-            <a href="problems_solutions_page.html" class="danger-link">
-                <div class="danger-content">
-                    <strong>→ See ALL the problems →</strong>
-                    <p>(It's worse than you think. But also fixable.)</p>
-                </div>
-            </a>
-            <div class="tape">⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠</div>
-        </div>
+<!-- ════════════════════ NICHES ════════════════════ -->
+<section class="niches reveal" id="niches">
+  <div class="niche-intro">
+    <div>
+      <div class="section-label">Who We Serve</div>
+      <h2>Built for <em>Real</em> Businesses Doing <em>Real</em> Work</h2>
     </div>
+    <p>This isn't some fancy AI agency consulting Fortune 500 companies. We're here for the MVPs who are covered in dog hair, paint, or massage oil by 2pm. If your business runs on appointments — this is built for you.</p>
+  </div>
+  <div class="niche-grid">
+    <div class="niche-card">
+      <span class="niche-icon">✂️</span>
+      <h3>Hair Salons</h3>
+      <div class="niche-tagline">Because your clients need reminders</div>
+      <p>Your AI handles new client inquiries, books colour appointments with the right time slots, collects deposits for long services, and sends reminders that actually cut no-shows.</p>
+      <ul class="niche-features">
+        <li>Books by stylist &amp; service type</li>
+        <li>Colour appointment deposit collection</li>
+        <li>Answers "how much is a balayage?" calls</li>
+        <li>Reschedules cancellations automatically</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🖊️</span>
+      <h3>Tattoo Studios</h3>
+      <div class="niche-tagline">Ink is permanent. Scheduling isn't.</div>
+      <p>Collect design ideas, quote turnaround times, take consultation deposits, and manage waitlists — all without you or your artists picking up mid-session.</p>
+      <ul class="niche-features">
+        <li>Consultation booking &amp; deposits</li>
+        <li>Artist availability management</li>
+        <li>Captures design brief info upfront</li>
+        <li>Cancellation waitlist management</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🐾</span>
+      <h3>Dog Groomers</h3>
+      <div class="niche-tagline">Good boys deserve great booking</div>
+      <p>Breed, size, services needed, last groom — your AI collects it all, books the right slot, and sends reminders. You just show up with the blow dryer.</p>
+      <ul class="niche-features">
+        <li>Breed &amp; size intake questions</li>
+        <li>Books bath vs. full groom correctly</li>
+        <li>Return reminder sequences</li>
+        <li>"Is my dog's spot still open?" handled</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">💅</span>
+      <h3>Nail Salons</h3>
+      <div class="niche-tagline">Polish off your admin work</div>
+      <p>Gel, acrylic, builder, dip — your AI knows the difference, books the right duration, and balances walk-in vs. appointment flow so you're never scrambling.</p>
+      <ul class="niche-features">
+        <li>Service duration awareness</li>
+        <li>Group booking (bridal parties)</li>
+        <li>Walk-in waitlist management</li>
+        <li>Upsell add-ons during booking</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">💉</span>
+      <h3>Aesthetic Clinics</h3>
+      <div class="niche-tagline">Beauty is pain. Admin is worse.</div>
+      <p>Botox consultations, filler inquiries, laser bookings — handled professionally and discreetly. Your AI pre-screens for contraindications and books the right provider.</p>
+      <ul class="niche-features">
+        <li>Treatment-specific intake questions</li>
+        <li>Provider availability management</li>
+        <li>Pre-appointment care instructions sent</li>
+        <li>Consult vs. treatment booking logic</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🫁</span>
+      <h3>Massage Therapy</h3>
+      <div class="niche-tagline">Relax. We'll handle the chaos.</div>
+      <p>RMT or relaxation — your AI books the right modality, length, and therapist. It collects insurance info and health intake details before they arrive.</p>
+      <ul class="niche-features">
+        <li>RMT vs. relaxation booking</li>
+        <li>Session length &amp; modality selection</li>
+        <li>Health intake form sent pre-appointment</li>
+        <li>Insurance details collected upfront</li>
+      </ul>
+    </div>
+    <div class="niche-card">
+      <span class="niche-icon">🏋️</span>
+      <h3>Gyms &amp; Fitness Studios</h3>
+      <div class="niche-tagline">No pain. No gain. No paperwork.</div>
+      <p>Class bookings, personal training sessions, membership inquiries, and trial sign-ups — all handled without pulling your trainers off the floor.</p>
+      <ul class="niche-features">
+        <li>Class schedule &amp; booking</li>
+        <li>Trial class sign-up flow</li>
+        <li>Membership inquiry handling</li>
+        <li>Trainer availability &amp; PT booking</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-	<!-- Tooltip -->
-	<div class="chewie-tooltip" id="chewie-tooltip">
-		How can I help you today?
-	</div>
+<!-- ════════════════════ WHAT YOU GET ════════════════════ -->
+<section class="what-you-get reveal">
+  <div class="section-label">Everything Included</div>
+  <h2>Not a Tool. A <em>Complete</em> System.</h2>
+  <p style="color:#666; max-width:55ch; margin-top:0.4rem; font-size:0.95rem;">No app stores. No learning curve. No tech headaches. Just plug in and watch your calendar fill up.</p>
+  <div class="features-list">
+    <div class="feature"><div class="feature-icon">📞</div><h3>24/7 AI Voice Receptionist</h3><p>A natural-sounding AI voice that handles inbound calls, answers service questions, and books appointments — any time of day or night.</p></div>
+    <div class="feature"><div class="feature-icon">📅</div><h3>Google Calendar Integration</h3><p>Bookings drop directly into your existing calendar in real-time. No double-bookings. Works with whatever Google Calendar setup you already use.</p></div>
+    <div class="feature"><div class="feature-icon">💬</div><h3>SMS &amp; Email Confirmations</h3><p>Automatic booking confirmations sent the moment they hang up. Reminders 24–48 hours before. No-shows become a relic of the past.</p></div>
+    <div class="feature"><div class="feature-icon">💰</div><h3>Deposit Collection</h3><p>Collect booking deposits during the call for high-value appointments. Eliminate no-shows before they happen — with real skin in the game.</p></div>
+    <div class="feature"><div class="feature-icon">🔄</div><h3>Rescheduling &amp; Cancellations</h3><p>Clients call to reschedule or cancel — your AI handles it gracefully, fills the slot from a waitlist, and keeps your day tight.</p></div>
+    <div class="feature"><div class="feature-icon">🎙️</div><h3>Custom Voice &amp; Personality</h3><p>Sounds like your business — friendly, professional, on-brand. We write the scripts to match your vibe whether that's chill salon or upscale clinic.</p></div>
+    <div class="feature"><div class="feature-icon">📊</div><h3>Daily Call Summary</h3><p>Every morning: who called, what was booked, what questions came in. You stay in the loop without being glued to the phone.</p></div>
+    <div class="feature"><div class="feature-icon">🛠️</div><h3>Done-For-You Setup</h3><p>Noel handles everything. You don't learn any new software. One call, a couple of days, you're live. Ongoing tweaks always included.</p></div>
+  </div>
+</section>
 
-	<!-- chewie floating launcher -->
-	<div class="chewie-launcher" id="chewie-launcher">
-		<img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="chewie Bot" />
-	</div>
+<!-- ════════════════════ TESTIMONIALS ════════════════════ -->
+<section class="proof-section reveal">
+  <div class="proof-banner">What Business Owners Like You Are Saying</div>
+  <div style="padding: 3.5rem 5vw;">
+    <div class="proof-cards">
+      <div class="proof-card">
+        <p>I was losing so many bookings to voicemail — especially evenings. Now my AI picks up everything after 5pm and my Tuesday/Wednesday slots that used to sit empty are fully booked. It paid for itself in the first week.</p>
+        <div class="proof-card-attr">✂ Hair Studio Owner — East Van</div>
+      </div>
+      <div class="proof-card">
+        <p>We were spending 2 hours a day playing phone tag. Now our front desk focuses on real clients and the AI handles the phones. Our no-show rate dropped by more than half once we started collecting deposits through the system.</p>
+        <div class="proof-card-attr">💉 Aesthetic Clinic — Burnaby</div>
+      </div>
+      <div class="proof-card">
+        <p>I groom alone and literally cannot answer while bathing a dog. I was missing 5–10 calls a week. Now everything gets answered, I get a text summary, and I had to add Saturday hours just to keep up with the demand.</p>
+        <div class="proof-card-attr">🐾 Dog Groomer — Surrey</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-	<!-- Chat container -->
-	<div id="chewie-chat-container"></div>
+<!-- ════════════════════ VANCOUVER LOCAL ════════════════════ -->
+<section class="vancouver reveal">
+  <div class="vancouver-inner">
+    <div>
+      <div class="section-label">Proudly Local</div>
+      <h2>Built in <em>Metro Vancouver.</em> For Vancouver Businesses.</h2>
+      <p>We're not some US SaaS company charging you in USD with no idea what it's like to run a business on Main Street or in Whalley. Princess Light Media is a local operation — we know the Vancouver market, we know your competition, and we're genuinely invested in your success.</p>
+      <p>You work directly with Noel — not a call centre, not a support ticket. Real conversations, real setup, real support. Text him on a Tuesday and he actually texts back.</p>
+      <div class="areas">
+        <span class="area-tag">Vancouver</span><span class="area-tag">Surrey</span><span class="area-tag">Burnaby</span><span class="area-tag">Richmond</span><span class="area-tag">North Van</span><span class="area-tag">Coquitlam</span><span class="area-tag">Langley</span><span class="area-tag">Maple Ridge</span><span class="area-tag">White Rock</span><span class="area-tag">Abbotsford</span><span class="area-tag">New Westminster</span><span class="area-tag">Port Moody</span>
+      </div>
+    </div>
+    <div class="van-stat-grid">
+      <div class="van-stat"><div class="vs-num">62%</div><div class="vs-label">of callers won't leave a voicemail — they call a competitor instead</div></div>
+      <div class="van-stat"><div class="vs-num">$28</div><div class="vs-label">Vancouver min. wage vs. your AI that works for less per day</div></div>
+      <div class="van-stat"><div class="vs-num">40%</div><div class="vs-label">of appointment requests happen outside your business hours</div></div>
+      <div class="van-stat"><div class="vs-num">1 Day</div><div class="vs-label">average time to get fully set up and live with your AI</div></div>
+    </div>
+  </div>
+</section>
 
-    <style>
-        .danger-zone {
-            margin-top: 50px;
-            border: 4px solid #2a2a2a;
-            background: #fff;
-            transform: rotate(-1.5deg);
-            position: relative;
-            overflow: hidden;
-        }
+<!-- ════════════════════ PRICING ════════════════════ -->
+<section class="pricing reveal" id="pricing">
+  <div class="section-label" style="text-align:center;">Simple Pricing</div>
+  <h2>No Surprises. <em>No</em> Long Contracts.</h2>
+  <p class="pricing-sub">Cancel any time. No setup fees. Just a receptionist that shows up every day without complaining.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-desc">Solo operators &amp; small studios</div>
+      <div class="plan-price"><span class="price-amount">$297</span><span class="price-period">/ mo CAD</span></div>
+      <div class="plan-note">← Less than 2 hrs of a real receptionist</div>
+      <ul class="plan-features">
+        <li>24/7 AI voice receptionist</li>
+        <li>Google Calendar booking</li>
+        <li>SMS &amp; email confirmations</li>
+        <li>Up to 200 calls/month</li>
+        <li>1 service type configured</li>
+        <li>Daily call summary</li>
+        <li>Full setup by Noel</li>
+      </ul>
+      <a href="mailto:noel@princesslight.com?subject=Starter Plan" class="btn-full">Get Started</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-desc">Busy studios with multiple services</div>
+      <div class="plan-price"><span class="price-amount">$497</span><span class="price-period">/ mo CAD</span></div>
+      <div class="plan-note">← Saves 20+ hrs of your time every month</div>
+      <ul class="plan-features">
+        <li>Everything in Starter</li>
+        <li>Unlimited calls</li>
+        <li>Up to 3 service types / staff</li>
+        <li>Deposit collection during booking</li>
+        <li>Cancellation &amp; rescheduling handling</li>
+        <li>Waitlist management</li>
+        <li>Monthly performance review</li>
+      </ul>
+      <a href="tel:7782380206" class="btn-full">📞 Call to Get Started</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Studio Pro</div>
+      <div class="plan-desc">Multi-location or high-volume</div>
+      <div class="plan-price"><span class="price-amount">Custom</span></div>
+      <div class="plan-note">← Let's talk about your actual needs</div>
+      <ul class="plan-features">
+        <li>Everything in Growth</li>
+        <li>Multiple locations supported</li>
+        <li>Custom voice &amp; persona scripting</li>
+        <li>CRM &amp; booking software integrations</li>
+        <li>Team member scheduling logic</li>
+        <li>Priority support via text/call</li>
+        <li>Custom workflow automations</li>
+      </ul>
+      <a href="mailto:noel@princesslight.com?subject=Studio Pro" class="btn-full">Contact for Pricing</a>
+    </div>
+  </div>
+  <p class="pricing-note">All prices in CAD · Month-to-month · Cancel with 30 days notice · <strong style="color:rgba(244,240,232,0.55)">Free 2-week trial for qualifying businesses.</strong></p>
+</section>
 
-        .warning-label {
-            background: #2a2a2a;
-            color: #f5f1e8;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            font-weight: 900;
-        }
+<!-- ════════════════════ FAQ ════════════════════ -->
+<section class="faq reveal" id="faq">
+  <div class="section-label">Got Questions?</div>
+  <h2>Straight <em>Answers.</em></h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Will my clients know they're talking to an AI?</div>
+      <div class="faq-a">Most won't — and it doesn't matter much either way. Your AI speaks naturally, uses your business name, and handles the conversation smoothly. The goal is to make sure every caller gets a great experience and a confirmed booking instead of voicemail.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Does it work with my existing Google Calendar or booking system?</div>
+      <div class="faq-a">Yes. We integrate directly with Google Calendar out of the box. If you use another system (Jane App, Vagaro, Mindbody, etc.), we'll figure out what's connectable during your setup call — most are.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if someone asks something the AI doesn't know?</div>
+      <div class="faq-a">We train it on your specific services, prices, and FAQs. For anything it can't answer, it takes a message and flags it for you — or offers to have you call back. It never makes things up or gives wrong information.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How long does setup actually take?</div>
+      <div class="faq-a">One discovery call (20–30 min) and we build everything out. Most clients are live within 1–2 business days. Noel handles the technical side completely — you don't do much at all.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do I need any new technology or apps?</div>
+      <div class="faq-a">No. If you have a phone number and Google Calendar, you're set. Everything runs in the background. You don't download anything, learn anything, or change how you already work.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What happens to my existing phone number?</div>
+      <div class="faq-a">We either provision a new local Vancouver number that forwards to your AI, or work with your existing number in many cases. We'll find the cleanest option on your setup call.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there a long-term contract?</div>
+      <div class="faq-a">Nope. Month-to-month on all plans. Give 30 days notice if you want out. We're confident you won't — but we never want to hold you hostage.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I just talk to a real person before signing up?</div>
+      <div class="faq-a">That's exactly what we want. Call or text 778-238-0206 or email noel@princesslight.com. No sales funnel, no pressure, no pitch deck. Just a real conversation about whether this makes sense for your specific business.</div>
+    </div>
+  </div>
+</section>
 
-        .danger-link {
-            display: block;
-            padding: 30px;
-            text-decoration: none;
-            color: #2a2a2a;
-            background: repeating-linear-gradient(
-                45deg,
-                #ffeb3b,
-                #ffeb3b 10px,
-                #2a2a2a 10px,
-                #2a2a2a 20px
-            );
-            transition: all 0.2s ease;
-        }
+<!-- ════════════════════ CONTACT ════════════════════ -->
+<section class="contact reveal" id="contact">
+  <div class="section-label">Let's Make It Happen</div>
+  <h2>Stop Losing Bookings to <em>Voicemail.</em> Start Today.</h2>
+  <p class="contact-sub">One conversation with Noel is all it takes. No pressure. No pitch deck. Just a straight talk about what your business needs — and whether we can deliver it.</p>
+  <div class="contact-cards">
+    <a href="tel:7782380206" class="contact-card">
+      <span class="contact-card-icon">📞</span>
+      <span class="contact-card-label">Call or Text Directly</span>
+      <span class="contact-card-value">778-238-0206</span>
+      <span class="contact-card-sub">Mon–Sat · 9am–7pm PST</span>
+    </a>
+    <a href="mailto:noel@princesslight.com" class="contact-card">
+      <span class="contact-card-icon">✉️</span>
+      <span class="contact-card-label">Send an Email</span>
+      <span class="contact-card-value">noel@princesslight.com</span>
+      <span class="contact-card-sub">Reply within a few hours, guaranteed</span>
+    </a>
+  </div>
+  <div class="contact-guarantee">
+    <span>🛡️</span>
+    <span><strong>Zero risk:</strong> 2-week free trial for qualifying businesses. If it doesn't book you more appointments, you owe nothing.</span>
+  </div>
+</section>
 
-        .danger-link:hover {
-            transform: scale(1.02);
-        }
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#" class="footer-logo">Princess Light <span>Media</span></a>
+    <div class="footer-tagline">AI Receptionist for Vancouver's Appointment Businesses · Surrey, BC</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#niches">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="tel:7782380206">778-238-0206</a></li>
+    <li><a href="mailto:noel@princesslight.com">noel@princesslight.com</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 Princess Light Media. All rights reserved.</div>
+</footer>
 
-        .danger-content {
-            background: #fff;
-            padding: 20px;
-            border: 3px dashed #8b0000;
-            text-align: center;
-        }
+<script>
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  reveals.forEach(el => io.observe(el));
 
-        .danger-content strong {
-            font-size: 1.3rem;
-            display: block;
-            margin-bottom: 10px;
-        }
+  // FAQ ACCORDION
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 
-        .danger-content p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        .tape {
-            background: #2a2a2a;
-            color: #ffeb3b;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
-        }
-    </style>
-
-	<script type="module">
-		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
-
-		const chatContainer = document.getElementById("chewie-chat-container");
-		const launcher = document.getElementById("chewie-launcher");
-		const tooltip = document.getElementById("chewie-tooltip");
-		const ctaButtons = document.querySelectorAll(".open-chat");
-
-		// Create official n8n chat
-		createChat({
-			webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
-			target: "#chewie-chat-container",
-			mode: "fullscreen",
-			showWelcomeScreen: false,
-			initialMessages: ["Chewie here! How can I assist you today?"],
-			i18n: {
-				en: {
-					title: "Chewie Chat",
-					subtitle: "Start a chat. I'm here to help you 24/7.",
-					inputPlaceholder: "Ask Chewie anything..."
-				}
-			}
-		});
-
-		// Open chat function
-		function openChat() {
-			chatContainer.classList.toggle("chewie-open");
-			tooltip.classList.add("hidden");
-		}
-
-		// CTA buttons open chat
-		ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
-
-		// Floating chewie icon opens chat
-		launcher.addEventListener("click", openChat);
-
-		// Clicking anywhere hides tooltip
-		window.addEventListener("click", (e) => {
-			if (!launcher.contains(e.target)) {
-				tooltip.classList.add("hidden");
-			}
-		});
-	</script>
-
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
 </body>
 </html>
