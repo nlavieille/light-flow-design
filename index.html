@@ -1,153 +1,923 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Princess Light Media</title>
-  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-  <link rel="canonical" href="https://princesslight.com" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://princesslight.com" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Princess Light Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #111009;
+  --page: #F5F0E8;
+  --amber: #C8860A;
+  --amber-pale: #F0C96A;
+  --amber-deep: #7A4E02;
+  --smoke: #2A2720;
+  --ash: #6B6560;
+  --rule: rgba(17,16,9,0.12);
+  --rule-amber: rgba(200,134,10,0.3);
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
-  <style>
-    :root {
-      --ink: #0d0d0d;
-      --paper: #f4f0e8;
-      --cream: #faf7f2;
-      --hot: #ff3c2f;
-      --gold: #f5c842;
-      --muted: #6b6560;
-      --border: #2a2a2a;
-    }
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+/* GRAIN */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
 
-    body {
-      background: var(--ink);
-      color: var(--paper);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 17px;
-      line-height: 1.65;
-      overflow-x: hidden;
-    }
+/* ── MASTHEAD ── */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+}
+.brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+.nav-right a {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-right a:hover { color: var(--ink); }
+.nav-cta {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  background: var(--ink);
+  color: var(--page) !important;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--amber) !important; color: var(--ink) !important; }
 
-    /* NOISE OVERLAY */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.3;
-    }
+/* ── HERO ── */
+.hero {
+  padding: 5rem 2.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 4rem;
+  align-items: end;
+  border-bottom: 1px solid var(--rule);
+  min-height: 85vh;
+  position: relative;
+}
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.hero-overline {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.hero-overline::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--amber);
+}
+.hero-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(4rem, 9vw, 9rem);
+  font-weight: 900;
+  line-height: 0.93;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 3rem;
+}
+.hero-headline .line-italic {
+  font-style: italic;
+  color: var(--amber);
+  display: block;
+}
+.hero-sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ash);
+  max-width: 480px;
+  border-left: 2px solid var(--amber);
+  padding-left: 1.25rem;
+  margin-bottom: 3rem;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.btn-dark {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  background: var(--ink);
+  color: var(--page);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-dark:hover { background: var(--amber); color: var(--ink); }
+.btn-line {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 2rem;
+  border: 1px solid var(--rule);
+  color: var(--ash);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.btn-line:hover { border-color: var(--ink); color: var(--ink); }
 
-    /* STICKY BAR */
-    .sticky-bar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 900;
-      background: var(--hot);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      padding: 0.55rem 1.5rem;
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .sticky-bar a { color: #fff; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: opacity 0.2s; }
-    .sticky-bar a:hover { opacity: 0.8; }
-    .sticky-bar .div { color: rgba(255,255,255,0.35); }
+/* HERO RIGHT COLUMN */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 0.5rem;
+}
+.hero-stat-block {
+  border-top: 1px solid var(--rule);
+  padding-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+.hero-stat-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-top: 0.3rem;
+}
+.hero-location {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ash);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
 
-    /* NAV */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.3rem 5vw;
-      margin-top: 36px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 0.12em; color: var(--gold); text-decoration: none; }
-    .logo span { color: rgba(244,240,232,0.5); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav ul a { font-family: 'Syne', sans-serif; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(244,240,232,0.55); text-decoration: none; transition: color 0.2s; }
-    nav ul a:hover { color: var(--gold); }
-    .nav-cta { background: var(--hot) !important; color: #fff !important; padding: 0.45rem 1.1rem; border-radius: 2px; }
+/* ── MARQUEE BELT ── */
+.marquee-belt {
+  background: var(--ink);
+  padding: 0.85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid rgba(200,134,10,0.2);
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 0;
+  animation: marquee 28s linear infinite;
+}
+.marquee-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-pale);
+  padding: 0 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.marquee-item::after {
+  content: '◆';
+  font-size: 6px;
+  color: var(--amber);
+  flex-shrink: 0;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
-    /* HERO */
-    .hero { padding: 6rem 5vw 5rem; position: relative; overflow: hidden; }
-    .hero::after {
-      content: 'Tomorrow is Today';
-      position: absolute; bottom: -0.05em; right: -0.02em;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 16vw, 18rem);
-      color: rgba(255,255,255,0.022);
-      line-height: 1; pointer-events: none; white-space: nowrap;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      font-family: 'Syne', sans-serif; font-size: 0.73rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem;
-    }
-    .hero-tag::before { content: ''; display: block; width: 22px; height: 2px; background: var(--gold); }
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3.2rem, 8.5vw, 8.5rem);
-      line-height: 0.92; letter-spacing: 0.01em;
-      max-width: 14ch; margin-bottom: 1.8rem;
-    }
-    .hero h1 em { font-style: normal; color: var(--hot); }
-    .hero h1 .gold { color: var(--gold); }
-    .hero-sub { font-size: clamp(0.95rem, 1.8vw, 1.18rem); color: rgba(244,240,232,0.7); max-width: 52ch; line-height: 1.75; margin-bottom: 2.8rem; }
-    .hero-sub strong { color: var(--paper); font-weight: 500; }
+/* ── WHAT WE DO ── */
+.what-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+  border-bottom: 1px solid var(--rule);
+}
+.what-left {
+  border-right: 1px solid var(--rule);
+  padding: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--smoke);
+  color: var(--page);
+}
+.what-left-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2rem;
+}
+.what-left-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--page);
+}
+.what-left-title em {
+  font-style: italic;
+  color: var(--amber-pale);
+}
+.what-left-body {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.55);
+  margin-top: auto;
+  padding-top: 3rem;
+}
+.what-right {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+}
+.service-row {
+  padding: 2.5rem 3rem;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 2rem;
+  transition: background 0.2s;
+  cursor: default;
+}
+.service-row:last-child { border-bottom: none; }
+.service-row:hover { background: rgba(200,134,10,0.05); }
+.service-row-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+}
+.service-row-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+.service-row-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ash);
+  max-width: 420px;
+}
+.service-row-rate {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--amber-deep);
+  text-align: right;
+  white-space: nowrap;
+  padding-top: 1.5rem;
+}
 
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 4rem; }
-    .btn-primary {
-      background: var(--hot); color: #fff;
-      font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.88rem;
-      letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
-      padding: 0.95rem 2rem; border-radius: 2px; display: inline-flex; align-items: center; gap: 0.5rem;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 4px 4px 0 var(--gold);
-    }
-    .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--gold); }
-    .btn-secondary {
-      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.83rem;
-      letter-spacing: 0.06em; text-transform: uppercase; color: var(--paper); text-decoration: none;
-      border-bottom: 2px solid var(--gold); padding-bottom: 2px; transition: color 0.2s;
-    }
-    .btn-secondary:hover { color: var(--gold); }
+/* ── DARK BAND ── */
+.dark-band {
+  background: var(--smoke);
+  padding: 6rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  border-bottom: 1px solid rgba(200,134,10,0.15);
+}
+.dark-band-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dark-band-overline {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.5rem;
+}
+.dark-band-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--page);
+  margin-bottom: 1.5rem;
+}
+.dark-band-headline em {
+  font-style: italic;
+  color: var(--amber-pale);
+}
+.dark-band-body {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.55);
+}
+.dark-band-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.principle {
+  border-top: 1px solid rgba(200,134,10,0.2);
+  padding: 1.75rem 0;
+}
+.principle:last-child { border-bottom: 1px solid rgba(200,134,10,0.2); }
+.principle-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+  margin-bottom: 0.4rem;
+}
+.principle-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--page);
+  margin-bottom: 0.4rem;
+}
+.principle-body {
+  font-size: 0.87rem;
+  color: rgba(245,240,232,0.5);
+  line-height: 1.65;
+}
 
-    .hero-proof { display: flex; flex-wrap: wrap; gap: 2.5rem; }
-    .proof-item { display: flex; flex-direction: column; gap: 0.12rem; }
-    .proof-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; color: var(--gold); }
-    .proof-label { font-size: 0.76rem; color: rgba(244,240,232,0.45); font-family: 'Syne', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; }
-  </style>
+/* ── CONSULTING FEATURE ── */
+.consulting-section {
+  padding: 6rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: start;
+}
+.consulting-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.5rem;
+}
+.consulting-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.consulting-headline em { font-style: italic; color: var(--amber); }
+.consulting-body {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--ash);
+  margin-bottom: 2rem;
+}
+.consulting-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--rule);
+}
+.consulting-card {
+  background: var(--page);
+  padding: 1.75rem 2rem;
+}
+.consulting-card-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.5rem;
+}
+.consulting-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.consulting-card-rate {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  color: var(--amber-deep);
+  letter-spacing: 0.08em;
+}
+
+/* ── WRITING STRIP ── */
+.writing-strip {
+  background: var(--page);
+  padding: 5rem 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.writing-inner {
+  max-width: 840px;
+}
+.writing-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1.5rem;
+}
+.writing-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+.writing-headline em { font-style: italic; color: var(--amber); }
+.writing-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ash);
+  margin-bottom: 3rem;
+  max-width: 560px;
+}
+.writing-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+}
+.writing-cell {
+  background: var(--page);
+  padding: 2rem;
+}
+.writing-cell-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.6rem;
+}
+.writing-cell-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.writing-cell-rate {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--ash);
+  letter-spacing: 0.05em;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--ink);
+  padding: 6rem 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.contact-left-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2rem;
+}
+.contact-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  color: var(--page);
+  margin-bottom: 1.5rem;
+}
+.contact-headline em { font-style: italic; color: var(--amber-pale); }
+.contact-body {
+  font-size: 0.97rem;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.45);
+  max-width: 380px;
+}
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(200,134,10,0.15);
+  margin-top: 4.5rem;
+}
+.contact-item {
+  background: var(--ink);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.contact-item:hover { background: var(--smoke); }
+.contact-item-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+.contact-item-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--amber-pale);
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  border-top: 1px solid rgba(200,134,10,0.15);
+  padding: 2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-mark {
+  font-family: 'Space Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.3);
+}
+.footer-right {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(245,240,232,0.2);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; padding: 3rem 1.5rem; }
+  .hero-right { display: none; }
+  .what-grid { grid-template-columns: 1fr; }
+  .what-left { min-height: auto; padding: 3rem 1.5rem; }
+  .dark-band { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .consulting-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .writing-row { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+  .nav-right a:not(.nav-cta) { display: none; }
+  .masthead { padding: 1.2rem 1.5rem; }
+  .service-row { padding: 2rem 1.5rem; grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-<!-- STICKY BAR -->
-<div class="sticky-bar">
+<!-- MASTHEAD -->
+<div class="masthead">
+  <a href="#" class="brand">
+    <span class="brand-pip"></span>
+    Princess Light Media
+  </a>
+  <div class="nav-right">
+    <a href="#services">Services</a>
+    <a href="#how">How We Work</a>
+    <a href="#consulting">Consulting</a>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
 </div>
 
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-overline">AI Creative Direction · Vancouver BC</div>
+    <h1 class="hero-headline">
+      Where taste<br>
+      <span class="line-italic">meets velocity.</span>
+    </h1>
+    <p class="hero-sub">Premium video, brand creative, and visual direction — powered by AI agents, guided by human judgment. The quality brands expect from agencies, at a pace they've never seen before.</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-dark">Explore Services</a>
+      <a href="#contact" class="btn-line">Start a Conversation</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat-block">
+      <div class="hero-stat-num">Days.</div>
+      <div class="hero-stat-label">Not weeks. Not six-week timelines.</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="hero-stat-num">AI+<br>Human.</div>
+      <div class="hero-stat-label">Agents accelerate. Judgment stays ours.</div>
+    </div>
+    <div class="hero-stat-block">
+      <div class="hero-stat-num">Zero<br>overhead.</div>
+      <div class="hero-stat-label">Direct creative partnership. No layers.</div>
+    </div>
+    <div class="hero-location">◆ &nbsp;Vancouver BC · Working globally</div>
+  </div>
+</div>
 
-<!-- ════════════════════ HERO ════════════════════ -->
-<section class="hero">
-  <div class="hero-tag">Princess Light Media</div>
-  <h1>You were here</h1>
-  <p class="hero-sub">
-    Happy?
-  </p>
-</section>
+<!-- MARQUEE -->
+<div class="marquee-belt">
+  <div class="marquee-track">
+    <span class="marquee-item">Video Production</span>
+    <span class="marquee-item">AI Creative Direction</span>
+    <span class="marquee-item">UGC Ad Content</span>
+    <span class="marquee-item">Visual Direction</span>
+    <span class="marquee-item">Music Video</span>
+    <span class="marquee-item">Brand Identity</span>
+    <span class="marquee-item">Direct Response Copy</span>
+    <span class="marquee-item">AI Consulting</span>
+    <span class="marquee-item">Motion Design</span>
+    <span class="marquee-item">Lookbook Direction</span>
+    <span class="marquee-item">Video Production</span>
+    <span class="marquee-item">AI Creative Direction</span>
+    <span class="marquee-item">UGC Ad Content</span>
+    <span class="marquee-item">Visual Direction</span>
+    <span class="marquee-item">Music Video</span>
+    <span class="marquee-item">Brand Identity</span>
+    <span class="marquee-item">Direct Response Copy</span>
+    <span class="marquee-item">AI Consulting</span>
+    <span class="marquee-item">Motion Design</span>
+    <span class="marquee-item">Lookbook Direction</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="what-grid" id="services">
+  <div class="what-left">
+    <div>
+      <div class="what-left-label">§ 01 · Video & Production</div>
+      <h2 class="what-left-title">Video.<br><em>At velocity.</em></h2>
+    </div>
+    <p class="what-left-body">The AI era made speed possible. Creative direction is still what makes it worth watching. We do both — every project, every frame.</p>
+  </div>
+  <div class="what-right">
+    <div class="service-row">
+      <div>
+        <div class="service-row-num">01</div>
+        <div class="service-row-name">AI UGC Video Producer</div>
+        <p class="service-row-desc">Ongoing UGC-style video for e-commerce and DTC brands. Output-based retainers — deliverables per month, not hours tracked. Consistent creative, built around your brand voice.</p>
+      </div>
+      <div class="service-row-rate">$10K–20K / mo<br>$1,500–8K / project</div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-num">02</div>
+        <div class="service-row-name">AI Ad Producer — Fashion & Brand</div>
+        <p class="service-row-desc">Single-campaign brand ads. Cinematic quality, no six-week agency timeline. Days, not months — without sacrificing the look.</p>
+      </div>
+      <div class="service-row-rate">$5K–20K / project</div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-num">03</div>
+        <div class="service-row-name">AI Music Video & Visualiser Director</div>
+        <p class="service-row-desc">Music videos and motion visualisers for artists, labels, and producers. Work that understands the music — the structure, the feeling, what the visuals need to carry.</p>
+      </div>
+      <div class="service-row-rate">$2K–12K / project</div>
+    </div>
+    <div class="service-row">
+      <div>
+        <div class="service-row-num">04</div>
+        <div class="service-row-name">Title Sequence & VFX Creator</div>
+        <p class="service-row-desc">Opening titles, motion graphic sequences, VFX-assisted shots. The kind of post-production work that used to need a full house — now done direct, done fast.</p>
+      </div>
+      <div class="service-row-rate">$3K–15K / project</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW WE WORK -->
+<div class="dark-band" id="how">
+  <div class="dark-band-left">
+    <div class="dark-band-overline">§ 02 · How We Work</div>
+    <h2 class="dark-band-headline">AI agents.<br><em>Human in the loop.</em><br>Always.</h2>
+    <p class="dark-band-body">We harness the speed of AI production pipelines while keeping creative judgment where it belongs — with people. The tools handle the heavy lifting. We handle the thinking that makes the work actually land.<br><br>The result: a pace that agencies can't match, and a standard they're used to charging much more for.</p>
+  </div>
+  <div class="dark-band-right">
+    <div class="principle">
+      <div class="principle-num">01</div>
+      <div class="principle-title">Outcomes, not process</div>
+      <p class="principle-body">The brief is what matters. We work backward from the result — not from a service menu or a timeline chart.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">02</div>
+      <div class="principle-title">Sound and vision as one</div>
+      <p class="principle-body">Audio and visual identity aren't separate decisions. We treat them together — which is why the work has a coherence most AI-generated content doesn't.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">03</div>
+      <div class="principle-title">No overhead, no hand-offs</div>
+      <p class="principle-body">Direct partnership means faster decisions, tighter creative alignment, and none of the agency markup that pays for floors you never visit.</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">04</div>
+      <div class="principle-title">Built from doing</div>
+      <p class="principle-body">The consulting work comes from using these tools in real production every day. The credibility is in the output, not the pitch deck.</p>
+    </div>
+  </div>
+</div>
+
+<!-- VISUAL DIRECTION -->
+<div style="padding: 5rem 2.5rem; border-bottom: 1px solid var(--rule); background: var(--page);">
+  <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start;">
+    <div>
+      <div style="font-family:'Space Mono',monospace; font-size:9px; letter-spacing:0.25em; text-transform:uppercase; color:var(--amber); margin-bottom:1.5rem;">§ 03 · Visual Direction & Design</div>
+      <h2 style="font-family:'Playfair Display',serif; font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; margin-bottom:1.5rem;">Visual direction<br><em style="color:var(--amber);">with conviction.</em></h2>
+      <p style="font-size:0.97rem; line-height:1.8; color:var(--ash); margin-bottom:2rem;">Fashion lookbooks, brand imagery, and visual identity work rooted in aesthetic point-of-view — not templates, not prompts pasted into a tool and called creative direction. A brief, a vision, a result.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); margin-top:4rem;">
+      <div style="background:var(--page); padding:2rem;">
+        <div style="font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem;">Fashion · Luxury · Brand</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">AI Lookbook & Fashion Visual Director</div>
+        <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--amber-deep);">$5K–20K / project</div>
+      </div>
+      <div style="background:var(--page); padding:2rem;">
+        <div style="font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem;">Full Package · Sonic + Visual</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">AI Audio-Visual Brand Identity</div>
+        <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--amber-deep);">$3K–12K / package</div>
+      </div>
+      <div style="background:var(--page); padding:2rem;">
+        <div style="font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:0.6rem;">Animation · Entertainment</div>
+        <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">AI Animator — Music & Entertainment</div>
+        <div style="font-family:'Space Mono',monospace; font-size:9px; color:var(--amber-deep);">$1.5K–5K / project</div>
+      </div>
+      <div style="background:var(--page); padding:2rem; display:flex; align-items:center; justify-content:center;">
+        <a href="#contact" style="font-family:'Space Mono',monospace; font-size:9.5px; letter-spacing:0.15em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--amber); padding-bottom:2px;">Discuss a project →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WRITING -->
+<div class="writing-strip" id="writing">
+  <div class="writing-inner">
+    <div class="writing-label">§ 04 · Copy & Creative Writing</div>
+    <h2 class="writing-headline">Copy that <em>moves people.</em></h2>
+    <p class="writing-body">Direct Response Marketing principles applied to 2026 consumers. Words that stop a scroll, earn a feeling, and drive an action — rooted in the masters, tuned for how attention actually works today.</p>
+  </div>
+  <div class="writing-row">
+    <div class="writing-cell">
+      <div class="writing-cell-tag">Direct Response · Brand</div>
+      <div class="writing-cell-title">AI Ad Copywriter</div>
+      <div class="writing-cell-rate">$500–3K / project · $1.5K+ / mo retainer</div>
+    </div>
+    <div class="writing-cell">
+      <div class="writing-cell-tag">Video · Social</div>
+      <div class="writing-cell-title">AI Script & Video Copywriter</div>
+      <div class="writing-cell-rate">$500–2K / script</div>
+    </div>
+    <div class="writing-cell">
+      <div class="writing-cell-tag">Long-Form · Ongoing</div>
+      <div class="writing-cell-title">AI Ghostwriter — Founders & Creators</div>
+      <div class="writing-cell-rate">$1.5K–2.5K / mo retainer</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONSULTING -->
+<div class="consulting-section" id="consulting">
+  <div>
+    <div class="consulting-label">§ 05 · Creative AI Consulting</div>
+    <h2 class="consulting-headline">Teaching teams<br>to <em>think with AI.</em></h2>
+    <p class="consulting-body">We sit with creative teams, understand their workflow, and map exactly how AI can be chained and scaled to do in days what used to take weeks. Hands-on throughout. This is not theoretical consulting — it's practical, workflow-by-workflow transformation.</p>
+    <p class="consulting-body">The goal: a creative team producing significantly more with the same people, and understanding exactly why each tool is in the chain.</p>
+  </div>
+  <div class="consulting-cards">
+    <div class="consulting-card">
+      <div class="consulting-card-tag">Hands-On · Agency & Creative Teams</div>
+      <div class="consulting-card-name">AI Creative Workflow Consultant</div>
+      <div class="consulting-card-rate">$500 / hour · 3-hour minimum · Workshop packages available</div>
+    </div>
+    <div class="consulting-card">
+      <div class="consulting-card-tag">Strategic · Ongoing</div>
+      <div class="consulting-card-name">AI Creative Systems Advisor — Retainer</div>
+      <div class="consulting-card-rate">$3K–5K / month</div>
+    </div>
+    <div class="consulting-card">
+      <div class="consulting-card-tag">One-Day Intensive</div>
+      <div class="consulting-card-name">AI Creative Workshop — Full Team</div>
+      <div class="consulting-card-rate">$2.5K–4K / day</div>
+    </div>
+    <div class="consulting-card" style="background: var(--smoke);">
+      <div style="font-family:'Space Mono',monospace; font-size:8.5px; letter-spacing:0.2em; text-transform:uppercase; color:var(--amber); margin-bottom:0.4rem;">Future Build</div>
+      <div style="font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--page); margin-bottom:0.3rem;">AI Ad Stack Agency</div>
+      <div style="font-family:'Space Mono',monospace; font-size:9px; color:rgba(240,201,106,0.5); letter-spacing:0.05em;">Systematised, high-volume ad production pipelines — building toward this.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div>
+    <div class="contact-left-label">Get in Touch</div>
+    <h2 class="contact-headline">Let's make<br><em>something.</em></h2>
+    <p class="contact-body">We take on a limited number of projects to protect the quality of the work. If you're thinking about something, reach out early. Every serious inquiry gets a response within 24 hours.</p>
+  </div>
+  <div>
+    <div class="contact-right">
+      <a href="mailto:noel@princesslight.com" class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-value">noel@princesslight.com</span>
+      </a>
+      <a href="https://instagram.com/princesslightmedia" target="_blank" class="contact-item">
+        <span class="contact-item-label">Instagram</span>
+        <span class="contact-item-value">@princesslightmedia</span>
+      </a>
+      <a href="https://princesslight.com" target="_blank" class="contact-item">
+        <span class="contact-item-label">Website</span>
+        <span class="contact-item-value">princesslight.com</span>
+      </a>
+      <a href="tel:+16045551234" class="contact-item">
+        <span class="contact-item-label">Phone · Vancouver BC</span>
+        <span class="contact-item-value">+1 (778) 238-0206</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-mark">Princess Light Media · Vancouver BC</div>
+  <div class="footer-right">AI Creative Direction · © 2026</div>
+</footer>
+
 </body>
 </html>
