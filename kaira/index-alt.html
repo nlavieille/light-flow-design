@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KAIRA — Slow Burn / A Spec Release Pack by Princess Light Media</title>
+<meta name="description" content="One artist. One release. One week. Eleven pieces of content built to make a single feel like an event. A spec case study by Princess Light Media.">
+
+<!-- Open Graph for link previews in DMs -->
+<meta property="og:title" content="KAIRA — Slow Burn / Princess Light Media">
+<meta property="og:description" content="One artist. One release. One week. Eleven pieces. Built to make a single feel like an event.">
+<meta property="og:image" content="assets/cover/cover-primary.png">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- RESET & BASE ---------- */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  :root {
+    --bg: #0F0D0B;
+    --bg-elevated: #16130F;
+    --bg-warm: #1A1612;
+    --amber: #C68B3F;
+    --amber-soft: #E0A85C;
+    --cream: #F4EFE4;
+    --cream-dim: rgba(244, 239, 228, 0.65);
+    --cream-faint: rgba(244, 239, 228, 0.35);
+    --rule: rgba(244, 239, 228, 0.12);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  img, video { max-width: 100%; height: auto; display: block; }
+
+  a { color: var(--amber-soft); text-decoration: none; transition: color 0.3s ease; }
+  a:hover { color: var(--cream); }
+
+  /* ---------- LAYOUT HELPERS ---------- */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .container-narrow { max-width: 720px; margin: 0 auto; padding: 0 32px; }
+
+  section { padding: 140px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: none; }
+
+  /* ---------- TYPOGRAPHY ---------- */
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber-soft);
+    margin-bottom: 32px;
+  }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 300; line-height: 1.05; }
+  h1 { font-size: clamp(56px, 10vw, 140px); letter-spacing: -0.025em; font-style: italic; }
+  h2 { font-size: clamp(36px, 6vw, 68px); letter-spacing: -0.015em; margin-bottom: 40px; }
+  h2.italic { font-style: italic; }
+  h3 { font-size: clamp(22px, 3vw, 32px); margin-bottom: 16px; }
+
+  p { font-size: 17px; line-height: 1.7; color: var(--cream-dim); margin-bottom: 24px; }
+  p.lead {
+    font-family: var(--serif);
+    font-size: 24px;
+    line-height: 1.5;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+  p.lead em { font-style: italic; }
+
+  em { font-style: italic; color: var(--cream); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(15, 13, 11, 0.92), rgba(15, 13, 11, 0));
+    backdrop-filter: blur(8px);
+  }
+  nav .brand {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+  }
+  nav .brand:hover { color: var(--amber-soft); }
+  nav .nav-links { display: flex; gap: 36px; }
+  nav .nav-links a {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-dim);
+  }
+  nav .nav-links a:hover { color: var(--cream); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100vh;
+    padding: 0;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/cover/cover-primary.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15, 13, 11, 0.5) 0%, rgba(15, 13, 11, 0.7) 60%, var(--bg) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 32px;
+    max-width: 960px;
+  }
+  .hero h1 {
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .hero .subhead {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream-dim);
+    margin-bottom: 56px;
+    letter-spacing: 0.01em;
+  }
+  .hero .meta-strip {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .meta-strip span {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+  }
+  .cta-button {
+    display: inline-block;
+    padding: 18px 44px;
+    border: 1px solid var(--cream);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+  .cta-button:hover {
+    background: var(--cream);
+    color: var(--bg);
+  }
+  .cta-button.amber {
+    border-color: var(--amber);
+    color: var(--amber-soft);
+  }
+  .cta-button.amber:hover {
+    background: var(--amber);
+    color: var(--bg);
+    border-color: var(--amber);
+  }
+
+  /* ---------- THE BRIEF ---------- */
+  .brief p {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .brief p em { font-style: italic; color: var(--cream); }
+  .brief .section-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--amber);
+    margin: 48px 0;
+  }
+
+  /* ---------- ARTIST INTRO ---------- */
+  .artist-section { background: var(--bg-warm); }
+  .artist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .artist-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  .artist-image {
+    aspect-ratio: 1 / 1;
+    background: #000;
+    overflow: hidden;
+  }
+  .artist-image img { width: 100%; height: 100%; object-fit: cover; }
+  .artist-meta-list {
+    list-style: none;
+    margin-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .artist-meta-list li {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .artist-meta-list .label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+  }
+  .artist-meta-list .value {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: var(--cream);
+    line-height: 1.4;
+  }
+  .artist-meta-list .value em { font-style: italic; }
+
+  /* ---------- HERO REEL ---------- */
+  .reel-section { background: var(--bg-elevated); }
+  .reel-wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+  }
+  .reel-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .reel-caption {
+    text-align: center;
+    margin-top: 40px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--cream-dim);
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-list {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 220px;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    transition: background 0.3s ease;
+  }
+  .timeline-row:hover { background: rgba(244, 239, 228, 0.02); }
+  .timeline-day {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber-soft);
+  }
+  .timeline-asset {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+  .timeline-asset em { font-style: italic; }
+  .timeline-platform {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    text-align: right;
+  }
+  @media (max-width: 720px) {
+    .timeline-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 28px 0;
+    }
+    .timeline-platform { text-align: left; }
+  }
+
+  /* ---------- ASSET GALLERY ---------- */
+  .asset-group { margin-bottom: 120px; }
+  .asset-group:last-child { margin-bottom: 0; }
+  .asset-group-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber-soft);
+    margin-bottom: 12px;
+  }
+  .asset-group-desc {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--cream-dim);
+    margin-bottom: 48px;
+    max-width: 640px;
+    line-height: 1.5;
+  }
+
+  /* video grids */
+  .video-grid-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .video-grid-small {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+  }
+  .video-card {
+    background: #000;
+    aspect-ratio: 9 / 16;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-card-label {
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+  }
+
+  /* image grids */
+  .image-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+  }
+  .image-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 28px;
+  }
+  .image-card { background: #000; overflow: hidden; }
+  .image-card.square { aspect-ratio: 1 / 1; }
+  .image-card img { width: 100%; height: 100%; object-fit: cover; }
+  .image-card-label {
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+  }
+
+  /* canvas single */
+  .canvas-wrapper {
+    max-width: 280px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    overflow: hidden;
+  }
+  .canvas-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ---------- PRODUCTION STACK ---------- */
+  .stack-section { background: var(--bg-elevated); }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
+    margin-top: 56px;
+  }
+  .stack-item {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .stack-item-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber-soft);
+    margin-bottom: 12px;
+  }
+  .stack-item-value {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+
+  /* ---------- CTA SECTION ---------- */
+  .cta-section { text-align: center; padding: 180px 0; }
+  .cta-section h2 {
+    font-style: italic;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-section p {
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 56px;
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.6;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 56px 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--cream-dim);
+  }
+  footer .footer-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 720px) {
+    section { padding: 88px 0; }
+    .hero .meta-strip { gap: 20px; }
+    nav { padding: 16px 24px; }
+    nav .nav-links { gap: 20px; }
+    nav .nav-links a { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== NAV ====== -->
+<nav>
+  <a href="https://princesslight.com" class="brand">Princess Light Media</a>
+  <div class="nav-links">
+    <a href="#brief">Brief</a>
+    <a href="#artist">Artist</a>
+    <a href="#reel">Reel</a>
+    <a href="#timeline">Rollout</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="eyebrow">A Spec Release Pack · Princess Light Media</div>
+    <h1>Slow Burn</h1>
+    <div class="subhead">KAIRA / a fourteen-day rollout in eleven pieces</div>
+    <div class="meta-strip">
+      <span>One Artist</span>
+      <span>One Release</span>
+      <span>One Week</span>
+      <span>Eleven Posts</span>
+    </div>
+    <a href="#brief" class="cta-button amber">Read the brief</a>
+  </div>
+</section>
+
+<!-- ====== BRIEF ====== -->
+<section id="brief" class="brief">
+  <div class="container-narrow">
+    <div class="eyebrow">The Brief</div>
+    <h2 class="italic">Most singles disappear before they're heard.</h2>
+    <p>The label drops a Reel on Friday. The artist tags two friends. By Monday, the algorithm has moved on, the song has eight thousand streams, and the rollout that was meant to last two weeks lasts about thirty-six hours.</p>
+    <p><em>Slow Burn</em> is a spec case study built to solve that. One Friday release date. One artist. One song. Eleven pieces of content sharing a single visual world, sequenced across fourteen days — each one engineered for a specific moment in the campaign.</p>
+    <div class="section-divider"></div>
+    <p>The teaser asks a question. The cutdowns answer it. The UGC clip disappears into the algorithm on purpose. The Canvas loop lives inside Spotify itself. The story frames stitch the gaps. The quote cards punctuate.</p>
+    <p>Eleven posts. One production pass. Two weeks of content from a single visual brief.</p>
+    <div class="section-divider"></div>
+    <p>Kaira is fictional. The pack is real — produced in approximately one production week using a Nano Banana Pro / Veo 3.1 / Kling 2.1 + 2.6 / CapCut pipeline. The point is not the artist. The point is the system.</p>
+    <p class="lead"><em>What does a single creative pass deliver when the visual language is locked from the cover art outward?</em></p>
+  </div>
+</section>
+
+<!-- ====== ARTIST ====== -->
+<section id="artist" class="artist-section">
+  <div class="container">
+    <div class="eyebrow">The Artist</div>
+    <h2 class="italic">Kaira.</h2>
+    <div class="artist-grid">
+      <div class="artist-image">
+        <img src="assets/cover/cover-primary.png" alt="KAIRA — primary cover art">
+      </div>
+      <div>
+        <p class="lead">Records in her bedroom. Produces everything herself. Performs live three or four times a year — and that scarcity is part of the brand.</p>
+        <p>Her songs do not shout. They smoulder. <em>Slow Burn</em> is the lead single off her forthcoming EP <em>Late Bloomer</em> — alt-pop about taking too long to leave, recorded in a single sitting at four in the morning, never edited.</p>
+        <ul class="artist-meta-list">
+          <li>
+            <span class="label">Genre</span>
+            <span class="value">Alt-pop · bedroom electronic · lofi-adjacent</span>
+          </li>
+          <li>
+            <span class="label">Based</span>
+            <span class="value">Montreal · Mile End</span>
+          </li>
+          <li>
+            <span class="label">For Fans Of</span>
+            <span class="value"><em>Clairo, Joji, Arlo Parks, early Rina Sawayama</em></span>
+          </li>
+          <li>
+            <span class="label">The Single</span>
+            <span class="value">Slow Burn · 3:14 · C♯ minor · 82 BPM</span>
+          </li>
+          <li>
+            <span class="label">Release</span>
+            <span class="value">Friday, May 15, 2026</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== HERO REEL ====== -->
+<section id="reel" class="reel-section">
+  <div class="container">
+    <div class="eyebrow" style="text-align:center;">The Hero Reel</div>
+    <h2 class="italic" style="text-align:center;">Day zero.</h2>
+    <p style="text-align:center; max-width: 600px; margin: 0 auto 64px; font-family: var(--serif); font-size: 22px; line-height: 1.6;">The flagship asset. Eighteen seconds. Pinned to the artist's grid. Tap for sound.</p>
+    <div class="reel-wrapper">
+      <video controls preload="metadata" poster="assets/thumbnails/hero-reel-poster.png" playsinline>
+        <source src="assets/videos/hero-reel.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+    <p class="reel-caption">— It wasn't a fire. It was a slow burn. —</p>
+  </div>
+</section>
+
+<!-- ====== TIMELINE ====== -->
+<section id="timeline">
+  <div class="container">
+    <div class="eyebrow">The Rollout</div>
+    <h2 class="italic">Fourteen days. Eleven posts. One song.</h2>
+    <p style="max-width: 640px; margin-bottom: 72px; font-family: var(--serif); font-size: 22px; line-height: 1.6;">The pack is sequenced for a Friday release. Each asset has a job — and a moment. The system below assumes a label is supporting the rollout across the artist's owned channels.</p>
+    <ul class="timeline-list">
+      <li class="timeline-row">
+        <span class="timeline-day">T − 14</span>
+        <span class="timeline-asset">Teaser cutdown <em>+</em> Story frame 1</span>
+        <span class="timeline-platform">Reels · TikTok · Story</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T − 10</span>
+        <span class="timeline-asset">Quote card · <em>title lyric</em></span>
+        <span class="timeline-platform">Feed · X</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T − 7</span>
+        <span class="timeline-asset">Story frame 2 · <em>countdown</em></span>
+        <span class="timeline-platform">Story</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T − 5</span>
+        <span class="timeline-asset">Quote card · <em>artist voice</em></span>
+        <span class="timeline-platform">Feed</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T − 3</span>
+        <span class="timeline-asset">Pre-save cutdown <em>+</em> Story frame 3</span>
+        <span class="timeline-platform">Reels · TikTok · Story</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T − 1</span>
+        <span class="timeline-asset">UGC creator clip</span>
+        <span class="timeline-platform">TikTok · Reels</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">Day 0</span>
+        <span class="timeline-asset">Hero reel <em>+</em> Story frame 4 <em>+</em> Canvas live on Spotify</span>
+        <span class="timeline-platform">Everywhere</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T + 1</span>
+        <span class="timeline-asset">Release-day cutdown <em>+</em> third quote card</span>
+        <span class="timeline-platform">Feed · Reels</span>
+      </li>
+      <li class="timeline-row">
+        <span class="timeline-day">T + 2</span>
+        <span class="timeline-asset">Story frame 5 · <em>fan repost template</em></span>
+        <span class="timeline-platform">Story</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ====== ASSET GALLERY ====== -->
+<section id="assets">
+  <div class="container">
+    <div class="eyebrow">The Pack</div>
+    <h2 class="italic">Every piece, in one place.</h2>
+
+    <!-- Cover Art -->
+    <div class="asset-group" style="margin-top: 96px;">
+      <div class="asset-group-title">Cover Art</div>
+      <div class="asset-group-desc">The image that anchors everything. Amber lamp, blue window, an unmade bed at four in the morning.</div>
+      <div class="image-grid-2">
+        <div>
+          <div class="image-card square">
+            <img src="assets/cover/cover-primary.png" alt="KAIRA Slow Burn primary cover art">
+          </div>
+          <div class="image-card-label">Primary cover</div>
+        </div>
+        <div>
+          <div class="image-card square">
+            <img src="assets/cover/cover-alt-still-life.png" alt="KAIRA Slow Burn alternate still-life cover">
+          </div>
+          <div class="image-card-label">Alt cover · still life</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Long-form videos -->
+    <div class="asset-group">
+      <div class="asset-group-title">Reels & Cutdowns</div>
+      <div class="asset-group-desc">One production pass, four edits. Each cutdown is the same hero footage re-sequenced for a different day in the campaign — and a different question the audience is being asked.</div>
+      <div class="video-grid-large">
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/teaser-cutdown-poster.png" playsinline muted>
+              <source src="assets/videos/teaser-cutdown.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">Teaser · 7s · T−14</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/presave-cutdown-poster.png" playsinline muted>
+              <source src="assets/videos/presave-cutdown.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">Pre-save · 12s · T−3</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/release-day-cutdown-poster.png" playsinline muted>
+              <source src="assets/videos/release-day-cutdown.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">Release Day · 18s · T+1</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/ugc-clip-poster.png" playsinline muted>
+              <source src="assets/videos/ugc-clip.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">UGC clip · 12s · T−1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spotify Canvas -->
+    <div class="asset-group">
+      <div class="asset-group-title">Spotify Canvas</div>
+      <div class="asset-group-desc">A seamless six-second loop. No text, no CTA — it lives inside the Spotify app while the song plays. Hypnotic on purpose.</div>
+      <div class="canvas-wrapper">
+        <video autoplay loop muted playsinline preload="metadata" poster="assets/thumbnails/canvas-loop-poster.png">
+          <source src="assets/videos/canvas-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <!-- Story Frames -->
+    <div class="asset-group">
+      <div class="asset-group-title">Story Frames</div>
+      <div class="asset-group-desc">Five vertical assets for Instagram and TikTok stories. Each one timed to a specific beat in the rollout, building anticipation in the days a label can't post a full reel.</div>
+      <div class="video-grid-small">
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/story-01-poster.png" playsinline muted>
+              <source src="assets/story-frames/story-01-teaser.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">01 · Teaser</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/story-02-poster.png" playsinline muted>
+              <source src="assets/story-frames/story-02-countdown.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">02 · Countdown</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/story-03-poster.png" playsinline muted>
+              <source src="assets/story-frames/story-03-presave.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">03 · Pre-save</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/story-04-poster.png" playsinline muted>
+              <source src="assets/story-frames/story-04-release-day.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">04 · Release Day</div>
+        </div>
+        <div>
+          <div class="video-card">
+            <video controls preload="metadata" poster="assets/thumbnails/story-05-poster.png" playsinline muted>
+              <source src="assets/story-frames/story-05-repost.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-card-label">05 · Fan repost</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote Cards -->
+    <div class="asset-group">
+      <div class="asset-group-title">Quote Cards</div>
+      <div class="asset-group-desc">Three typographic moments. Two lyrics, one in the artist's own voice — punctuating the campaign on the days when the audience needs to remember the song exists.</div>
+      <div class="image-grid-3">
+        <div>
+          <div class="image-card square">
+            <img src="assets/quote-cards/quote-card-01-slow-burn.png" alt="Quote card — It wasn't a fire">
+          </div>
+          <div class="image-card-label">01 · Title lyric</div>
+        </div>
+        <div>
+          <div class="image-card square">
+            <img src="assets/quote-cards/quote-card-02-coffee-cold.png" alt="Quote card — Coffee got cold">
+          </div>
+          <div class="image-card-label">02 · Lyric pull</div>
+        </div>
+        <div>
+          <div class="image-card square">
+            <img src="assets/quote-cards/quote-card-03-artist-quote.png" alt="Quote card — artist voice">
+          </div>
+          <div class="image-card-label">03 · Artist voice</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PRODUCTION STACK ====== -->
+<section class="stack-section">
+  <div class="container-narrow">
+    <div class="eyebrow">Production Stack</div>
+    <h2 class="italic">How it was made.</h2>
+    <p class="lead">No stock. No licensed footage. No traditional shoot. Every asset on this page was produced in-house at Princess Light Media using a tightly integrated AI-native pipeline.</p>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-item-label">Stills</div>
+        <div class="stack-item-value">Nano Banana Pro</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-label">Animation</div>
+        <div class="stack-item-value">Veo 3.1<br>Kling 2.1 + 2.6</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-label">Assembly</div>
+        <div class="stack-item-value">CapCut</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-label">Timeline</div>
+        <div class="stack-item-value">~5 production days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA ====== -->
+<section id="contact" class="cta-section">
+  <div class="container-narrow">
+    <div class="eyebrow">The Offer</div>
+    <h2>One song. One week. One pack.</h2>
+    <p>We build packs like this for indie labels and artist managers — typically one release at a time, sometimes on retainer. If you have a single coming out in the next sixty days, we'd like to put a brief together.</p>
+    <a href="mailto:hello@princesslight.com?subject=Slow Burn case study — release inquiry" class="cta-button amber">Get in touch</a>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-brand">Princess Light Media · Vancouver</div>
+  <div class="footer-meta">© 2026 · KAIRA Slow Burn is a fictional spec project</div>
+</footer>
+
+</body>
+</html>
