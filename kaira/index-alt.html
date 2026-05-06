@@ -448,6 +448,13 @@
     height: 100%;
     object-fit: cover;
   }
+  .reel-wrapper video:fullscreen,
+  .reel-wrapper video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
   .reel-caption {
     text-align: center;
     margin-top: 40px;
@@ -590,7 +597,18 @@
     gap: 18px;
   }
   .video-card { background: #000; aspect-ratio: 9 / 16; position: relative; overflow: hidden; }
-  .video-card video { width: 100%; height: 100%; object-fit: cover; }
+  .video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-card video:fullscreen,
+  .video-card video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
   .video-card-label {
     margin-top: 14px;
     font-family: var(--sans);
@@ -626,7 +644,18 @@
     background: #000;
     overflow: hidden;
   }
-  .canvas-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+  .canvas-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .canvas-wrapper video:fullscreen,
+  .canvas-wrapper video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
 
   /* ---------- CAPTION SET ---------- */
   .captions-section { background: var(--bg-elevated); }
@@ -729,7 +758,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="eyebrow">A Done-For-You Service · Princess Light Media</div>
+    <div class="eyebrow">A Done-For-You Service</div>
     <h1>The Single Release Pack</h1>
     <div class="subhead">Eleven assets. Fourteen days. One production pass.</div>
     <p class="subhead-detail">A complete content rollout for a single release — built so a label or artist can post every day for two weeks from one creative brief, without burning out the in-house team.</p>
