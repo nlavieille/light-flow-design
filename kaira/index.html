@@ -9,18 +9,19 @@
 <!-- Open Graph for link previews in DMs -->
 <meta property="og:title" content="The Single Release Pack — Princess Light Media">
 <meta property="og:description" content="A done-for-you content pack for indie single releases. Eleven assets. Fourteen days. One production pass.">
-<meta property="og:image" content="assets/cover/cover-primary.png">
+<meta property="og:image" content="https://princesslight.com/kaira/assets/cover/cover-primary.png">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
   /* ---------- RESET & BASE ---------- */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
+  section[id] { scroll-margin-top: 80px; }
+  
   :root {
     --bg: #0F0D0B;
     --bg-elevated: #16130F;
@@ -31,7 +32,7 @@
     --cream-dim: rgba(244, 239, 228, 0.65);
     --cream-faint: rgba(244, 239, 228, 0.35);
     --rule: rgba(244, 239, 228, 0.12);
-    --serif: 'Cormorant Garamond', Georgia, serif;
+    --serif: 'Cormorant', Georgia, serif;
     --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
@@ -118,6 +119,19 @@
     color: var(--cream-dim);
   }
   nav .nav-links a:hover { color: var(--cream); }
+  nav .nav-links a.active {
+    color: var(--cream);
+    position: relative;
+  }
+  nav .nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--amber);
+  }
 
   /* ---------- HERO ---------- */
   .hero {
@@ -448,6 +462,13 @@
     height: 100%;
     object-fit: cover;
   }
+  .reel-wrapper video:fullscreen,
+  .reel-wrapper video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }  
   .reel-caption {
     text-align: center;
     margin-top: 40px;
@@ -590,7 +611,18 @@
     gap: 18px;
   }
   .video-card { background: #000; aspect-ratio: 9 / 16; position: relative; overflow: hidden; }
-  .video-card video { width: 100%; height: 100%; object-fit: cover; }
+  .video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .video-card video:fullscreen,
+  .video-card video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
   .video-card-label {
     margin-top: 14px;
     font-family: var(--sans);
@@ -626,7 +658,18 @@
     background: #000;
     overflow: hidden;
   }
-  .canvas-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+  .canvas-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .canvas-wrapper video:fullscreen,
+  .canvas-wrapper video:-webkit-full-screen {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    background: #000;
+  }
 
   /* ---------- CAPTION SET ---------- */
   .captions-section { background: var(--bg-elevated); }
@@ -710,6 +753,130 @@
     nav .nav-links { gap: 20px; }
     nav .nav-links a { font-size: 10px; }
   }
+
+  /* Lightbox modal */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 13, 11, 0.95);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    cursor: zoom-out;
+    padding: 40px;
+  }
+  .lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 85vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+    transform: scale(0.95);
+    transition: transform 0.4s ease;
+  }
+  .lightbox.active img {
+    transform: scale(1);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    color: var(--cream-dim);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 12px 16px;
+    border: 1px solid var(--rule);
+    transition: all 0.3s ease;
+  }
+  .lightbox-close:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .image-card.square.clickable {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+  .image-card.square.clickable:hover {
+    transform: scale(1.02);
+  }
+
+  .contact-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+  .email-reveal {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+    text-align: center;
+  }
+  .email-reveal.visible {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 8px;
+  }
+  .email-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream-faint);
+    margin-bottom: 16px;
+  }
+  .email-address {
+    display: inline-block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--cream);
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .email-address:hover {
+    color: var(--amber-soft);
+    border-bottom-color: var(--amber-soft);
+  }
+  .copy-button {
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--cream-dim);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .copy-button:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+  .copy-button.copied {
+    color: var(--amber-soft);
+    border-color: var(--amber-soft);
+  }
+
 </style>
 </head>
 <body>
@@ -718,9 +885,12 @@
 <nav>
   <a href="https://princesslight.com" class="brand">Princess Light Media</a>
   <div class="nav-links">
-    <a href="#pack">The Pack</a>
-    <a href="#artist">Demo</a>
-    <a href="#timeline">Timeline</a>
+    <a href="#pack">Pack</a>
+    <a href="#artist">Artist</a>
+    <a href="#cover">Cover</a>
+    <a href="#mood">Mood</a>
+    <a href="#assets">Assets</a>
+    <a href="#timeline">Cadence</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -729,16 +899,10 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="eyebrow">A Done-For-You Service · Princess Light Media</div>
+    <div class="eyebrow">A Done-For-You Service</div>
     <h1>The Single Release Pack</h1>
     <div class="subhead">Eleven assets. Fourteen days. One production pass.</div>
-    <p class="subhead-detail">A complete content rollout for a single release — built so a label or artist can post every day for two weeks from one creative brief, without burning out the in-house team.</p>
-    <div class="meta-strip">
-      <span>One Artist</span>
-      <span>One Release</span>
-      <span>One Week</span>
-      <span>One Outcome</span>
-    </div>
+    <p class="subhead-detail">A complete content rollout for a single release, built so a label or artist can post every day for two weeks from one creative brief.</p>
     <a href="#pack" class="cta-button amber">See what's included</a>
   </div>
 </section>
@@ -751,46 +915,62 @@
     <p class="lead">Every asset is built from the same creative brief, sharing one cover concept, one colour palette, one set of lyrics, and one tonal vocabulary. The result feels like a campaign — not a pile of files.</p>
 
     <div class="pack-grid">
+      <a href="#cover">
       <div class="pack-item">
         <div class="pack-item-num">01</div>
         <div class="pack-item-title">The Hero Reel</div>
         <div class="pack-item-desc">A 15–20 second vertical announcement reel. The release-day flagship. Posted once, pinned to the top of the artist's grid, used across Reels, TikTok, and Shorts.</div>
       </div>
+      </a>
+      <a href="#cutdowns">
       <div class="pack-item">
         <div class="pack-item-num">02</div>
         <div class="pack-item-title">Three Cutdowns</div>
         <div class="pack-item-desc">The hero reel re-cut for three campaign moments — teaser, pre-save push, and release day. Same footage, three different jobs, three additional posts from one production pass.</div>
       </div>
+      </a>
+      <a href="#story-frames">
       <div class="pack-item">
         <div class="pack-item-num">03</div>
         <div class="pack-item-title">Five Story Frames</div>
         <div class="pack-item-desc">Vertical assets sized for Instagram and TikTok stories — countdown, pre-save CTA, release-day announcement, fan repost template. Each timed to a specific day in the rollout.</div>
       </div>
+      </a>
+      <a href="#quote-cards">
       <div class="pack-item">
         <div class="pack-item-num">04</div>
         <div class="pack-item-title">Three Quote Cards</div>
         <div class="pack-item-desc">Square typographic feed posts pulling lyrics and artist quotes from the song. The screenshot-and-share moments — the kind fans tag friends in.</div>
       </div>
+      </a>
+      <a href="#spotify-canvas">
       <div class="pack-item">
         <div class="pack-item-num">05</div>
         <div class="pack-item-title">Spotify Canvas Loop</div>
         <div class="pack-item-desc">A seamless 6-second motion loop, sized to Spotify's exact specs. Lives inside the streaming app while the song plays. Hypnotic, no text, all mood.</div>
       </div>
+      </a>
+      <a href="#ugc-clip">
       <div class="pack-item">
         <div class="pack-item-num">06</div>
         <div class="pack-item-title">UGC Creator Clip</div>
         <div class="pack-item-desc">A 12–15 second clip styled to look like a fan or creator posted it organically. The asset that drives algorithmic pickup — because it doesn't look produced.</div>
       </div>
+      </a>
+      <a href="#captions-hooks">
       <div class="pack-item">
         <div class="pack-item-num">07</div>
         <div class="pack-item-title">Caption & Hook Pack</div>
         <div class="pack-item-desc">Five opening hooks, three mid-caption story beats, four CTA variations, and platform-specific hashtag sets — ready to paste into every post in the rollout.</div>
       </div>
+      </a>
+      <a href="#timeline">
       <div class="pack-item">
         <div class="pack-item-num">+</div>
         <div class="pack-item-title">Full Campaign Timeline</div>
         <div class="pack-item-desc">A day-by-day rollout calendar showing exactly when each asset posts, on which platform, and why — so the campaign runs itself once it begins.</div>
       </div>
+      </a>
     </div>
   </div>
 </section>
@@ -800,8 +980,6 @@
   <div class="container-narrow">
     <div class="eyebrow">A Demonstration</div>
     <p>What follows is a complete pack — every asset in the bundle — built for a fictional artist named <em>KAIRA</em> and her debut single, <em>Slow Burn</em>.</p>
-    <div class="divider"></div>
-    <p>Kaira isn't real. The pack is. We built it to show what a single creative brief can deliver when the visual language is locked from the cover art outward.</p>
   </div>
 </section>
 
@@ -812,7 +990,7 @@
     <h2 class="italic">Meet Kaira.</h2>
     <div class="artist-grid">
       <div class="artist-image">
-        <img src="assets/cover/cover-primary.png" alt="KAIRA — primary cover art">
+        <img src="assets/cover/cover-primary-closer.png" alt="KAIRA — primary cover art">
       </div>
       <div>
         <p class="lead">Records in her bedroom in Mile End. Produces everything herself. Performs live three or four times a year — and that scarcity is part of the brand.</p>
@@ -853,7 +1031,7 @@
 </section>
 
 <!-- ====== COVER CONCEPT ====== -->
-<section class="cover-section">
+<section id="cover" class="cover-section">
   <div class="container">
     <div class="eyebrow">The Cover</div>
     <h2 class="italic">Where the visual world begins.</h2>
@@ -891,7 +1069,7 @@
 </section>
 
 <!-- ====== MOOD & DIRECTION ====== -->
-<section class="mood-section">
+<section id="mood" class="mood-section">
   <div class="container-narrow">
     <div class="eyebrow">Mood & Sonic Direction</div>
     <h2 class="italic">The slow realisation that something is over.</h2>
@@ -929,7 +1107,7 @@
 </section>
 
 <!-- ====== HERO REEL ====== -->
-<section id="reel" class="reel-section">
+<section id="assets" class="reel-section">
   <div class="container">
     <div class="eyebrow" style="text-align:center;">Asset 01 · The Hero Reel</div>
     <h2 class="italic" style="text-align:center;">Day zero.</h2>
@@ -948,7 +1126,7 @@
 </section>
 
 <!-- ====== CUTDOWNS ====== -->
-<section>
+<section id="cutdowns">
   <div class="container">
     <div class="eyebrow">Asset 02 · The Cutdowns</div>
     <h3 class="asset-group-headline">One reel, three jobs.</h3>
@@ -958,7 +1136,7 @@
     <div class="video-grid-large">
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/teaser-cutdown-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/teaser-cutdown-poster.png" playsinline>
             <source src="assets/videos/teaser-cutdown.mp4" type="video/mp4">
           </video>
         </div>
@@ -966,7 +1144,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/presave-cutdown-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/presave-cutdown-poster.png" playsinline>
             <source src="assets/videos/presave-cutdown.mp4" type="video/mp4">
           </video>
         </div>
@@ -974,7 +1152,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/release-day-cutdown-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/release-day-cutdown-poster.png" playsinline>
             <source src="assets/videos/release-day-cutdown.mp4" type="video/mp4">
           </video>
         </div>
@@ -985,7 +1163,7 @@
 </section>
 
 <!-- ====== STORY FRAMES ====== -->
-<section>
+<section id="story-frames">
   <div class="container">
     <div class="eyebrow">Asset 03 · Story Frames</div>
     <h3 class="asset-group-headline">Five vertical assets that stitch the gaps.</h3>
@@ -995,7 +1173,7 @@
     <div class="video-grid-small">
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/story-01-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/story-01-poster.png" playsinline>
             <source src="assets/story-frames/story-01-teaser.mp4" type="video/mp4">
           </video>
         </div>
@@ -1003,7 +1181,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/story-02-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/story-02-poster.png" playsinline>
             <source src="assets/story-frames/story-02-countdown.mp4" type="video/mp4">
           </video>
         </div>
@@ -1011,7 +1189,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/story-03-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/story-03-poster.png" playsinline>
             <source src="assets/story-frames/story-03-presave.mp4" type="video/mp4">
           </video>
         </div>
@@ -1019,7 +1197,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/story-04-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/story-04-poster.png" playsinline>
             <source src="assets/story-frames/story-04-release-day.mp4" type="video/mp4">
           </video>
         </div>
@@ -1027,7 +1205,7 @@
       </div>
       <div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/thumbnails/story-05-poster.png" playsinline muted>
+          <video controls preload="metadata" poster="assets/thumbnails/story-05-poster.png" playsinline>
             <source src="assets/story-frames/story-05-repost.mp4" type="video/mp4">
           </video>
         </div>
@@ -1038,7 +1216,7 @@
 </section>
 
 <!-- ====== QUOTE CARDS ====== -->
-<section>
+<section id="quote-cards">
   <div class="container">
     <div class="eyebrow">Asset 04 · Quote Cards</div>
     <h3 class="asset-group-headline">The screenshot-and-share moments.</h3>
@@ -1047,19 +1225,19 @@
 
     <div class="image-grid-3">
       <div>
-        <div class="image-card square">
+        <div class="image-card square clickable" onclick="openLightbox(this.querySelector('img').src)">
           <img src="assets/quote-cards/quote-card-01-slow-burn.png" alt="Quote card — It wasn't a fire">
         </div>
         <div class="image-card-label">01 · Title lyric</div>
       </div>
       <div>
-        <div class="image-card square">
+        <div class="image-card square clickable" onclick="openLightbox(this.querySelector('img').src)">
           <img src="assets/quote-cards/quote-card-02-coffee-cold.png" alt="Quote card — Coffee got cold">
         </div>
         <div class="image-card-label">02 · Lyric pull</div>
       </div>
       <div>
-        <div class="image-card square">
+        <div class="image-card square clickable" onclick="openLightbox(this.querySelector('img').src)">
           <img src="assets/quote-cards/quote-card-03-artist-quote.png" alt="Quote card — artist voice">
         </div>
         <div class="image-card-label">03 · Artist voice</div>
@@ -1097,7 +1275,7 @@
 </section>
 
 <!-- ====== SPOTIFY CANVAS ====== -->
-<section>
+<section id="spotify-canvas">
   <div class="container">
     <div class="eyebrow">Asset 05 · Spotify Canvas</div>
     <h3 class="asset-group-headline" style="text-align:center; margin-left:auto; margin-right:auto;">Six seconds. No text. Hypnotic on purpose.</h3>
@@ -1113,7 +1291,7 @@
 </section>
 
 <!-- ====== UGC CLIP ====== -->
-<section>
+<section id="ugc-clip">
   <div class="container">
     <div class="eyebrow">Asset 06 · UGC Creator Clip</div>
     <h3 class="asset-group-headline">The asset that doesn't look produced.</h3>
@@ -1135,7 +1313,7 @@
 <section id="timeline">
   <div class="container">
     <div class="eyebrow">The Rollout · Day-by-Day</div>
-    <h2 class="italic">Fourteen days. Eleven posts. One song.</h2>
+    <h2 class="italic">Fourteen days. Fourteen posts. One song.</h2>
     <p style="max-width: 640px; margin-bottom: 64px; font-family: var(--serif); font-size: 22px; line-height: 1.6;">Each asset has a job — and a moment. The teaser asks a question. The cutdowns answer it. The UGC clip disappears into the algorithm on purpose. The Canvas loop lives inside Spotify itself.</p>
     <ul class="timeline-list">
       <li class="timeline-row">
@@ -1188,7 +1366,7 @@
 </section>
 
 <!-- ====== CAPTION SET ====== -->
-<section class="captions-section">
+<section id="captions-hooks" class="captions-section">
   <div class="container">
     <div class="eyebrow">Asset 07 · Caption & Hook Pack</div>
     <h2 class="italic">The words that go under every post.</h2>
@@ -1233,8 +1411,17 @@
   <div class="container-narrow">
     <div class="eyebrow">The Offer</div>
     <h2>One song. One week. One pack.</h2>
-    <p>We build packs like this for indie labels and artist managers — typically one release at a time, sometimes on retainer. If you have a single coming out in the next sixty days, we'd like to put a brief together.</p>
-    <a href="mailto:hello@princesslight.com?subject=Single Release Pack — release inquiry" class="cta-button amber">Get in touch</a>
+    <p>If you have a single coming out in the next sixty days, send us the song. We'll come back with a creative direction and a quote inside three working days.</p>
+
+    <div class="contact-block">
+      <a href="mailto:hello@princesslight.com?subject=Single Release Pack — release inquiry" class="cta-button amber" id="contact-cta" onclick="revealEmail(event)">Get in touch</a>
+      <div class="email-reveal" id="email-reveal">
+        <div class="email-label">Or write to us directly</div>
+        <a href="mailto:hello@princesslight.com?subject=Single Release Pack — release inquiry" class="email-address">hello@princesslight.com</a>
+        <button class="copy-button" onclick="copyEmail()" id="copy-button">Copy address</button>
+      </div>
+    </div>
+    
   </div>
 </section>
 
@@ -1244,5 +1431,105 @@
   <div class="footer-meta">© 2026 · Demonstration pack · KAIRA Slow Burn is fictional</div>
 </footer>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">CLOSE</span>
+  <img src="" alt="" id="lightbox-image">
+</div>
+
+<script>
+
+  function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const image = document.getElementById('lightbox-image');
+    image.src = src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  // ESC key closes
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  (function() {
+    const navLinks = document.querySelectorAll('nav .nav-links a');
+    const sections = Array.from(navLinks)
+      .map(link => {
+        const id = link.getAttribute('href').replace('#', '');
+        return { id, link, el: document.getElementById(id) };
+      })
+      .filter(item => item.el);
+
+    function setActive() {
+      // Use the section that's closest to (but past) the top of the viewport
+      const scrollPos = window.scrollY + 120; // offset for fixed nav
+      let current = sections[0];
+      for (const section of sections) {
+        if (section.el.offsetTop <= scrollPos) {
+          current = section;
+        }
+      }
+      navLinks.forEach(link => link.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+    }
+
+    // Throttle scroll events for performance
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setActive();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Run once on page load
+    setActive();
+  })();
+
+  function revealEmail(e) {
+    // Don't prevent the mailto from firing — it works for many users
+    // Just also reveal the email below for users where mailto fails
+    const reveal = document.getElementById('email-reveal');
+    reveal.classList.add('visible');
+  }
+
+  function copyEmail() {
+    const email = 'hello@princesslight.com';
+    navigator.clipboard.writeText(email).then(() => {
+      const button = document.getElementById('copy-button');
+      const originalText = button.textContent;
+      button.textContent = 'Copied ✓';
+      button.classList.add('copied');
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('copied');
+      }, 2000);
+    }).catch(() => {
+      // Fallback for older browsers
+      const tempInput = document.createElement('input');
+      tempInput.value = email;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      const button = document.getElementById('copy-button');
+      button.textContent = 'Copied ✓';
+      button.classList.add('copied');
+      setTimeout(() => {
+        button.textContent = 'Copy address';
+        button.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+</script>
 </body>
 </html>
