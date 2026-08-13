@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Your Weird Business Habits</title>
+	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+
+	<!-- Official n8n chat styles -->
+	<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+		:root {
+			/* chewie brand colors */
+
+			--chat--header--background: #2a2a2a;        /* Header Background        */
+			--chat--header--color: #f8f5f0;             /* Header Font              */
+
+			--chat--header--background:
+				linear-gradient(
+					rgba(0, 0, 0, 0.5),
+					rgba(0, 0, 0, 0.3)
+				),
+				url("https://www.looper.com/img/gallery/who-played-chewbacca-in-star-wars-and-which-animals-were-used-in-his-voice/l-intro-1689824423.jpg") center/cover no-repeat;
+
+
+			--chat--color-light: #f0dfce;               /* Chat Background          */
+
+			--chat--border-radius: 1.85rem;             /* Bubble Shape             */
+			--chat--transition-duration: 0.15s;         /* The dot dot dots         */
+
+			--chat--message--bot--background: #ffe6e6;  /* Old Pink = ffe6e6        */
+			--chat--message--bot--color: #2a2a2a;       /* Same as Header Bg        */
+
+			--chat--message--user--background: #e8f4f8; /* Blue from Actionable Box */
+			--chat--message--user--color: #2a2a2a;      /* Same as Header Bg        */
+		}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 60px;
+            border: 3px dashed #2a2a2a;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(-1deg);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            transform: rotate(1deg);
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+
+        strong {
+            background: #fff3cd;
+            padding: 2px 4px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            border-bottom: 3px wavy #2a2a2a;
+        }
+
+        .disclaimer {
+            font-size: 0.9rem;
+            font-style: italic;
+            padding: 15px;
+            background: #ffe8d6;
+            border-left: 4px solid #2a2a2a;
+            margin-top: 20px;
+            transform: rotate(0.5deg);
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0;
+            opacity: 0.3;
+        }
+
+        .service-list {
+            margin-top: 40px;
+        }
+
+        .service-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            text-decoration: none;
+            color: #2a2a2a;
+            display: block;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .service-item:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            border-style: dashed;
+        }
+
+        .service-item:nth-child(even) {
+            transform: rotate(0.5deg);
+            border-style: solid;
+        }
+
+        .service-item:hover {
+            transform: rotate(0deg) translateX(10px);
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        .service-item h2 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+
+        .service-item h2::before {
+            content: "→ ";
+            opacity: 0.5;
+        }
+
+        .service-item p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .handwritten {
+            font-family: 'Comic Sans MS', cursive;
+            background: #e8f4f8;
+            padding: 20px;
+            border: 2px solid #2a2a2a;
+            margin: 40px 0;
+            transform: rotate(-1.5deg);
+            box-shadow: 5px 5px 0 #c9a9e8;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            header {
+                padding: 20px;
+            }
+        }
+
+		/* Chat container toggled by CTA buttons */
+		#chewie-chat-container {
+			position: fixed;
+			bottom: 110px;
+			right: 10px;
+			width: 330px;
+			height: 600px;
+			max-width: 95vw;
+			max-height: 80vh;
+			display: none;
+			z-index: 9998;
+		}
+		#chewie-chat-container.chewie-open {
+			display: block;
+		}
+
+		@media (max-width: 600px) {
+			#chewie-chat-container {
+				width: 100vw;
+				height: 100vh;
+				bottom: 0;
+				right: 0;
+				left: 0;
+			}
+		}
+
+		/* Floating chewie icon */
+		.chewie-launcher {
+			position: fixed;
+			right: 20px;
+			bottom: 35px;
+			width: 75px;
+			height: 75px;
+			background: #ffe6e6;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			z-index: 9999;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+			transition: transform 0.18s ease;
+		}
+		.chewie-launcher:hover {
+			transform: scale(1.07);
+		}
+		.chewie-launcher img {
+			width: 58px;
+			height: 58px;
+		}
+
+		/* Tooltip styling */
+		.chewie-tooltip {
+			position: fixed;
+			right: 35px;
+			bottom: 120px;
+			background: #ffe6e6;
+			color: #2a2a2a;
+			padding: 5px 16px;
+			font-size: 16px;
+			border-radius: 12px;
+			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+			z-index: 9999;
+			transition: opacity 0.25s ease, transform 0.25s ease;
+			white-space: nowrap;
+		}
+		.chewie-tooltip::after {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			right: 20px;
+			border-width: 10px;
+			border-style: solid;
+			border-color: #ffe6e6 transparent transparent transparent;
+		}
+		.chewie-tooltip.hidden {
+			opacity: 0;
+			transform: translateY(8px);
+			pointer-events: none;
+		}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI for <em>your</em> local biz...</h1>
+            <p class="subtitle"><strong>We will make your business more money or save your business money with AI.</strong></p><p>Look, we automate all those weird business habits you'd rather offload to a robot.</p>
+            <div class="disclaimer">
+                ✓ This is not some fancy AI agency that consults for Fortune 500 companies.<br>
+                ✓ We're here for the real MVPs doing real work.
+            </div>
+        </header>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="handwritten">
+            <strong>A note from us:</strong> We build AI stuff for businesses that don't have "Chief Innovation Officers" or whatever. If you're covered in dog hair, paint, or massage oil by 2pm, this is for you.
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="service-list">
+            <a href="hair_salon_page.html" class="service-item">
+                <h2>Hair Salons</h2>
+                <p>Because your clients need reminders</p>
+            </a>
+
+            <a href="tattoo_parlor_page.html" class="service-item">
+                <h2>Tattoo Parlors</h2>
+                <p>Ink is permanent, scheduling isn't</p>
+            </a>
+
+            <a href="aesthetic_clinic_page.html" class="service-item">
+                <h2>Aesthetic Clinics</h2>
+                <p>Beauty is pain, admin is worse</p>
+            </a>
+
+            <a href="massage_therapy_page.html" class="service-item">
+                <h2>Massage Therapy</h2>
+                <p>Relax, we'll handle the chaos</p>
+            </a>
+
+            <a href="nail_salon_page.html" class="service-item">
+                <h2>Nail Salons</h2>
+                <p>Polish off your admin work</p>
+            </a>
+
+            <a href="gym_fitness_page.html" class="service-item">
+                <h2>Gyms & Fitness Studios</h2>
+                <p>No pain, no gain, no paperwork</p>
+            </a>
+
+            <a href="dog_groomer_page.html" class="service-item">
+                <h2>Dog Groomers</h2>
+                <p>Good boys deserve good booking</p>
+            </a>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="danger-zone">
+            <div class="warning-label">⚠ WARNING ZONE ⚠</div>
+            <a href="problems_solutions_page.html" class="danger-link">
+                <div class="danger-content">
+                    <strong>→ See ALL the problems →</strong>
+                    <p>(It's worse than you think. But also fixable.)</p>
+                </div>
+            </a>
+            <div class="tape">⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠</div>
+        </div>
+    </div>
+
+	<!-- Tooltip -->
+	<div class="chewie-tooltip" id="chewie-tooltip">
+		Ask a Question?<br>
+		Book a Call?
+	</div>
+
+	<!-- chewie floating launcher -->
+	<div class="chewie-launcher" id="chewie-launcher">
+		<img src="https://www.svgrepo.com/show/440401/chewbacca.svg" alt="chewie Bot" />
+	</div>
+
+	<!-- Chat container -->
+	<div id="chewie-chat-container"></div>
+
+    <style>
+        .danger-zone {
+            margin-top: 50px;
+            border: 4px solid #2a2a2a;
+            background: #fff;
+            transform: rotate(-1.5deg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-label {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .danger-link {
+            display: block;
+            padding: 30px;
+            text-decoration: none;
+            color: #2a2a2a;
+            background: repeating-linear-gradient(
+                45deg,
+                #ffeb3b,
+                #ffeb3b 10px,
+                #2a2a2a 10px,
+                #2a2a2a 20px
+            );
+            transition: all 0.2s ease;
+        }
+
+        .danger-link:hover {
+            transform: scale(1.02);
+        }
+
+        .danger-content {
+            background: #fff;
+            padding: 20px;
+            border: 3px dashed #8b0000;
+            text-align: center;
+        }
+
+        .danger-content strong {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .danger-content p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .tape {
+            background: #2a2a2a;
+            color: #ffeb3b;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+    </style>
+
+	<script type="module">
+		import { createChat } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
+		const chatContainer = document.getElementById("chewie-chat-container");
+		const launcher = document.getElementById("chewie-launcher");
+		const tooltip = document.getElementById("chewie-tooltip");
+		const ctaButtons = document.querySelectorAll(".open-chat");
+
+		// Create official n8n chat
+		createChat({
+			webhookUrl: "https://noell.app.n8n.cloud/webhook/6d3b6d76-fb10-427c-a819-07b088aeea45/chat",
+			target: "#chewie-chat-container",
+			mode: "fullscreen",
+			showWelcomeScreen: false,
+			initialMessages: ["Chewie here! How can I assist you today?"],
+			i18n: {
+				en: {
+					title: "Chewie Chat",
+					subtitle: "Start a chat. I'm here to help you 24/7.",
+					inputPlaceholder: "Ask Chewie anything..."
+				}
+			}
+		});
+
+		// Open chat function
+		function openChat() {
+			chatContainer.classList.toggle("chewie-open");
+			tooltip.classList.add("hidden");
+		}
+
+		// CTA buttons open chat
+		ctaButtons.forEach(btn => btn.addEventListener("click", openChat));
+
+		// Floating chewie icon opens chat
+		launcher.addEventListener("click", openChat);
+
+		// Clicking anywhere hides tooltip
+		window.addEventListener("click", (e) => {
+			if (!launcher.contains(e.target)) {
+				tooltip.classList.add("hidden");
+			}
+		});
+	</script>
+
+</body>
+</html>
