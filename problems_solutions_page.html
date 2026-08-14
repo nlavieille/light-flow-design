@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Real Problems (And Fixes)</title>
+	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+<style>
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 2px;
+        }
+
+        .back-btn:hover {
+            border-bottom-style: solid;
+        }
+
+        header {
+            border: 4px solid #2a2a2a;
+            padding: 30px;
+            background: #2a2a2a;
+            color: #f5f1e8;
+            box-shadow: 8px 8px 0 #8b0000;
+            transform: rotate(-1.5deg);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            transform: rotate(1deg);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .intro-box {
+            background: #ffe8d6;
+            padding: 25px;
+            border: 3px dashed #2a2a2a;
+            margin-bottom: 40px;
+            transform: rotate(0.8deg);
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        .intro-box p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        .industry-section {
+            margin-bottom: 40px;
+        }
+
+        .industry-header {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            padding: 15px 20px;
+            border: 3px solid #2a2a2a;
+            transform: rotate(-0.5deg);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .problems-box {
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #2a2a2a;
+            margin-bottom: 15px;
+            transform: rotate(0.3deg);
+            border-style: dashed;
+        }
+
+        .problems-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-decoration: underline wavy #8b0000;
+        }
+
+        .problems-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problems-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        .problems-box li::before {
+            content: "↯ ";
+            position: absolute;
+            left: 0;
+            color: #8b0000;
+        }
+
+        .solutions-box {
+            background: #e8f4f8;
+            padding: 20px;
+            border: 3px solid #2a2a2a;
+            transform: rotate(-0.3deg);
+            box-shadow: 5px 5px 0 #d4f8e8;
+        }
+
+        .solutions-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            text-decoration: underline wavy #2a2a2a;
+        }
+
+        .solutions-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .solutions-box li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .solutions-box li::before {
+            content: "✓ ";
+            position: absolute;
+            left: 0;
+            font-weight: 900;
+        }
+
+        .reality-check {
+            background: #ffd4e5;
+            padding: 25px;
+            border: 4px solid #2a2a2a;
+            margin: 40px 0;
+            transform: rotate(1.2deg);
+            box-shadow: 8px 8px 0 #e8d4f8;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .reality-check h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .reality-check p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .summary-table {
+            background: #fff;
+            padding: 20px;
+            border: 3px solid #2a2a2a;
+            margin: 40px 0;
+            transform: rotate(-0.8deg);
+            overflow-x: auto;
+        }
+
+        .summary-table h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .summary-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f5f1e8;
+            border-left: 4px solid #2a2a2a;
+        }
+
+        .summary-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .industry-header {
+                font-size: 1.1rem;
+            }
+        }
+</style>
+<style>
+
+        /* Princess Light Media: simple human contact widget */
+        .plm-contact-launcher {
+            position: fixed;
+            right: 20px;
+            bottom: 24px;
+            z-index: 9999;
+            border: 3px solid #2a2a2a;
+            background: #fff3cd;
+            color: #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            padding: 13px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transform: rotate(-0.8deg);
+            max-width: calc(100vw - 40px);
+        }
+        .plm-contact-launcher:hover,
+        .plm-contact-launcher:focus-visible {
+            transform: rotate(0deg) translateY(-2px);
+            outline: none;
+        }
+        .plm-contact-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 88px;
+            z-index: 9998;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            padding: 20px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 3px dashed #2a2a2a;
+            box-shadow: 8px 8px 0 #d4af37;
+            display: none;
+            transform: rotate(0.5deg);
+        }
+        .plm-contact-panel.plm-open { display: block; }
+        .plm-contact-panel h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            letter-spacing: -0.5px;
+        }
+        .plm-contact-panel p {
+            margin: 0 0 15px;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        .plm-contact-action {
+            display: block;
+            margin-top: 10px;
+            padding: 11px 12px;
+            border: 2px solid #2a2a2a;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+        .plm-contact-action:hover,
+        .plm-contact-action:focus-visible {
+            background: #fff3cd;
+            outline: none;
+        }
+        .plm-contact-small {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.76rem;
+            opacity: 0.72;
+        }
+        .direct-contact-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .direct-contact-options a {
+            display: block;
+            padding: 14px 16px;
+            background: #fff3cd;
+            border: 2px solid #2a2a2a;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 #d4af37;
+        }
+        .direct-contact-options a:hover { transform: translateY(-1px); }
+        @media (max-width: 600px) {
+            .plm-contact-launcher { right: 12px; bottom: 14px; font-size: 0.82rem; }
+            .plm-contact-panel { right: 12px; bottom: 76px; max-width: calc(100vw - 24px); }
+        }
+
+    
+        /* Princess Light Media social links */
+        .plm-social-links { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:18px 0 8px; }
+        .plm-social-links a { display:inline-block; padding:8px 11px; background:#fff; color:#2a2a2a; border:2px solid #2a2a2a; text-decoration:none; font-weight:700; font-size:.82rem; box-shadow:3px 3px 0 #d4af37; }
+        .plm-social-links a:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 #d4af37; }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-btn">← Back to main page</a>
+        
+        <header>
+            <h1>The Real Problems (And Fixes)</h1>
+            <p class="tagline">An honest look at what's actually broken in your industry</p>
+        </header>
+
+        <div class="intro-box">
+            <p>Look, we're not going to sugarcoat this. Running a service business is chaos. Phones ring nonstop with the same questions. People ghost appointments. Your DMs are a warzone. You're doing the work of three people.</p>
+            <p>The good news? Most of this is fixable. Not with more hustle. With better systems. Specifically, streamlined systems that take repetitive admin off your plate so you and your team can actually do your jobs.</p>
+            <p><strong>Here's the breakdown by industry →</strong></p>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">💇 Hair Salons & Barbershops</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Phones ringing nonstop (availability, prices, "which stylist?")</li>
+                    <li>Last-minute cancellations killing revenue</li>
+                    <li>Double-bookings when stylists manage their own calendars</li>
+                    <li>Clients sliding into DMs instead of using booking links</li>
+                    <li>Inconsistent pricing answers from different staff</li>
+                    <li>New client intake chaos (photos, hair type, inspiration)</li>
+                    <li>High staff turnover, especially juniors</li>
+                    <li>Slow periods during the week</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>24/7 automated booking</li>
+                    <li>FAQ system handling prices, walk-ins, stylist info</li>
+                    <li>No-show reminders that actually work</li>
+                    <li>Cancellation waitlists that auto-fill</li>
+                    <li>Intake forms with photo upload</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">💅 Nail Salons</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Constant calls for availability and pricing</li>
+                    <li>Walk-in vs appointment confusion</li>
+                    <li>Language barriers slowing down booking</li>
+                    <li>Last-minute rescheduling demands</li>
+                    <li>No-shows (low deposit culture)</li>
+                    <li>Owners working 12+ hour days, exhausted</li>
+                    <li>Many still on paper booking systems</li>
+                    <li>Pressure to respond to DMs, texts, Facebook messages</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Automated pricing + service explanations</li>
+                    <li>Appointment confirmations</li>
+                    <li>Deposit policy enforcement</li>
+                    <li>Multi-channel messaging → booking</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">🎨 Tattoo Parlors</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Artists overwhelmed with DMs (Instagram, Facebook, email)</li>
+                    <li>Booking requires photos, inspiration, body placement, size</li>
+                    <li>Clients ghosting after receiving quotes</li>
+                    <li>Long backlogs → lost leads</li>
+                    <li>Walk-in questions for pricing and availability</li>
+                    <li>Need to screen out time wasters</li>
+                    <li>Deposits & cancellations are major issues</li>
+                    <li>No receptionist = constant interruptions</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Automated intake with photo upload</li>
+                    <li>Pre-screening questions</li>
+                    <li>Deposit reminders that enforce themselves</li>
+                    <li>Artist availability + price FAQs</li>
+                    <li>Lead capture from Instagram</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">💆 Massage Therapy Clinics</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>High no-show rates (especially evenings/weekends)</li>
+                    <li>Clients price-shopping, waiting for deals</li>
+                    <li>Phones ringing constantly for availability</li>
+                    <li>Online booking confusion between therapists</li>
+                    <li>Schedule gaps hurting revenue</li>
+                    <li>Managing first-time client intake forms</li>
+                    <li>Busy times overwhelming, slow times dead</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>No-show reduction systems</li>
+                    <li>Reminders & follow-up messages</li>
+                    <li>FAQ system (pricing, insurance, modalities)</li>
+                    <li>Rebooking nudges for repeat clients</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">✨ Aesthetic Clinics / Medspas</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Lead volume is huge, impossible to respond fast enough</li>
+                    <li>Same questions every day (pricing, downtime, risks)</li>
+                    <li>Response speed determines bookings (competition is fierce)</li>
+                    <li>High-ticket no-shows are extremely expensive</li>
+                    <li>Staff overwhelmed with Instagram DMs</li>
+                    <li>Need to explain pre-care and after-care constantly</li>
+                    <li>Clients anxious, need reassurance & hand-holding</li>
+                    <li>Follow-up visits needed but often forgotten</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Instant lead response (24/7)</li>
+                    <li>Price ranges + aftercare instructions automated</li>
+                    <li>Follow-up reminders</li>
+                    <li>Pre-care checklists</li>
+                    <li>Rebooking sequences</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">💪 Gyms</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Lead capture failures (walk-ins, website, social media)</li>
+                    <li>Free trial people who never convert</li>
+                    <li>Staff overwhelmed with membership questions</li>
+                    <li>Cancellations and failed payments</li>
+                    <li>Clients confused about class schedules</li>
+                    <li>High churn after 30-90 days</li>
+                    <li>Poor follow-up for after-hours inquiries</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Lead capture + automatic follow-up</li>
+                    <li>Membership FAQ system</li>
+                    <li>Class schedule system</li>
+                    <li>Win-back campaigns for inactive members</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">🧘 Fitness Studios (Pilates, Barre, HIIT)</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Class booking confusion ("Is there space?" "Can I cancel?")</li>
+                    <li>Waitlist management is a nightmare</li>
+                    <li>Late-canceling clients forcing revenue losses</li>
+                    <li>High churn if they don't become regulars</li>
+                    <li>Constant DMs about membership vs drop-in</li>
+                    <li>Need to remind clients about expiring packages</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Automated waitlist management</li>
+                    <li>Late cancellation policy enforcement</li>
+                    <li>Package-expiry alerts</li>
+                    <li>FAQ + booking system</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">🥊 Boxing Clubs / Martial Arts</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Endless beginner questions ("Do I need gear?")</li>
+                    <li>Free trials with no follow-up = no conversion</li>
+                    <li>Coaches too busy teaching to answer calls</li>
+                    <li>High turnover in early months</li>
+                    <li>Parents of kids' programs need constant updates</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Trial → membership conversion sequence</li>
+                    <li>New student FAQ system</li>
+                    <li>Gear checklist automation</li>
+                    <li>Class reminders</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">🧘 Yoga Studios</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Price vs membership confusion</li>
+                    <li>Questions about class difficulty, injuries, instructors</li>
+                    <li>Schedule changes causing chaos</li>
+                    <li>No-shows in small classes hurting revenue</li>
+                    <li>Poor new student onboarding</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Pricing explanation system</li>
+                    <li>Class level + instructor info system</li>
+                    <li>Mindfulness reminders (on-brand!)</li>
+                    <li>No-show reduction</li>
+                    <li>New student onboarding sequence</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="industry-section">
+            <div class="industry-header">🐕 Dog Groomers / Pet Services</div>
+            
+            <div class="problems-box">
+                <h3>The Problems:</h3>
+                <ul>
+                    <li>Nonstop calls: "How much for a small dog?"</li>
+                    <li>"Do you have openings today?"</li>
+                    <li>"How long does it take?"</li>
+                    <li>CHRONIC no-shows and late cancellations</li>
+                    <li>Owners forget to pick up dogs → schedule chaos</li>
+                    <li>Long waitlists managed manually</li>
+                    <li>Can't answer phones while grooming</li>
+                    <li>Breed-specific pricing confusion</li>
+                    <li>Many operate with no receptionist</li>
+                </ul>
+            </div>
+
+            <div class="solutions-box">
+                <h3>What Actually Fixes This:</h3>
+                <ul>
+                    <li>Real-time booking + price estimates</li>
+                    <li>Grooming prep instructions</li>
+                    <li>Pick-up time reminders</li>
+                    <li>No-show fee enforcement</li>
+                    <li>Waitlist automation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <div class="reality-check">
+            <h2>The Pattern You're Probably Noticing</h2>
+            <p>Most of these problems aren't unique. It's the same handful of issues showing up across every industry:</p>
+            <p><strong>→</strong> Phone/DM overload with repetitive questions<br>
+            <strong>→</strong> No-shows and last-minute cancellations<br>
+            <strong>→</strong> Manual booking chaos<br>
+            <strong>→</strong> Poor lead follow-up<br>
+            <strong>→</strong> Schedule gaps hurting revenue</p>
+            <p>That's actually good news. Because if the problems are similar, the solutions are too. You don't need a custom-built enterprise system. You need smart, well-built systems that handle the grunt work and keep the day moving.</p>
+        </div>
+
+        <div class="summary-table">
+            <h2>Quick Reference: Industry Pain Points</h2>
+            
+            <div class="summary-item">
+                <strong>Hair/Barber:</strong> Phone overload, no-shows, pricing questions
+            </div>
+            
+            <div class="summary-item">
+                <strong>Nail Salons:</strong> Walk-in chaos, repetitive FAQs
+            </div>
+            
+            <div class="summary-item">
+                <strong>Tattoo Parlors:</strong> DM overload, quoting, intake complexity
+            </div>
+            
+            <div class="summary-item">
+                <strong>Massage Clinics:</strong> No-shows, phone overload, schedule gaps
+            </div>
+            
+            <div class="summary-item">
+                <strong>Aesthetic Clinics:</strong> High lead volume, pricing FAQs
+            </div>
+            
+            <div class="summary-item">
+                <strong>Gyms:</strong> Lead follow-up, churn, membership confusion
+            </div>
+            
+            <div class="summary-item">
+                <strong>Fitness Studios:</strong> Booking issues, waitlists, package confusion
+            </div>
+            
+            <div class="summary-item">
+                <strong>Boxing/Martial Arts:</strong> Beginner FAQs, low trial conversion
+            </div>
+            
+            <div class="summary-item">
+                <strong>Yoga Studios:</strong> Schedule changes, no-shows, pricing confusion
+            </div>
+            
+            <div class="summary-item">
+                <strong>Dog Groomers:</strong> Phone overload, CHRONIC no-shows, breed pricing confusion
+            </div>
+        </div>
+
+        <div class="intro-box" style="margin-top: 40px;">
+            <p><strong>Bottom line:</strong> If you saw yourself in any of these problems, you're not alone. And more importantly, you don't have to keep living like this.</p>
+            <p>Better systems can give you your time — and your sanity — back. Really.</p>
+        </div>
+    </div>
+
+    <!-- Human contact panel -->
+    <div class="plm-contact-panel" id="plm-contact-panel" aria-hidden="true">
+        <h3>What's driving you crazy?</h3>
+        <p>Tell us what's messy, repetitive, or eating your week. You'll reach a real person who can help you sort it out.</p>
+        <a class="plm-contact-action" href="tel:+17782380206">☎ Call 778-238-0206</a>
+        <a class="plm-contact-action" href="mailto:hello@princesslight.com?subject=Help%20with%20my%20business">✉ Email us<span style="display:block;font-size:0.75rem;font-weight:400;opacity:0.7;margin-top:2px;">hello@princesslight.com</span></a>
+        <a class="plm-contact-action" href="book_a_call_page.html">→ Book a quick call</a>
+        <span class="plm-contact-small">No bots. No runaround. Just a straightforward conversation.</span>
+    
+        <div class="plm-social-links" aria-label="Princess Light Media social media">
+            <a href="https://www.linkedin.com/in/princesslight/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/princesslightmedia" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/princesslightmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+
+</div>
+    <button class="plm-contact-launcher" id="plm-contact-launcher" type="button" aria-expanded="false" aria-controls="plm-contact-panel">Tell Us What’s Driving You Crazy →</button>
+
+    <script>
+        (() => {
+            const launcher = document.getElementById('plm-contact-launcher');
+            const panel = document.getElementById('plm-contact-panel');
+            if (!launcher || !panel) return;
+            const closePanel = () => {
+                panel.classList.remove('plm-open');
+                panel.setAttribute('aria-hidden', 'true');
+                launcher.setAttribute('aria-expanded', 'false');
+            };
+            launcher.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isOpen = panel.classList.toggle('plm-open');
+                panel.setAttribute('aria-hidden', String(!isOpen));
+                launcher.setAttribute('aria-expanded', String(isOpen));
+            });
+            panel.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+        })();
+    </script>
+
+</body>
+</html>
