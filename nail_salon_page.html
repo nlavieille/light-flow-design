@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Systems for Nail Salons</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Courier New', monospace; background: #f5f1e8; color: #2a2a2a; min-height: 100vh; padding: 40px 20px; line-height: 1.7; }
+.container { max-width: 480px; margin: 0 auto; }
+.back-btn { display: inline-block; margin-bottom: 30px; color: #2a2a2a; text-decoration: none; border-bottom: 2px dashed #2a2a2a; padding-bottom: 2px; }
+.back-btn:hover { border-bottom-style: solid; }
+header { border: 3px solid #2a2a2a; padding: 30px; background: #e8d4f8; box-shadow: 8px 8px 0 #ffd4e5; transform: rotate(-1.5deg); margin-bottom: 40px; }
+h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 900; letter-spacing: -2px; transform: rotate(1deg); }
+.scissors { text-align: center; font-size: 2rem; margin: 30px 0; opacity: 0.3; }
+.intro { background: #fff; padding: 25px; border: 2px dashed #2a2a2a; margin-bottom: 30px; transform: rotate(0.7deg); }
+.intro p { margin-bottom: 15px; font-size: 1rem; }
+.problem-box { background: #ffd4e5; padding: 20px; border: 4px solid #2a2a2a; margin: 30px 0; transform: rotate(-1deg); font-family: 'Comic Sans MS', cursive; font-size: 1.1rem; box-shadow: 6px 6px 0 #e8d4f8; }
+.feature { margin-bottom: 25px; padding: 20px; background: #fff; border: 2px solid #2a2a2a; position: relative; }
+.feature:nth-child(odd) { transform: rotate(-0.9deg); box-shadow: 5px 5px 0 #e8d4f8; border-style: dashed; }
+.feature:nth-child(even) { transform: rotate(0.9deg); box-shadow: 5px 5px 0 #ffd4e5; border-style: solid; }
+.feature strong { display: block; font-size: 1.2rem; margin-bottom: 10px; border-bottom: 3px wavy #2a2a2a; padding-bottom: 5px; }
+.feature strong::before { content: "→ "; }
+.feature p { font-size: 0.95rem; opacity: 0.8; }
+.callout { background: #e8d4f8; padding: 20px; border: 3px dashed #2a2a2a; margin: 30px 0; transform: rotate(1.3deg); box-shadow: 6px 6px 0 #d4af37; }
+.bottom-note { font-style: italic; opacity: 0.7; padding: 20px; background: #fff; border: 2px solid #2a2a2a; transform: rotate(-0.6deg); margin-top: 30px; }
+@media (max-width: 600px) { h1 { font-size: 2rem; } }
+.plm-contact-launcher { position: fixed; right: 20px; bottom: 24px; z-index: 9999; border: 3px solid #2a2a2a; background: #fff3cd; color: #2a2a2a; box-shadow: 6px 6px 0 #d4af37; padding: 13px 16px; font-family: 'Courier New', monospace; font-size: 0.92rem; font-weight: 900; cursor: pointer; transform: rotate(-0.8deg); max-width: calc(100vw - 40px); }
+.plm-contact-launcher:hover { transform: rotate(0deg) translateY(-2px); }
+.plm-contact-panel { position: fixed; right: 20px; bottom: 88px; z-index: 9998; width: 340px; max-width: calc(100vw - 40px); padding: 20px; background: #fff; color: #2a2a2a; border: 3px dashed #2a2a2a; box-shadow: 8px 8px 0 #d4af37; display: none; transform: rotate(0.5deg); }
+.plm-contact-panel.plm-open { display: block; }
+.plm-contact-panel h3 { font-size: 1.2rem; margin: 0 0 8px; }
+.plm-contact-panel p { margin: 0 0 15px; font-size: 0.9rem; line-height: 1.45; }
+.plm-contact-action { display: block; margin-top: 10px; padding: 11px 12px; border: 2px solid #2a2a2a; background: #f5f1e8; color: #2a2a2a; text-decoration: none; font-weight: 900; line-height: 1.25; }
+.plm-contact-action:hover { background: #fff3cd; }
+.plm-contact-small { display: block; margin-top: 12px; font-size: 0.76rem; opacity: 0.72; }
+.plm-social-links { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin:18px 0 8px; }
+.plm-social-links a { display:inline-block; padding:8px 11px; background:#fff; color:#2a2a2a; border:2px solid #2a2a2a; text-decoration:none; font-weight:700; font-size:.82rem; box-shadow:3px 3px 0 #d4af37; }
+@media (max-width: 600px) { .plm-contact-launcher { right: 12px; bottom: 14px; } .plm-contact-panel { right: 12px; bottom: 76px; } }
+</style>
+</head>
+<body>
+    <div class="container">
+        <a href="./index.html" class="back-btn">← Back to all services</a>
+        <header><h1>Nail Salons</h1></header>
+        <div class="problem-box">"Polish off your admin work. Finally."</div>
+        <div class="intro">
+            <p>You're out here creating tiny works of art on fingernails, dealing with gel that won't cure, acrylics that crack, and clients who bring in Pinterest photos of nails that defy the laws of physics.</p>
+            <p>The last thing you need is answering the phone mid-manicure because someone wants to know if you can "fit them in real quick" at peak Saturday hours. Spoiler: you can't. Let a simple booking system handle that interruption.</p>
+        </div>
+        <div class="scissors">✂ ✂ ✂</div>
+        <div class="feature">
+            <strong>Booking Without the Phone Interruptions</strong>
+            <p>Online scheduling so you can finish those stiletto nails without pausing to grab your phone with acetone-covered hands.</p>
+        </div>
+        <div class="feature">
+            <strong>Service Duration That Actually Makes Sense</strong>
+            <p>Different time slots for basic polish vs. full sets vs. nail art marathons. No more running 45 minutes behind by noon.</p>
+        </div>
+        <div class="feature">
+            <strong>Client Preference Memory</strong>
+            <p>"Always wants OPI Lincoln Park After Dark." "Cuticles are sensitive." "Tips cash." All saved. You're not a mind reader.</p>
+        </div>
+        <div class="feature">
+            <strong>Automated Appointment Reminders</strong>
+            <p>Because people will absolutely forget about their appointment and show up three days late wondering why you're "fully booked."</p>
+        </div>
+        <div class="feature">
+            <strong>Walk-In Queue Management</strong>
+            <p>Digital waitlist so walk-ins know where they stand instead of hovering near your station asking "how much longer?"</p>
+        </div>
+        <div class="feature">
+            <strong>Video Ads & Content That Fill Your Chair</strong>
+            <p>Nail art time-lapses that get saved and shared. New design showcases that make people screenshot and book. "This week's inspo" content that runs on autopilot. We create the posts, set up the system that keeps them going, and make sure your salon shows up when people search for nail services in your area. Less time on your phone. More time on your clients' nails.</p>
+        </div>
+        <div class="scissors">✂ ✂ ✂</div>
+        <div class="callout">
+            <strong>Here's the reality:</strong> You're simultaneously trying to create perfect cuticles, manage multiple clients at different stages, and answer the phone. That's too many things. Let a better system take at least one of those jobs off your plate.
+        </div>
+        <div class="bottom-note">✓ Your art fills the chair. We make sure they know where to find you.</div>
+    </div>
+    <div class="plm-contact-panel" id="plm-contact-panel" aria-hidden="true">
+        <h3>What's driving you crazy?</h3>
+        <p>Tell us what's messy, repetitive, or eating your week. You'll reach a real person who can help you sort it out.</p>
+        <a class="plm-contact-action" href="tel:+17782380206">☎ Call 778-238-0206</a>
+        <a class="plm-contact-action" href="mailto:hello@princesslight.com?subject=Help%20with%20my%20business">✉ Email us</a>
+        <a class="plm-contact-action" href="book_a_call_page.html">→ Book a quick call</a>
+        <span class="plm-contact-small">No bots. No runaround. Just a straightforward conversation.</span>
+        <div class="plm-social-links"><a href="https://www.linkedin.com/in/princesslight/" target="_blank" rel="noopener noreferrer">LinkedIn</a><a href="https://www.facebook.com/princesslightmedia" target="_blank" rel="noopener noreferrer">Facebook</a><a href="https://www.instagram.com/princesslightmedia/" target="_blank" rel="noopener noreferrer">Instagram</a></div>
+    </div>
+    <button class="plm-contact-launcher" id="plm-contact-launcher" type="button" aria-expanded="false" aria-controls="plm-contact-panel">Tell Us What's Driving You Crazy →</button>
+    <script>
+        (() => {
+            const launcher = document.getElementById('plm-contact-launcher');
+            const panel = document.getElementById('plm-contact-panel');
+            if (!launcher || !panel) return;
+            const closePanel = () => { panel.classList.remove('plm-open'); panel.setAttribute('aria-hidden', 'true'); launcher.setAttribute('aria-expanded', 'false'); };
+            launcher.addEventListener('click', (event) => { event.stopPropagation(); const isOpen = panel.classList.toggle('plm-open'); panel.setAttribute('aria-hidden', String(!isOpen)); launcher.setAttribute('aria-expanded', String(isOpen)); });
+            panel.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+        })();
+    </script>
+</body>
+</html>
