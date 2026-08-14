@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Princess Light Media — We Handle the Marketing. You Handle the Business.</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 520px; margin: 0 auto; }
+
+        /* HEADER */
+        header {
+            margin-bottom: 50px;
+            border: 3px dashed #2a2a2a;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(-1deg);
+        }
+
+        .brand-name {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.55;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            transform: rotate(0.5deg);
+            display: block;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            border-bottom: 3px wavy #2a2a2a;
+            padding-bottom: 12px;
+        }
+
+        .disclaimer {
+            font-size: 0.88rem;
+            font-style: italic;
+            padding: 14px;
+            background: #ffe8d6;
+            border-left: 4px solid #2a2a2a;
+            margin-top: 16px;
+            transform: rotate(0.3deg);
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 40px 0;
+            opacity: 0.3;
+        }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        /* TWO DOORS */
+        .two-doors {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .door {
+            display: block;
+            text-decoration: none;
+            color: #2a2a2a;
+            padding: 28px;
+            border: 3px solid #2a2a2a;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .door-a {
+            transform: rotate(-1deg);
+            background: #fff3cd;
+            box-shadow: 8px 8px 0 #d4af37;
+        }
+
+        .door-b {
+            transform: rotate(0.8deg);
+            background: #2a2a2a;
+            color: #f5f1e8;
+            box-shadow: 8px 8px 0 #8b0000;
+            border-color: #d4af37;
+        }
+
+        .door:hover { transform: rotate(0deg) translateX(6px); }
+
+        .door-label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .door-b .door-label { color: #d4af37; opacity: 1; }
+
+        .door h2 {
+            font-size: 1.9rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .door-b h2 { color: #fff3cd; }
+
+        .door p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .door-b p { color: #f5f1e8; opacity: 0.85; }
+
+        .door-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            font-size: 0.72rem;
+            padding: 3px 8px;
+            border: 1.5px solid #2a2a2a;
+            font-weight: 700;
+            background: #f5f1e8;
+        }
+
+        .door-b .tag {
+            border-color: #d4af37;
+            background: transparent;
+            color: #d4af37;
+        }
+
+        .door-cta {
+            font-weight: 900;
+            font-size: 1rem;
+            display: inline-block;
+            border-bottom: 2px solid currentColor;
+        }
+
+        .door-b .door-cta { color: #fff3cd; }
+
+        /* HANDWRITTEN */
+        .handwritten {
+            font-family: 'Comic Sans MS', cursive;
+            background: #e8f4f8;
+            padding: 20px;
+            border: 2px solid #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(-1.5deg);
+            box-shadow: 5px 5px 0 #c9a9e8;
+        }
+
+        /* SERVICE LIST */
+        .service-list { margin-top: 10px; }
+
+        .service-item {
+            margin-bottom: 14px;
+            padding: 16px 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            text-decoration: none;
+            color: #2a2a2a;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .service-item:nth-child(odd) { transform: rotate(-0.5deg); border-style: dashed; }
+        .service-item:nth-child(even) { transform: rotate(0.5deg); border-style: solid; }
+
+        .service-item:hover {
+            transform: rotate(0deg) translateX(10px);
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        .service-item h3 { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+        .service-item h3::before { content: "→ "; opacity: 0.5; }
+        .service-item p { font-size: 0.85rem; opacity: 0.7; }
+
+        /* TRACK B */
+        .track-b-hero {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            padding: 28px;
+            border: 3px solid #d4af37;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(0.8deg);
+            margin-bottom: 30px;
+        }
+
+        .track-b-hero .track-label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .track-b-hero h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 14px;
+            line-height: 1.2;
+            color: #fff3cd;
+        }
+
+        .track-b-hero p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+
+        .track-b-cta {
+            display: inline-block;
+            padding: 12px 16px;
+            background: #d4af37;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* VIDEO CARDS */
+        .video-card {
+            background: #fff;
+            padding: 22px;
+            border: 2px solid #2a2a2a;
+            margin-bottom: 22px;
+        }
+
+        .video-card:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            box-shadow: 5px 5px 0 #d4af37;
+            border-style: dashed;
+        }
+
+        .video-card:nth-child(even) {
+            transform: rotate(0.5deg);
+            box-shadow: 5px 5px 0 #c9a9e8;
+            border-style: solid;
+        }
+
+        .video-card .vid-label {
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .video-card strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .video-card strong::before { content: "→ "; }
+
+        .video-card p {
+            font-size: 0.85rem;
+            opacity: 0.75;
+            margin-bottom: 12px;
+        }
+
+        .video-placeholder {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+
+        /* VIDEO EMBED */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin-top: 10px;
+            background: #2a2a2a;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* TRACK B CLOSE */
+        .track-b-close {
+            background: #fff3cd;
+            border: 3px dashed #2a2a2a;
+            padding: 22px;
+            transform: rotate(0.6deg);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .track-b-close p { font-size: 1rem; font-weight: 900; margin-bottom: 8px; }
+        .track-b-close .sub { font-size: 0.85rem; opacity: 0.8; font-weight: normal; margin-bottom: 14px; }
+
+        .track-b-close a {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #2a2a2a;
+            color: #f5f1e8;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* DANGER ZONE */
+        .danger-zone {
+            margin-top: 40px;
+            border: 4px solid #2a2a2a;
+            background: #fff;
+            transform: rotate(-1.5deg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-label {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        .danger-link {
+            display: block;
+            padding: 30px;
+            text-decoration: none;
+            color: #2a2a2a;
+            background: repeating-linear-gradient(45deg, #ffeb3b, #ffeb3b 10px, #2a2a2a 10px, #2a2a2a 20px);
+            transition: all 0.2s ease;
+        }
+
+        .danger-link:hover { transform: scale(1.02); }
+
+        .danger-content {
+            background: #fff;
+            padding: 20px;
+            border: 3px dashed #8b0000;
+            text-align: center;
+        }
+
+        .danger-content strong { font-size: 1.3rem; display: block; margin-bottom: 8px; }
+        .danger-content p { font-size: 0.9rem; opacity: 0.8; font-style: italic; }
+
+        .tape {
+            background: #2a2a2a;
+            color: #ffeb3b;
+            text-align: center;
+            padding: 8px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+        }
+
+        /* CONTACT WIDGET */
+        .plm-contact-launcher {
+            position: fixed;
+            right: 20px;
+            bottom: 24px;
+            z-index: 9999;
+            border: 3px solid #2a2a2a;
+            background: #fff3cd;
+            color: #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            padding: 13px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transform: rotate(-0.8deg);
+            max-width: calc(100vw - 40px);
+        }
+
+        .plm-contact-launcher:hover,
+        .plm-contact-launcher:focus-visible {
+            transform: rotate(0deg) translateY(-2px);
+            outline: none;
+        }
+
+        .plm-contact-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 88px;
+            z-index: 9998;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            padding: 20px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 3px dashed #2a2a2a;
+            box-shadow: 8px 8px 0 #d4af37;
+            display: none;
+            transform: rotate(0.5deg);
+        }
+
+        .plm-contact-panel.plm-open { display: block; }
+        .plm-contact-panel h3 { font-size: 1.2rem; margin: 0 0 8px; letter-spacing: -0.5px; }
+        .plm-contact-panel p { margin: 0 0 15px; font-size: 0.9rem; line-height: 1.45; }
+
+        .plm-contact-action {
+            display: block;
+            margin-top: 10px;
+            padding: 11px 12px;
+            border: 2px solid #2a2a2a;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+
+        .plm-contact-action:hover,
+        .plm-contact-action:focus-visible { background: #fff3cd; outline: none; }
+
+        .plm-contact-small {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.76rem;
+            opacity: 0.72;
+        }
+
+        .plm-social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 18px 0 8px;
+        }
+
+        .plm-social-links a {
+            display: inline-block;
+            padding: 8px 11px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 2px solid #2a2a2a;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .82rem;
+            box-shadow: 3px 3px 0 #d4af37;
+        }
+
+        .plm-social-links a:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #d4af37; }
+
+        /* HEADSHOT */
+        .headshot-card {
+            float: right;
+            margin: 0 0 12px 16px;
+            border: 3px solid #2a2a2a;
+            box-shadow: 5px 5px 0 #d4af37;
+            transform: rotate(2deg);
+            background: #fff;
+            padding: 4px 4px 24px 4px;
+            width: 110px;
+        }
+        .headshot-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .headshot-caption {
+            font-size: 0.65rem;
+            text-align: center;
+            margin-top: 6px;
+            opacity: 0.7;
+            font-family: 'Comic Sans MS', cursive;
+            letter-spacing: 0.5px;
+        }
+        header::after { content: ''; display: table; clear: both; }
+
+        /* ADMIN BUSTERS HERO BANNER */
+        .adminbusters-banner {
+            width: calc(100% + 0px);
+            border: 3px solid #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            transform: rotate(-0.5deg);
+            display: block;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            header, .door { padding: 20px; }
+            .door h2 { font-size: 1.5rem; }
+            .plm-contact-launcher { right: 12px; bottom: 14px; font-size: 0.82rem; }
+            .plm-contact-panel { right: 12px; bottom: 76px; max-width: calc(100vw - 24px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <header>
+            <div class="headshot-card">
+                <img src="headshot.webp" alt="Noel Lavieille — Princess Light Media" width="102" height="102">
+                <div class="headshot-caption">Noel · Surrey, BC</div>
+            </div>
+            <div class="brand-name">Princess Light Media · Surrey, BC</div>
+            <h1>We handle the marketing.<br>You handle the business.</h1>
+            <p class="subtitle"><strong>Done-for-you marketing for local service businesses. Motion design video ads for product brands.</strong></p>
+            <p>If you're covered in paint, dog hair, or massage oil by 2pm — or you're a founder trying to launch something and need a video that actually sells it — you're in the right place.</p>
+            <div class="disclaimer">
+                ✓ Not a fancy agency built for Fortune 500 companies.<br>
+                ✓ Real work for real businesses. Surrey to the world.
+            </div>
+        </header>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- TWO DOORS -->
+        <span class="section-label">Two types of businesses. Pick your door.</span>
+
+        <div class="two-doors">
+
+            <a href="#track-a" class="door door-a">
+                <span class="door-label">Track A — Local Service Businesses</span>
+                <h2>Admin-Busters 🚫</h2>
+                <p>You do great work. Your marketing doesn't show it — and the admin is eating your evenings. We handle both so you don't have to.</p>
+                <div class="door-tags">
+                    <span class="tag">Local SEO</span>
+                    <span class="tag">Google Maps</span>
+                    <span class="tag">Social Media</span>
+                    <span class="tag">Booking Systems</span>
+                    <span class="tag">Video Ads</span>
+                    <span class="tag">AI Search</span>
+                </div>
+                <span class="door-cta">→ See what we fix</span>
+            </a>
+
+            <a href="#track-b" class="door door-b">
+                <span class="door-label">Track B — Product Brands</span>
+                <h2>Motion Design<br>Video Ads</h2>
+                <p>Your product deserves video that stops the scroll. One brief. One visual world. Built fast, built to perform.</p>
+                <div class="door-tags">
+                    <span class="tag">Short-Form Ads</span>
+                    <span class="tag">UGC Video</span>
+                    <span class="tag">Brand Content</span>
+                    <span class="tag">DTC · Ecomm · Kickstarter</span>
+                </div>
+                <span class="door-cta">→ See the work</span>
+            </a>
+
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- ======================== TRACK A ======================== -->
+        <div id="track-a">
+            <span class="section-label">Admin-Busters — For Local Service Businesses</span>
+
+            <div class="handwritten">
+                <strong>A note from us:</strong> We build practical systems for businesses that don't have "Chief Innovation Officers" or whatever. If you're covered in dog hair, paint, or massage oil by 2pm, you're exactly who we built this for.
+            </div>
+
+            <div class="scissors">✂ ✂ ✂</div>
+
+            <img src="adminbusters_hero.webp" alt="Admin-Busters — Done-for-you marketing for local businesses and motion design video ads for product brands" class="adminbusters-banner">
+
+            <div class="service-list">
+                <a href="hair_salon_page.html" class="service-item">
+                    <h3>Hair Salons</h3>
+                    <p>Because your clients need reminders</p>
+                </a>
+                <a href="tattoo_parlor_page.html" class="service-item">
+                    <h3>Tattoo Parlors</h3>
+                    <p>Ink is permanent. Scheduling chaos isn't.</p>
+                </a>
+                <a href="aesthetic_clinic_page.html" class="service-item">
+                    <h3>Aesthetic Clinics</h3>
+                    <p>Beauty is pain. Admin is worse.</p>
+                </a>
+                <a href="massage_therapy_page.html" class="service-item">
+                    <h3>Massage Therapy</h3>
+                    <p>Relax. We'll handle the chaos.</p>
+                </a>
+                <a href="nail_salon_page.html" class="service-item">
+                    <h3>Nail Salons</h3>
+                    <p>Polish off your admin work.</p>
+                </a>
+                <a href="gym_fitness_page.html" class="service-item">
+                    <h3>Gyms & Fitness Studios</h3>
+                    <p>No pain, no gain, no paperwork.</p>
+                </a>
+                <a href="dog_groomer_page.html" class="service-item">
+                    <h3>Dog Groomers</h3>
+                    <p>Good dogs deserve good booking.</p>
+                </a>
+            </div>
+
+            <div class="scissors">✂ ✂ ✂</div>
+
+            <div class="danger-zone">
+                <div class="warning-label">⚠ WARNING ZONE ⚠</div>
+                <a href="problems_solutions_page.html" class="danger-link">
+                    <div class="danger-content">
+                        <strong>→ See ALL the problems →</strong>
+                        <p>(It's worse than you think. But also fixable.)</p>
+                    </div>
+                </a>
+                <div class="tape">⚠ ⚠ ⚠ ⚠ ⚠ ⚠ ⚠</div>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- ======================== TRACK B ======================== -->
+        <div id="track-b">
+            <span class="section-label">Princess Light Media — Motion Design Video Ads</span>
+
+            <div class="track-b-hero">
+                <span class="track-label">For Product Brands · DTC · Ecomm · Craft Beverage · Skincare · Kickstarter</span>
+                <h2>Most creators make videos.<br>We build creative systems.</h2>
+                <p>One brief becomes one visual world becomes content built to perform. Short-form ads, UGC video, cinematic brand content — engineered for the scroll, built to convert.</p>
+                <a href="mailto:hello@princesslight.com?subject=Video%20Ads%20Inquiry" class="track-b-cta">→ Send us the brief<span style="display:block;font-size:0.75rem;font-weight:400;opacity:0.85;margin-top:3px;">hello@princesslight.com</span></a>
+            </div>
+
+            <!-- VIDEO CARD 1 -->
+            <div class="video-card">
+                <span class="vid-label">Spec Commercial — Craft Beverage</span>
+                <strong>La Piazza Pilsner — Luppolo Brewing</strong>
+                <p>Built in 20 minutes from one product photo. No crew. No studio. No budget. Cinematic quality that a small brand couldn't afford to shoot — until now.</p>
+                <!-- REPLACE BELOW: paste Instagram embed or video src URL -->
+                <video autoplay muted loop playsinline controls style="width:100%;display:block;margin-top:10px;background:#2a2a2a;">
+                    <source src="luppolo.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- VIDEO CARD 2 -->
+            <div class="video-card">
+                <span class="vid-label">Local Service Brand — Video Ad</span>
+                <strong>Butterfly Cleaning Company</strong>
+                <p>Started with a logo and a colour palette. Ended with a full video ad — branded characters, real-feeling story, hook-driven and ready to post. No shoot day. No editing suite.</p>
+                <!-- REPLACE BELOW -->
+                <video autoplay muted loop playsinline controls style="width:100%;display:block;margin-top:10px;background:#2a2a2a;">
+                    <source src="butterfly.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- VIDEO CARD 3 -->
+            <div class="video-card">
+                <span class="vid-label">Single Release Pack — Music / Artist Marketing</span>
+                <strong>KAIRA · Slow Burn</strong>
+                <p>One creative brief. Eleven assets. Fourteen days of content. One production pass. This is what a campaign looks like when the brief is built right.</p>
+                <!-- REPLACE BELOW -->
+                <video autoplay muted loop playsinline controls style="width:100%;display:block;margin-top:10px;background:#2a2a2a;">
+                    <source src="kaira.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <div class="track-b-close">
+                <p>Surrey to the world. 🇨🇦 🌍</p>
+                <p class="sub">Local. National. International. If you have a product and a brief, we can work together.</p>
+                <a href="mailto:hello@princesslight.com?subject=Video%20Inquiry">→ Let's talk video<span style="display:block;font-size:0.78rem;font-weight:400;opacity:0.8;margin-top:3px;">hello@princesslight.com</span></a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Human contact panel -->
+    <div class="plm-contact-panel" id="plm-contact-panel" aria-hidden="true">
+        <h3>What's driving you crazy?</h3>
+        <p>Tell us what's messy, repetitive, or eating your week. You'll reach a real person who can help you sort it out.</p>
+        <a class="plm-contact-action" href="tel:+17782380206">☎ Call 778-238-0206</a>
+        <a class="plm-contact-action" href="mailto:hello@princesslight.com?subject=Help%20with%20my%20business">✉ Email us<span style="display:block;font-size:0.75rem;font-weight:400;opacity:0.7;margin-top:2px;">hello@princesslight.com</span></a>
+        <a class="plm-contact-action" href="book_a_call_page.html">→ Book a quick call</a>
+        <span class="plm-contact-small">No bots. No runaround. Just a straightforward conversation.</span>
+        <div class="plm-social-links" aria-label="Princess Light Media social media">
+            <a href="https://www.linkedin.com/in/princesslight/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/princesslightmedia" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/princesslightmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+    </div>
+    <button class="plm-contact-launcher" id="plm-contact-launcher" type="button" aria-expanded="false" aria-controls="plm-contact-panel">Tell Us What's Driving You Crazy →</button>
+
+    <script>
+        (() => {
+            const launcher = document.getElementById('plm-contact-launcher');
+            const panel = document.getElementById('plm-contact-panel');
+            if (!launcher || !panel) return;
+            const closePanel = () => {
+                panel.classList.remove('plm-open');
+                panel.setAttribute('aria-hidden', 'true');
+                launcher.setAttribute('aria-expanded', 'false');
+            };
+            launcher.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isOpen = panel.classList.toggle('plm-open');
+                panel.setAttribute('aria-hidden', String(!isOpen));
+                launcher.setAttribute('aria-expanded', String(isOpen));
+            });
+            panel.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+        })();
+    </script>
+
+</body>
+</html>
