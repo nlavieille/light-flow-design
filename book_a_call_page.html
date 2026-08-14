@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better Systems for Hair Salons</title>
+	<link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+<style>
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 2px;
+        }
+
+        .back-btn:hover {
+            border-bottom-style: solid;
+        }
+
+        header {
+            border: 3px solid #2a2a2a;
+            padding: 30px;
+            background: #ffd4e5;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(-1.5deg);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            transform: rotate(1deg);
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        .intro {
+            background: #fff;
+            padding: 25px;
+            border: 2px dashed #2a2a2a;
+            margin-bottom: 30px;
+            transform: rotate(0.5deg);
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .problem-box {
+            background: #ffe8d6;
+            padding: 20px;
+            border-left: 5px solid #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(-0.8deg);
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1rem;
+        }
+
+        .feature {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            position: relative;
+        }
+
+        .feature:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            box-shadow: 5px 5px 0 #e8d4f8;
+        }
+
+        .feature:nth-child(even) {
+            transform: rotate(0.5deg);
+            box-shadow: 5px 5px 0 #d4f8e8;
+        }
+
+        .feature strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-decoration: underline wavy #2a2a2a;
+        }
+
+        .feature strong::before {
+            content: "→ ";
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        .callout {
+            background: #e8f4f8;
+            padding: 20px;
+            border: 3px dashed #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(1deg);
+            box-shadow: 6px 6px 0 #c9a9e8;
+        }
+
+        .bottom-note {
+            font-style: italic;
+            opacity: 0.7;
+            padding: 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            transform: rotate(-0.5deg);
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            header, .intro, .feature, .callout {
+                padding: 15px;
+            }
+        }
+</style>
+<style>
+
+        /* Princess Light Media: simple human contact widget */
+        .plm-contact-launcher {
+            position: fixed;
+            right: 20px;
+            bottom: 24px;
+            z-index: 9999;
+            border: 3px solid #2a2a2a;
+            background: #fff3cd;
+            color: #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            padding: 13px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transform: rotate(-0.8deg);
+            max-width: calc(100vw - 40px);
+        }
+        .plm-contact-launcher:hover,
+        .plm-contact-launcher:focus-visible {
+            transform: rotate(0deg) translateY(-2px);
+            outline: none;
+        }
+        .plm-contact-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 88px;
+            z-index: 9998;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            padding: 20px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 3px dashed #2a2a2a;
+            box-shadow: 8px 8px 0 #d4af37;
+            display: none;
+            transform: rotate(0.5deg);
+        }
+        .plm-contact-panel.plm-open { display: block; }
+        .plm-contact-panel h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px;
+            letter-spacing: -0.5px;
+        }
+        .plm-contact-panel p {
+            margin: 0 0 15px;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+        .plm-contact-action {
+            display: block;
+            margin-top: 10px;
+            padding: 11px 12px;
+            border: 2px solid #2a2a2a;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+        .plm-contact-action:hover,
+        .plm-contact-action:focus-visible {
+            background: #fff3cd;
+            outline: none;
+        }
+        .plm-contact-small {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.76rem;
+            opacity: 0.72;
+        }
+        .direct-contact-options {
+            display: grid;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .direct-contact-options a {
+            display: block;
+            padding: 14px 16px;
+            background: #fff3cd;
+            border: 2px solid #2a2a2a;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 #d4af37;
+        }
+        .direct-contact-options a:hover { transform: translateY(-1px); }
+        @media (max-width: 600px) {
+            .plm-contact-launcher { right: 12px; bottom: 14px; font-size: 0.82rem; }
+            .plm-contact-panel { right: 12px; bottom: 76px; max-width: calc(100vw - 24px); }
+        }
+
+    
+        /* Princess Light Media social links */
+        .plm-social-links { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin:18px 0 8px; }
+        .plm-social-links a { display:inline-block; padding:8px 11px; background:#fff; color:#2a2a2a; border:2px solid #2a2a2a; text-decoration:none; font-weight:700; font-size:.82rem; box-shadow:3px 3px 0 #d4af37; }
+        .plm-social-links a:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 #d4af37; }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <h2>Quick 15-Minute Call to See What We Can Take Off Your Plate</h2>
+            <h3><br>Pick the easiest way to reach us.<br>You'll deal with a real person 👍</h3>
+            <p><br><i>No sales pressure — just a quick look at what's messy, repetitive, or costing you time.</i></p>
+        </header>
+
+        <div class="intro">
+            <p><strong>Keep it simple.</strong></p>
+            <p>Call us if you want to talk now, or email us to set up a time that works for you.</p>
+            <p>This quick conversation can cover:<br>✓ Missed calls / booking gaps<br>✓ Repetitive admin that eats your week<br>✓ Website, follow-up, content, or marketing bottlenecks<br>✓ Whether there's a sensible way to streamline it</p>
+            <div class="direct-contact-options">
+                <a href="tel:+17782380206">☎ Call 778-238-0206</a>
+                <a href="mailto:hello@princesslight.com?subject=Book%20a%2015-minute%20call&body=Hi%20Princess%20Light%20Media%2C%0A%0AI%27d%20like%20to%20book%20a%20quick%2015-minute%20call.%0A%0AThe%20main%20thing%20driving%20me%20crazy%20is%3A%20">✉ Email to book a time</a>
+            </div>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+    </div>
+
+    <!-- Human contact panel -->
+    <div class="plm-contact-panel" id="plm-contact-panel" aria-hidden="true">
+        <h3>Want to talk?</h3>
+        <p>Pick the easiest way to reach us. You'll deal with a real person.</p>
+        <a class="plm-contact-action" href="tel:+17782380206">☎ Call 778-238-0206</a>
+        <a class="plm-contact-action" href="mailto:hello@princesslight.com?subject=Book%20a%2015-minute%20call">✉ Email to schedule</a>
+        <span class="plm-contact-small">No bots. No runaround. Just a straightforward conversation.</span>
+    
+        <div class="plm-social-links" aria-label="Princess Light Media social media">
+            <a href="https://www.linkedin.com/in/princesslight/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/princesslightmedia" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/princesslightmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+
+</div>
+    <button class="plm-contact-launcher" id="plm-contact-launcher" type="button" aria-expanded="false" aria-controls="plm-contact-panel">Call or Email Us →</button>
+
+    <script>
+        (() => {
+            const launcher = document.getElementById('plm-contact-launcher');
+            const panel = document.getElementById('plm-contact-panel');
+            if (!launcher || !panel) return;
+            const closePanel = () => {
+                panel.classList.remove('plm-open');
+                panel.setAttribute('aria-hidden', 'true');
+                launcher.setAttribute('aria-expanded', 'false');
+            };
+            launcher.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isOpen = panel.classList.toggle('plm-open');
+                panel.setAttribute('aria-hidden', String(!isOpen));
+                launcher.setAttribute('aria-expanded', String(isOpen));
+            });
+            panel.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+        })();
+    </script>
+
+</body>
+</html>
