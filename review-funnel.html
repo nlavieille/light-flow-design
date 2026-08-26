@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How was your visit?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     PER-CLIENT CONFIG — edit these 6 lines for each business,
+     nothing else in the CSS/JS needs to change.
+     ============================================================ */
+  :root{
+    --ink:#20362E;        /* chalkboard green — primary text/surface */
+    --paper:#F1EEE6;      /* warm paper background */
+    --chalk:#F6F3EC;      /* chalk white for lines/text on dark */
+    --brass:#B8863E;      /* accent — CTA, stars, highlights */
+    --brass-soft:#DDBE8A;
+    --line:#3A5346;
+  }
+</style>
+</head>
+<body>
+
+<script>
+  // ============================================================
+  // PER-CLIENT CONFIG — this is the only block you edit per business.
+  // ============================================================
+  const CONFIG = {
+    businessName: "Spaw Patrol Dog Grooming",     // shown on the sign
+    initial: "SP",                                 // shown in the little badge, 1-2 letters
+    googleReviewUrl: "https://g.page/r/REPLACE_WITH_PLACE_REVIEW_LINK/review",
+    // Where "not great" feedback goes. Simplest default: owner's email via mailto.
+    // Swap this for a real endpoint (Formspree, Google Apps Script Web App,
+    // a Twilio Function, etc.) once you're running this for real — see
+    // the submitFeedback() function below for exactly where to change it.
+    ownerEmail: "owner@example.com"
+  };
+</script>
+
+<div class="wrap">
+  <div class="sign" id="sign">
+
+    <!-- STEP 1: rating -->
+    <section class="step" id="step-rate" data-active="true">
+      <div class="badge" id="badge"></div>
+      <p class="eyebrow">a quick one from</p>
+      <h1 class="biz" id="bizName"></h1>
+      <p class="question">How was your visit?</p>
+
+      <div class="faces">
+        <button class="face-btn" data-rating="great" aria-label="Great">
+          <svg viewBox="0 0 100 100" class="face">
+            <circle cx="50" cy="50" r="44" class="face-ring"/>
+            <path d="M30 40 Q34 34 38 40" class="face-line"/>
+            <path d="M62 40 Q66 34 70 40" class="face-line"/>
+            <path d="M28 60 Q50 82 72 60" class="face-line thick"/>
+          </svg>
+          <span>Great</span>
+        </button>
+        <button class="face-btn" data-rating="okay" aria-label="Okay">
+          <svg viewBox="0 0 100 100" class="face">
+            <circle cx="50" cy="50" r="44" class="face-ring"/>
+            <path d="M30 40 Q34 34 38 40" class="face-line"/>
+            <path d="M62 40 Q66 34 70 40" class="face-line"/>
+            <path d="M30 64 L70 64" class="face-line thick"/>
+          </svg>
+          <span>Okay</span>
+        </button>
+        <button class="face-btn" data-rating="rough" aria-label="Not great">
+          <svg viewBox="0 0 100 100" class="face">
+            <circle cx="50" cy="50" r="44" class="face-ring"/>
+            <path d="M30 40 Q34 34 38 40" class="face-line"/>
+            <path d="M62 40 Q66 34 70 40" class="face-line"/>
+            <path d="M28 68 Q50 46 72 68" class="face-line thick"/>
+          </svg>
+          <span>Not great</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- STEP 2a: great -> redirecting to google -->
+    <section class="step" id="step-great">
+      <div class="stars" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
+      </div>
+      <p class="thanks-big">That's what we like to hear.</p>
+      <p class="sub" id="greatSub">Taking you to leave a Google review\u2026</p>
+      <a class="cta" id="greatLink" href="#" target="_blank" rel="noopener">Leave a review now</a>
+    </section>
+
+    <!-- STEP 2b: okay/rough -> private feedback -->
+    <section class="step" id="step-feedback">
+      <p class="eyebrow">this stays between us</p>
+      <h2 class="fb-title">What could've gone better?</h2>
+      <form id="fbForm">
+        <textarea id="fbMessage" placeholder="Tell us what happened \u2014 we read every one of these ourselves." rows="4" required></textarea>
+        <input type="text" id="fbName" placeholder="Your name (optional)">
+        <input type="tel" id="fbPhone" placeholder="Phone, if you'd like a call back (optional)">
+        <button type="submit" class="cta cta-dark">Send feedback</button>
+      </form>
+    </section>
+
+    <!-- STEP 2b confirm -->
+    <section class="step" id="step-fb-done">
+      <p class="thanks-big">Got it \u2014 thank you.</p>
+      <p class="sub">We'll follow up personally. We appreciate you telling us instead of just walking away.</p>
+    </section>
+
+  </div>
+  <p class="footer" id="footer"></p>
+</div>
+
+<style>
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(184,134,62,0.10), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(32,54,46,0.06), transparent 45%);
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Manrope', sans-serif;
+    padding:24px;
+  }
+  .wrap{width:100%; max-width:420px;}
+  .sign{
+    background:var(--ink);
+    border-radius:22px;
+    padding:40px 28px 34px;
+    box-shadow:0 24px 60px -20px rgba(32,54,46,0.55), 0 2px 0 rgba(255,255,255,0.03) inset;
+    position:relative;
+    overflow:hidden;
+    color:var(--chalk);
+  }
+  .sign::before{
+    /* chalk dust / board texture */
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:3px 3px;
+    pointer-events:none;
+  }
+  .step{display:none; text-align:center; position:relative; z-index:1;}
+  .step[data-active="true"]{display:block; animation:fadeUp .5s ease;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .badge{
+    width:44px; height:44px; margin:0 auto 18px;
+    border:1.5px solid var(--brass-soft);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px; letter-spacing:0.5px;
+    color:var(--brass-soft);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--brass-soft); opacity:0.85; margin:0 0 6px;
+  }
+  .biz{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    font-size:38px;
+    line-height:1.05;
+    margin:0 0 18px;
+    color:var(--chalk);
+  }
+  .question{
+    font-size:19px; font-weight:600; margin:0 0 28px; color:var(--chalk);
+  }
+
+  .faces{display:flex; gap:10px; justify-content:center;}
+  .face-btn{
+    background:rgba(246,243,236,0.04);
+    border:1.5px solid var(--line);
+    border-radius:16px;
+    padding:16px 10px 12px;
+    flex:1;
+    cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+    font-family:'Manrope', sans-serif;
+    color:var(--chalk);
+  }
+  .face-btn:hover{transform:translateY(-2px); border-color:var(--brass-soft); background:rgba(184,134,62,0.08);}
+  .face-btn:active{transform:translateY(0) scale(0.98);}
+  .face{width:40px; height:40px;}
+  .face-ring{fill:none; stroke:var(--chalk); stroke-width:3; opacity:0.9;}
+  .face-line{fill:none; stroke:var(--chalk); stroke-width:3; stroke-linecap:round;}
+  .face-line.thick{stroke-width:3.5;}
+  .face-btn span{font-size:13px; font-weight:600;}
+
+  .stars svg{width:34px; height:34px; fill:var(--brass); margin:0 auto 14px; display:block;}
+  .stars{margin-top:4px;}
+  .thanks-big{font-family:'Caveat', cursive; font-weight:700; font-size:30px; margin:0 0 8px; color:var(--chalk);}
+  .sub{font-size:14px; color:var(--brass-soft); margin:0 0 22px; line-height:1.5;}
+
+  .cta{
+    display:inline-block;
+    background:var(--brass);
+    color:var(--ink);
+    font-weight:700;
+    font-size:15px;
+    text-decoration:none;
+    padding:13px 26px;
+    border-radius:12px;
+    border:none;
+    cursor:pointer;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  .cta:hover{filter:brightness(1.06); transform:translateY(-1px);}
+  .cta-dark{width:100%; margin-top:14px;}
+
+  .fb-title{font-size:19px; font-weight:700; margin:0 0 20px; color:var(--chalk);}
+  #fbForm{display:flex; flex-direction:column; gap:10px; text-align:left;}
+  #fbForm textarea, #fbForm input{
+    background:rgba(246,243,236,0.05);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    color:var(--chalk);
+    font-family:'Manrope', sans-serif;
+    font-size:14px;
+    resize:none;
+  }
+  #fbForm textarea::placeholder, #fbForm input::placeholder{color:rgba(246,243,236,0.4);}
+  #fbForm textarea:focus, #fbForm input:focus{outline:none; border-color:var(--brass);}
+
+  .footer{
+    text-align:center; font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:1px; color:var(--ink); opacity:0.35;
+    margin-top:16px; text-transform:uppercase;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .step[data-active="true"]{animation:none;}
+  }
+</style>
+
+<script>
+  // Fill in config-driven content
+  document.getElementById('bizName').textContent = CONFIG.businessName;
+  document.getElementById('badge').textContent = CONFIG.initial;
+  document.getElementById('footer').textContent = CONFIG.businessName;
+  document.getElementById('greatLink').href = CONFIG.googleReviewUrl;
+
+  const steps = {
+    rate: document.getElementById('step-rate'),
+    great: document.getElementById('step-great'),
+    feedback: document.getElementById('step-feedback'),
+    fbDone: document.getElementById('step-fb-done'),
+  };
+
+  function showStep(name){
+    Object.values(steps).forEach(s => s.removeAttribute('data-active'));
+    steps[name].setAttribute('data-active', 'true');
+  }
+
+  document.querySelectorAll('.face-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const rating = btn.dataset.rating;
+      if(rating === 'great'){
+        showStep('great');
+        // small delay so the "taking you to..." moment registers,
+        // then open the Google review link. Remove the timeout and
+        // just let them tap the button if you'd rather not auto-redirect.
+        setTimeout(() => { window.open(CONFIG.googleReviewUrl, '_blank'); }, 1400);
+      } else {
+        showStep('feedback');
+      }
+    });
+  });
+
+  document.getElementById('fbForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitFeedback({
+      message: document.getElementById('fbMessage').value,
+      name: document.getElementById('fbName').value,
+      phone: document.getElementById('fbPhone').value,
+    });
+    showStep('fbDone');
+  });
+
+  function submitFeedback(data){
+    // ------------------------------------------------------------
+    // DEFAULT: opens a pre-filled email to the owner. Works with zero
+    // backend, but requires the customer's device to have a mail app
+    // configured, and you won't get a record of it automatically.
+    //
+    // TO GO LIVE FOR REAL: replace this whole function body with a
+    // fetch() to a real endpoint instead, e.g.:
+    //
+    //   fetch('https://formspree.io/f/XXXXXXX', {
+    //     method: 'POST',
+    //     headers: {'Content-Type':'application/json'},
+    //     body: JSON.stringify({ business: CONFIG.businessName, ...data })
+    //   });
+    //
+    // (Formspree free tier, a Google Apps Script Web App tied to a
+    // Sheet, or a tiny Twilio Function that also texts you the
+    // feedback are all one-afternoon builds.)
+    // ------------------------------------------------------------
+    const subject = encodeURIComponent(`Private feedback \u2014 ${CONFIG.businessName}`);
+    const body = encodeURIComponent(
+      `Rating: not great / okay\nName: ${data.name || '(not given)'}\nPhone: ${data.phone || '(not given)'}\n\nMessage:\n${data.message}`
+    );
+    window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
+  }
+</script>
+
+</body>
+</html>
