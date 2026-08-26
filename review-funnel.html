@@ -24,12 +24,20 @@
 <body>
 
 <script>
-const CONFIG = {
-  businessName: "Spaw Patrol Dog Grooming",
-  initial: "SP",
-  googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJMywfpG7XhVQRYEeoEedWPqM",
-  ownerEmail: "test@princesslight.com"
-};
+  // ============================================================
+  // PER-CLIENT CONFIG — this is the only block you edit per business.
+  // ============================================================
+  const CONFIG = {
+    businessName: "Spaw Patrol Dog Grooming",     // shown on the sign
+    initial: "SP",                                 // shown in the little badge, 1-2 letters
+    googleReviewUrl: "https://g.page/r/REPLACE_WITH_PLACE_REVIEW_LINK/review",
+    // Where "not great" feedback gets written — a free Google Sheet via a
+    // Google Apps Script Web App. See SETUP_GUIDE.md for the 5-minute setup
+    // (paste one script, deploy, paste the URL here). Leave as-is and it
+    // falls back to a mailto: link to ownerEmail instead.
+    feedbackEndpoint: "https://script.google.com/macros/s/AKfycbxwLxd_Hul79vfGkaWdNxds96sEr6bgdrKo4-smlxh9B_OpvNs3trs0D7T3zVkoNCs_yg/exec", // e.g. https://script.google.com/macros/s/XXXX/exec
+    ownerEmail: "owner@example.com" // used only as the mailto: fallback
+  };
 </script>
 
 <div class="wrap">
@@ -79,7 +87,7 @@ const CONFIG = {
         <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7L2 9.2l7.1-.6L12 2z"/></svg>
       </div>
       <p class="thanks-big">That's what we like to hear.</p>
-      <p class="sub" id="greatSub">Taking you to leave a Google review\u2026</p>
+      <p class="sub" id="greatSub">Taking you to leave a Google review…</p>
       <a class="cta" id="greatLink" href="#" target="_blank" rel="noopener">Leave a review now</a>
     </section>
 
@@ -88,7 +96,7 @@ const CONFIG = {
       <p class="eyebrow">this stays between us</p>
       <h2 class="fb-title">What could've gone better?</h2>
       <form id="fbForm">
-        <textarea id="fbMessage" placeholder="Tell us what happened \u2014 we read every one of these ourselves." rows="4" required></textarea>
+        <textarea id="fbMessage" placeholder="Tell us what happened — we read every one of these ourselves." rows="4" required></textarea>
         <input type="text" id="fbName" placeholder="Your name (optional)">
         <input type="tel" id="fbPhone" placeholder="Phone, if you'd like a call back (optional)">
         <button type="submit" class="cta cta-dark">Send feedback</button>
@@ -97,7 +105,7 @@ const CONFIG = {
 
     <!-- STEP 2b confirm -->
     <section class="step" id="step-fb-done">
-      <p class="thanks-big">Got it \u2014 thank you.</p>
+      <p class="thanks-big">Got it — thank you.</p>
       <p class="sub">We'll follow up personally. We appreciate you telling us instead of just walking away.</p>
     </section>
 
@@ -269,9 +277,12 @@ const CONFIG = {
     });
   });
 
-  document.getElementById('fbForm').addEventListener('submit', (e) => {
+  document.getElementById('fbForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    submitFeedback({
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending\u2026';
+    await submitFeedback({
       message: document.getElementById('fbMessage').value,
       name: document.getElementById('fbName').value,
       phone: document.getElementById('fbPhone').value,
@@ -279,28 +290,42 @@ const CONFIG = {
     showStep('fbDone');
   });
 
-  function submitFeedback(data){
-    // ------------------------------------------------------------
-    // DEFAULT: opens a pre-filled email to the owner. Works with zero
-    // backend, but requires the customer's device to have a mail app
-    // configured, and you won't get a record of it automatically.
-    //
-    // TO GO LIVE FOR REAL: replace this whole function body with a
-    // fetch() to a real endpoint instead, e.g.:
-    //
-    //   fetch('https://formspree.io/f/XXXXXXX', {
-    //     method: 'POST',
-    //     headers: {'Content-Type':'application/json'},
-    //     body: JSON.stringify({ business: CONFIG.businessName, ...data })
-    //   });
-    //
-    // (Formspree free tier, a Google Apps Script Web App tied to a
-    // Sheet, or a tiny Twilio Function that also texts you the
-    // feedback are all one-afternoon builds.)
-    // ------------------------------------------------------------
+  async function submitFeedback(data){
+    const hasEndpoint = CONFIG.feedbackEndpoint && !CONFIG.feedbackEndpoint.startsWith('REPLACE_');
+
+    if (hasEndpoint){
+      // Writes a row straight into a free Google Sheet via a Google Apps
+      // Script Web App \u2014 no paid service, nothing to host. Setup steps
+      // are in SETUP_GUIDE.md. Apps Script Web Apps don't send back CORS
+      // headers, so we POST with mode:'no-cors' \u2014 the request still
+      // lands and the row still gets written, we just can't read a
+      // response, which is fine since we're not displaying the result.
+      try {
+        await fetch(CONFIG.feedbackEndpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {'Content-Type': 'text/plain'}, // avoids a CORS preflight
+          body: JSON.stringify({
+            business: CONFIG.businessName,
+            name: data.name || '',
+            phone: data.phone || '',
+            message: data.message,
+            timestamp: new Date().toISOString()
+          })
+        });
+        return;
+      } catch (err) {
+        // network hiccup \u2014 fall through to the mailto backup below so
+        // the feedback still reaches someone instead of vanishing.
+      }
+    }
+
+    // Fallback (also used if no endpoint is configured yet): open a
+    // pre-filled email to the owner. Zero setup, but needs the customer's
+    // device to have a mail app configured.
     const subject = encodeURIComponent(`Private feedback \u2014 ${CONFIG.businessName}`);
     const body = encodeURIComponent(
-      `Rating: not great / okay\nName: ${data.name || '(not given)'}\nPhone: ${data.phone || '(not given)'}\n\nMessage:\n${data.message}`
+      `Name: ${data.name || '(not given)'}\nPhone: ${data.phone || '(not given)'}\n\nMessage:\n${data.message}`
     );
     window.location.href = `mailto:${CONFIG.ownerEmail}?subject=${subject}&body=${body}`;
   }
