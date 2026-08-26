@@ -24,19 +24,12 @@
 <body>
 
 <script>
-  // ============================================================
-  // PER-CLIENT CONFIG — this is the only block you edit per business.
-  // ============================================================
-  const CONFIG = {
-    businessName: "Spaw Patrol Dog Grooming",     // shown on the sign
-    initial: "SP",                                 // shown in the little badge, 1-2 letters
-    googleReviewUrl: "https://g.page/r/REPLACE_WITH_PLACE_REVIEW_LINK/review",
-    // Where "not great" feedback goes. Simplest default: owner's email via mailto.
-    // Swap this for a real endpoint (Formspree, Google Apps Script Web App,
-    // a Twilio Function, etc.) once you're running this for real — see
-    // the submitFeedback() function below for exactly where to change it.
-    ownerEmail: "owner@example.com"
-  };
+const CONFIG = {
+  businessName: "Spaw Patrol Dog Grooming",
+  initial: "SP",
+  googleReviewUrl: "https://search.google.com/local/writereview?placeid=ChIJMywfpG7XhVQRYEeoEedWPqM",
+  ownerEmail: "REPLACE_ME"
+};
 </script>
 
 <div class="wrap">
