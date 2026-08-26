@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps & Local Search Optimization — Princess Light Media</title>
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.7;
+        }
+
+        .container { max-width: 480px; margin: 0 auto; }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: #2a2a2a;
+            text-decoration: none;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 2px;
+        }
+        .back-btn:hover { border-bottom-style: solid; }
+
+        /* HEADER */
+        header {
+            border: 3px solid #2a2a2a;
+            padding: 30px;
+            background: #fff3cd;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(-1deg);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            transform: rotate(0.5deg);
+            display: block;
+        }
+
+        .header-sub {
+            font-size: 1rem;
+            opacity: 0.8;
+            border-top: 2px wavy #2a2a2a;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .scissors {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+
+        /* QUICK CTA */
+        .quick-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0 0;
+        }
+
+        .quick-cta a {
+            display: block;
+            padding: 13px 16px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.95rem;
+            border: 2px solid #2a2a2a;
+            transition: all 0.15s ease;
+        }
+
+        .quick-cta a:first-child {
+            background: #d4af37;
+            color: #2a2a2a;
+            transform: rotate(-0.5deg);
+            box-shadow: 4px 4px 0 #2a2a2a;
+        }
+
+        .quick-cta a:last-child {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            transform: rotate(0.5deg);
+            box-shadow: 4px 4px 0 #d4af37;
+        }
+
+        .quick-cta a:hover {
+            transform: rotate(0deg) translateY(-2px);
+        }
+
+        .quick-cta a span {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        /* PACKAGE CARDS */
+        .package-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0 0 10px;
+        }
+
+        .package-card {
+            padding: 22px;
+            border: 3px solid #2a2a2a;
+            background: #fff;
+        }
+
+        .package-card:first-child {
+            transform: rotate(-0.8deg);
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        .package-card:last-child {
+            transform: rotate(0.8deg);
+            box-shadow: 6px 6px 0 #c9a9e8;
+            border-style: dashed;
+        }
+
+        .pkg-badge {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 900;
+            background: #2a2a2a;
+            color: #d4af37;
+            display: inline-block;
+            padding: 3px 8px;
+            margin-bottom: 10px;
+        }
+
+        .package-card strong {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            border-bottom: 2px wavy #2a2a2a;
+            padding-bottom: 6px;
+        }
+
+        .package-card > p {
+            font-size: 0.92rem;
+            opacity: 0.85;
+            margin-bottom: 12px;
+        }
+
+        .package-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .package-card ul li {
+            font-size: 0.88rem;
+            padding: 3px 0;
+            font-weight: 700;
+        }
+
+        .pkg-note {
+            font-size: 0.78rem !important;
+            font-style: italic;
+            opacity: 0.65 !important;
+            margin-bottom: 0 !important;
+        }
+
+        /* IMAGES */
+        .maps-hero-img {
+            width: 100%;
+            display: block;
+            border: 3px solid #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            transform: rotate(-0.5deg);
+            margin-bottom: 30px;
+        }
+
+        .adminbusters-stamp {
+            display: block;
+            width: 120px;
+            margin: 0 auto 0 0;
+            transform: rotate(2deg);
+            opacity: 0.92;
+        }
+
+        .stamp-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #fff;
+            border: 2px dashed #2a2a2a;
+            padding: 16px 20px;
+            margin: 30px 0;
+            transform: rotate(0.4deg);
+            box-shadow: 4px 4px 0 #d4af37;
+        }
+
+        .stamp-row p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* PROBLEM BOX */
+        .problem-box {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            padding: 22px;
+            border: 3px solid #d4af37;
+            margin: 30px 0;
+            transform: rotate(1deg);
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.1rem;
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        /* MOCK GOOGLE CARD — the signature element */
+        .google-map-mock {
+            background: #fff;
+            border: 2px solid #dadce0;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 30px 0;
+            transform: rotate(-0.5deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12), 5px 5px 0 #d4af37;
+            font-family: Arial, sans-serif;
+        }
+
+        .mock-label {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .mock-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .mock-listing {
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            line-height: 1.4;
+        }
+
+        .mock-bad {
+            background: #fff3cd;
+            border: 1.5px solid #f0ad4e;
+        }
+
+        .mock-good {
+            background: #d4edda;
+            border: 1.5px solid #28a745;
+        }
+
+        .mock-biz-name {
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+            color: #1a0dab;
+        }
+
+        .mock-rating { color: #f5a623; margin-bottom: 3px; }
+        .mock-detail { color: #555; margin-bottom: 2px; }
+        .mock-missing { color: #c0392b; font-style: italic; }
+        .mock-present { color: #27ae60; }
+
+        .mock-verdict {
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            font-weight: 900;
+            margin-top: 6px;
+            padding: 4px;
+            border-radius: 3px;
+        }
+
+        .mock-bad .mock-verdict { background: #f0ad4e; color: #2a2a2a; }
+        .mock-good .mock-verdict { background: #28a745; color: #fff; }
+
+        /* INTRO */
+        .intro {
+            background: #fff;
+            padding: 25px;
+            border: 2px dashed #2a2a2a;
+            margin-bottom: 30px;
+            transform: rotate(0.5deg);
+        }
+        .intro p { margin-bottom: 14px; font-size: 1rem; }
+        .intro p:last-child { margin-bottom: 0; }
+
+        /* PHASE HEADER */
+        .phase-header {
+            background: #2a2a2a;
+            color: #d4af37;
+            padding: 10px 16px;
+            font-size: 0.78rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 900;
+            transform: rotate(-0.5deg);
+            margin: 30px 0 0 0;
+            border: 2px solid #d4af37;
+        }
+
+        /* STEPS */
+        .step {
+            margin-bottom: 16px;
+            padding: 18px 20px;
+            background: #fff;
+            border: 2px solid #2a2a2a;
+            position: relative;
+        }
+
+        .step:nth-child(odd) {
+            transform: rotate(-0.5deg);
+            box-shadow: 4px 4px 0 #d4af37;
+            border-style: solid;
+        }
+
+        .step:nth-child(even) {
+            transform: rotate(0.5deg);
+            box-shadow: 4px 4px 0 #c9a9e8;
+            border-style: dashed;
+        }
+
+        .step-num {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.45;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .step strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+            border-bottom: 2px wavy #2a2a2a;
+            padding-bottom: 4px;
+        }
+
+        .step strong::before { content: "→ "; }
+
+        .step p { font-size: 0.92rem; opacity: 0.82; }
+
+        /* ONGOING NOTE */
+        .ongoing-note {
+            background: #e8f4f8;
+            padding: 20px;
+            border: 3px dashed #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(1deg);
+            box-shadow: 5px 5px 0 #c9a9e8;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 0.95rem;
+        }
+
+        /* WHAT YOU GET */
+        .callout {
+            background: #fff3cd;
+            padding: 22px;
+            border: 3px solid #2a2a2a;
+            margin: 30px 0;
+            transform: rotate(-1deg);
+            box-shadow: 6px 6px 0 #d4af37;
+        }
+
+        .callout strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .callout ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .callout ul li {
+            padding: 4px 0;
+            font-size: 0.95rem;
+        }
+
+        .callout ul li::before { content: "✓ "; font-weight: 900; }
+
+        /* CTA */
+        .cta-block {
+            background: #2a2a2a;
+            color: #f5f1e8;
+            padding: 28px;
+            border: 3px solid #d4af37;
+            box-shadow: 8px 8px 0 #d4af37;
+            transform: rotate(0.8deg);
+            margin: 40px 0 30px;
+            text-align: center;
+        }
+
+        .cta-block p {
+            font-size: 1rem;
+            margin-bottom: 18px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .cta-block strong {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+            color: #fff3cd;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 13px 18px;
+            background: #d4af37;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.95rem;
+            width: 100%;
+            transition: all 0.15s ease;
+            margin-bottom: 10px;
+        }
+
+        .cta-btn:hover {
+            background: #c9a020;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 #fff3cd;
+        }
+
+        .cta-btn-secondary {
+            display: inline-block;
+            padding: 13px 18px;
+            background: transparent;
+            color: #f5f1e8;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.95rem;
+            width: 100%;
+            border: 2px solid #d4af37;
+            transition: all 0.15s ease;
+        }
+
+        .cta-btn-secondary:hover {
+            background: #d4af37;
+            color: #2a2a2a;
+            transform: translateY(-2px);
+        }
+
+        .cta-email-sub {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-top: 3px;
+        }
+
+        /* BOTTOM NOTE */
+        .bottom-note {
+            font-style: italic;
+            opacity: 0.7;
+            padding: 18px;
+            background: #fff;
+            border: 2px dashed #2a2a2a;
+            transform: rotate(-0.5deg);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* CONTACT WIDGET */
+        .plm-contact-launcher {
+            position: fixed;
+            right: 20px;
+            bottom: 24px;
+            z-index: 9999;
+            border: 3px solid #2a2a2a;
+            background: #fff3cd;
+            color: #2a2a2a;
+            box-shadow: 6px 6px 0 #d4af37;
+            padding: 13px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.92rem;
+            font-weight: 900;
+            cursor: pointer;
+            transform: rotate(-0.8deg);
+            max-width: calc(100vw - 40px);
+        }
+        .plm-contact-launcher:hover,
+        .plm-contact-launcher:focus-visible {
+            transform: rotate(0deg) translateY(-2px);
+            outline: none;
+        }
+        .plm-contact-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 88px;
+            z-index: 9998;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            padding: 20px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 3px dashed #2a2a2a;
+            box-shadow: 8px 8px 0 #d4af37;
+            display: none;
+            transform: rotate(0.5deg);
+        }
+        .plm-contact-panel.plm-open { display: block; }
+        .plm-contact-panel h3 { font-size: 1.2rem; margin: 0 0 8px; }
+        .plm-contact-panel p { margin: 0 0 15px; font-size: 0.9rem; line-height: 1.45; }
+        .plm-contact-action {
+            display: block;
+            margin-top: 10px;
+            padding: 11px 12px;
+            border: 2px solid #2a2a2a;
+            background: #f5f1e8;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-weight: 900;
+            line-height: 1.25;
+        }
+        .plm-contact-action:hover { background: #fff3cd; }
+        .plm-contact-small {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.76rem;
+            opacity: 0.72;
+        }
+        .plm-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 18px 0 8px;
+        }
+        .plm-social-links a {
+            display: inline-block;
+            padding: 8px 11px;
+            background: #fff;
+            color: #2a2a2a;
+            border: 2px solid #2a2a2a;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .82rem;
+            box-shadow: 3px 3px 0 #d4af37;
+        }
+        .plm-social-links a:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #d4af37; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.9rem; }
+            .mock-compare { grid-template-columns: 1fr; }
+            .plm-contact-launcher { right: 12px; bottom: 14px; font-size: 0.82rem; }
+            .plm-contact-panel { right: 12px; bottom: 76px; max-width: calc(100vw - 24px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <a href="./index.html" class="back-btn">← Back to all services</a>
+
+        <header>
+            <h1>Your Google listing is either sending people to you — or sending them to your competitor.</h1>
+            <p class="header-sub">We fix the listing.</p>
+        </header>
+
+        <img
+            src="maps_hero.webp"
+            alt="A local business owner staring at her incomplete Google listing late at night — hours not set, no photos, zero reviews"
+            class="maps-hero-img"
+            width="900"
+        >
+
+        <div class="problem-box">
+            "When someone nearby searches for what you do, Google skips incomplete listings. They never see you. They call someone else."
+        </div>
+
+        <!-- MOCK GOOGLE COMPARISON — the signature element -->
+        <div class="google-map-mock">
+            <span class="mock-label">What Google sees — incomplete vs. complete</span>
+            <div class="mock-compare">
+                <div class="mock-listing mock-bad">
+                    <div class="mock-biz-name">Your Business</div>
+                    <div class="mock-rating">★★★★☆ (3)</div>
+                    <div class="mock-missing">✗ No hours listed</div>
+                    <div class="mock-missing">✗ No phone number</div>
+                    <div class="mock-missing">✗ No photos</div>
+                    <div class="mock-missing">✗ No description</div>
+                    <div class="mock-verdict">Gets skipped</div>
+                </div>
+                <div class="mock-listing mock-good">
+                    <div class="mock-biz-name">Your Business</div>
+                    <div class="mock-rating">★★★★☆ (3)</div>
+                    <div class="mock-present">✓ Open until 6pm</div>
+                    <div class="mock-present">✓ Call / Directions</div>
+                    <div class="mock-present">✓ 12 photos</div>
+                    <div class="mock-present">✓ Services listed</div>
+                    <div class="mock-verdict">Gets the call</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro">
+            <p>We know exactly what's broken and how to fix it. Two packages. Pick one.</p>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- PACKAGE OVERVIEW -->
+        <div class="package-cards">
+
+            <div class="package-card package-one">
+                <div class="pkg-badge">Package 1</div>
+                <strong>The One-Time Fix</strong>
+                <p>We clean up your Google listing once, properly. Steps 1–5. Flat fee. Done.</p>
+                <ul>
+                    <li>✓ Claim & verify your listing</li>
+                    <li>✓ Fix your name, address & phone</li>
+                    <li>✓ Set the right categories</li>
+                    <li>✓ Fill out every field</li>
+                    <li>✓ Add real photos</li>
+                </ul>
+            </div>
+
+            <div class="package-card package-two">
+                <div class="pkg-badge">Package 2</div>
+                <strong>Keep It Working</strong>
+                <p>Monthly management that keeps your listing active, answered, and ahead of competitors who went quiet.</p>
+                <ul>
+                    <li>✓ Review generation & responses</li>
+                    <li>✓ Weekly Google Posts</li>
+                    <li>✓ Q&amp;A monitoring</li>
+                </ul>
+                <p class="pkg-note">Includes Package 1 on first month.</p>
+            </div>
+
+        </div>
+
+        <div class="quick-cta">
+            <a href="tel:+17782380206">☎ Call 778-238-0206</a>
+            <a href="mailto:hello@princesslight.com?subject=Google%20Maps%20Audit">✉ Email us — free audit<span>hello@princesslight.com</span></a>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+        <div class="phase-header">Package 1 — The One-Time Fix</div>
+
+        <div class="step">
+            <span class="step-num">Step 1</span>
+            <strong>Claim & Verify Your Listing</strong>
+            <p>You can't edit what you don't own. We make sure you control the profile before anyone else edits it — including Google applying random suggestions from strangers.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 2</span>
+            <strong>Fix Your Name, Address & Phone</strong>
+            <p>These three must match exactly everywhere your business appears online. Mismatches — even small ones like "St" vs "Street" — actively hurt your ranking. We find them and fix them at the source.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 3</span>
+            <strong>Set the Right Categories</strong>
+            <p>The single biggest lever for showing up in the right searches. We pick the closest primary category and add every relevant secondary category — the ones most businesses miss entirely.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 4</span>
+            <strong>Fill Out Every Field</strong>
+            <p>Hours, holiday hours, service area, payment methods, services list, attributes. Google rewards completeness. A fully filled profile answers the customer's question before they even click.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 5</span>
+            <strong>Add Real Photos</strong>
+            <p>Exterior, interior, team, and your actual work. Listings with photos get significantly more calls and direction requests. This is usually the fastest visible gap — and the easiest win.</p>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- PHASE 2 -->
+        <div class="phase-header">Package 2 — Keep It Working (Monthly)</div>
+
+        <div class="ongoing-note">
+            A clean listing gets you in the game. Staying active keeps you there. Google rewards businesses that show up consistently — and customers notice when you respond.
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 6</span>
+            <strong>Review Generation & Responses</strong>
+            <p>A QR code at your counter, a text after each job, and a response to every review — good or bad. This is the step that compounds. Same star rating as your competitor, but you respond and they don't. Customers choose you.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 7</span>
+            <strong>Weekly Google Posts</strong>
+            <p>Updates, offers, before-and-afters — posted weekly to your profile. Most local businesses have never touched this feature. The ones that do show up as the active, current choice.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">Step 8</span>
+            <strong>Q&A Monitoring</strong>
+            <p>Anyone can answer questions on your listing — including competitors with wrong information. We seed it with the questions customers actually ask, and monitor it so bad answers don't sit there unchallenged.</p>
+        </div>
+
+        <div class="scissors">✂ ✂ ✂</div>
+
+        <!-- CTA -->
+        <div class="stamp-row">
+            <img src="adminbusters_logo.webp" alt="Admin-Busters" class="adminbusters-stamp" width="120">
+            <p>This is an <strong>Admin-Busters</strong> service — done-for-you marketing for local service businesses in Surrey and the Lower Mainland.</p>
+        </div>
+
+        <div class="cta-block">
+            <strong>Start with a free 15-minute audit.</strong>
+            <p>We pull up your actual listing, show you exactly what's missing, and tell you what it's probably costing you. No pressure. No pitch deck. Just a straight look at what's there — and what isn't.</p>
+            <p style="font-size:0.78rem;opacity:0.6;margin-bottom:16px;font-style:italic;">No ranking guarantees — just a complete, professional listing that gives you the best shot.</p>
+            <a href="tel:+17782380206" class="cta-btn">☎ Call 778-238-0206</a>
+            <a href="mailto:hello@princesslight.com?subject=Google%20Maps%20Audit" class="cta-btn-secondary">
+                ✉ Book a free audit by email
+                <span class="cta-email-sub">hello@princesslight.com</span>
+            </a>
+        </div>
+
+
+
+    </div>
+
+    <!-- Contact panel -->
+    <div class="plm-contact-panel" id="plm-contact-panel" aria-hidden="true">
+        <h3>What's driving you crazy?</h3>
+        <p>Tell us what's messy, repetitive, or eating your week. You'll reach a real person who can help you sort it out.</p>
+        <a class="plm-contact-action" href="tel:+17782380206">☎ Call 778-238-0206</a>
+        <a class="plm-contact-action" href="mailto:hello@princesslight.com?subject=Help%20with%20my%20business">
+            ✉ Email us
+            <span style="display:block;font-size:0.75rem;font-weight:400;opacity:0.7;margin-top:2px;">hello@princesslight.com</span>
+        </a>
+        <a class="plm-contact-action" href="book_a_call_page.html">→ Book a quick call</a>
+        <span class="plm-contact-small">No bots. No runaround. Just a straightforward conversation.</span>
+        <div class="plm-social-links">
+            <a href="https://www.linkedin.com/in/princesslight/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://www.facebook.com/princesslightmedia" target="_blank" rel="noopener noreferrer">Facebook</a>
+            <a href="https://www.instagram.com/princesslightmedia/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+    </div>
+    <button class="plm-contact-launcher" id="plm-contact-launcher" type="button" aria-expanded="false" aria-controls="plm-contact-panel">Tell Us What's Driving You Crazy →</button>
+
+    <script>
+        (() => {
+            const launcher = document.getElementById('plm-contact-launcher');
+            const panel = document.getElementById('plm-contact-panel');
+            if (!launcher || !panel) return;
+            const closePanel = () => {
+                panel.classList.remove('plm-open');
+                panel.setAttribute('aria-hidden', 'true');
+                launcher.setAttribute('aria-expanded', 'false');
+            };
+            launcher.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isOpen = panel.classList.toggle('plm-open');
+                panel.setAttribute('aria-hidden', String(!isOpen));
+                launcher.setAttribute('aria-expanded', String(isOpen));
+            });
+            panel.addEventListener('click', (event) => event.stopPropagation());
+            document.addEventListener('click', closePanel);
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+        })();
+    </script>
+</body>
+</html>
