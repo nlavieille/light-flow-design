@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <title>Interval Trainer</title>
+  <style>
+    :root{
+      color-scheme: dark;
+      --bg:#08101d;
+      --panel:#111827;
+      --panel2:#0b1220;
+      --muted:#94a3b8;
+      --text:#f8fafc;
+      --blue:#2563eb;
+      --blue2:#60a5fa;
+      --orange:#b45309;
+      --orange2:#f59e0b;
+      --bar:#7c4a32;
+      --active:#ffbe55;
+      --done:#b87333;
+      --border:#334155;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    body{
+      min-height:100vh;
+      min-height:100dvh;
+      overflow:hidden;
+      padding:max(env(safe-area-inset-top),8px) max(env(safe-area-inset-right),8px) max(env(safe-area-inset-bottom),8px) max(env(safe-area-inset-left),8px);
+    }
+    .app{
+      height:calc(100vh - max(env(safe-area-inset-top),8px) - max(env(safe-area-inset-bottom),8px));
+      height:calc(100dvh - max(env(safe-area-inset-top),8px) - max(env(safe-area-inset-bottom),8px));
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      gap:8px;
+      max-width:560px;
+      margin:0 auto;
+    }
+    .top{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+      background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 12px;
+    }
+    .eyebrow{font-size:11px;color:var(--muted);letter-spacing:.13em;text-transform:uppercase}
+    #remaining{font-size:clamp(44px,14vw,78px);font-weight:900;letter-spacing:.01em;line-height:.9;font-variant-numeric:tabular-nums}
+    .elapsed{margin-top:6px;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums}
+    .right{text-align:right}
+    #phase{font-size:clamp(20px,6vw,30px);font-weight:900;line-height:1}
+    #minute{font-weight:750;margin-top:6px}
+    #effort{font-size:13px;color:#cbd5e1;margin-top:2px}
+
+    .chartWrap{
+      min-height:0;background:var(--panel2);border:1px solid #1f2937;border-radius:14px;padding:10px 7px 8px;
+      display:grid;grid-template-rows:1fr auto;
+    }
+    .bars{
+      min-height:0;display:flex;align-items:flex-end;gap:2px;padding:2px 2px 0;
+    }
+    .bar{
+      flex:1;min-width:2px;background:var(--bar);opacity:.42;border-radius:3px 3px 0 0;
+      transition:filter .15s,opacity .15s,transform .15s;
+    }
+    .bar.past{opacity:.65;background:var(--done)}
+    .bar.active{opacity:1;background:var(--active);filter:brightness(1.15);transform:scaleX(1.12);z-index:2}
+    .ticks{display:flex;justify-content:space-between;color:#64748b;font-size:10px;padding:3px 2px 0}
+
+    .controls{
+      display:grid;grid-template-columns:2fr 1fr;gap:8px;
+    }
+    button{
+      min-height:52px;border-radius:12px;border:1px solid transparent;font:inherit;font-weight:850;font-size:17px;color:white;
+      touch-action:manipulation;
+    }
+    #toggle{background:var(--blue);border-color:var(--blue2)}
+    #toggle.running{background:var(--orange);border-color:var(--orange2)}
+    #reset{background:#27272a;border-color:#52525b}
+    .aux{
+      grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:8px;
+    }
+    .aux button{
+      min-height:42px;font-size:14px;background:#1f2937;border-color:#475569;color:#e2e8f0;
+    }
+    #wake.ok{border-color:#16a34a}
+    #wake.bad{border-color:#b91c1c}
+    #install[hidden]{display:none}
+
+    @media (max-height:650px){
+      .top{padding:8px 10px}
+      #remaining{font-size:42px}
+      #phase{font-size:20px}
+      button{min-height:46px}
+      .aux button{min-height:38px}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="top">
+      <div>
+        <div class="eyebrow">Time remaining</div>
+        <div id="remaining">30:00</div>
+        <div id="elapsed" class="elapsed">Elapsed 00:00</div>
+      </div>
+      <div class="right">
+        <div class="eyebrow">Current</div>
+        <div id="phase">Warm-up</div>
+        <div id="minute">Minute 1 / 30</div>
+        <div id="effort">Effort 3 / 10</div>
+      </div>
+    </section>
+
+    <section class="chartWrap" aria-label="30 minute interval workout">
+      <div id="bars" class="bars"></div>
+      <div class="ticks"><span>0</span><span>15 min</span><span>30</span></div>
+    </section>
+
+    <section class="controls">
+      <button id="toggle" type="button">▶ Start</button>
+      <button id="reset" type="button">Reset</button>
+      <div class="aux">
+        <button id="fullscreen" type="button">⛶ Fullscreen</button>
+        <button id="wake" type="button">☀ Keep screen awake</button>
+        <button id="install" type="button" hidden>⬇ Install app</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (() => {
+    const effort = [3,3,3,3,3,4,4,8,8,4,4,8,8,4,4,8,8,4,4,8,8,4,4,8,8,4,4,3,2,2];
+    const total = 1800;
+
+    let elapsed = 0;
+    let timer = null;
+    let running = false;
+    let audioCtx = null;
+    let wakeLock = null;
+    let deferredInstall = null;
+    let lastZone = "low";
+
+    const $ = id => document.getElementById(id);
+    const remainingEl = $("remaining");
+    const elapsedEl = $("elapsed");
+    const phaseEl = $("phase");
+    const minuteEl = $("minute");
+    const effortEl = $("effort");
+    const toggleEl = $("toggle");
+    const resetEl = $("reset");
+    const fsEl = $("fullscreen");
+    const wakeEl = $("wake");
+    const installEl = $("install");
+    const barsEl = $("bars");
+
+    effort.forEach((v, i) => {
+      const b = document.createElement("div");
+      b.className = "bar";
+      b.style.height = `${18 + v * 8}%`;
+      b.title = `Minute ${i+1}: effort ${v}/10`;
+      barsEl.appendChild(b);
+    });
+    const bars = [...barsEl.children];
+
+    const fmt = s => `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+    const zoneFor = v => v >= 7 ? "high" : "low";
+    const phaseFor = m => m <= 5 ? "Warm-up" : (m >= 28 ? "Cool-down" : (effort[m-1] >= 7 ? "WORK" : "Recovery"));
+
+    function ensureAudio(){
+      if (!audioCtx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (Ctx) audioCtx = new Ctx();
+      }
+      if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    }
+
+    // Strong, long bell/chime with harmonics and decay.
+    function bell(type){
+      ensureAudio();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const base = type === "high" ? 880 : 520;
+      const harmonics = [
+        [1.00, 0.55],
+        [1.50, 0.34],
+        [2.00, 0.22],
+        [2.67, 0.13]
+      ];
+      harmonics.forEach(([mult, amp], idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = idx === 0 ? "sine" : "triangle";
+        osc.frequency.setValueAtTime(base * mult, now);
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(amp, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.1);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 2.15);
+      });
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(base * (type === "high" ? 1.25 : 0.8), now + 0.23);
+      gain2.gain.setValueAtTime(0.0001, now + 0.22);
+      gain2.gain.exponentialRampToValueAtTime(0.48, now + 0.28);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 2.35);
+      osc2.connect(gain2).connect(audioCtx.destination);
+      osc2.start(now + 0.22);
+      osc2.stop(now + 2.4);
+    }
+
+    function render(){
+      const rem = Math.max(0, total - elapsed);
+      const idx = Math.min(29, Math.floor(elapsed / 60));
+      const minute = idx + 1;
+
+      remainingEl.textContent = fmt(rem);
+      elapsedEl.textContent = `Elapsed ${fmt(elapsed)}`;
+      minuteEl.textContent = `Minute ${minute} / 30`;
+      phaseEl.textContent = elapsed >= total ? "Complete" : phaseFor(minute);
+      effortEl.textContent = elapsed >= total ? "Workout finished" : `Effort ${effort[idx]} / 10`;
+
+      bars.forEach((b, i) => {
+        b.classList.toggle("active", i === idx && elapsed < total);
+        b.classList.toggle("past", i < idx);
+      });
+
+      if (elapsed >= total) {
+        stopTimer();
+        toggleEl.textContent = "Complete";
+        toggleEl.disabled = true;
+        bell("high");
+      }
+    }
+
+    function tick(){
+      if (elapsed >= total) return;
+      const prevIdx = Math.min(29, Math.floor(elapsed / 60));
+      elapsed += 1;
+      const newIdx = Math.min(29, Math.floor(elapsed / 60));
+
+      if (newIdx !== prevIdx && elapsed < total) {
+        const zone = zoneFor(effort[newIdx]);
+        if (zone !== lastZone) bell(zone);
+        lastZone = zone;
+      }
+      render();
+    }
+
+    function startTimer(){
+      if (running || elapsed >= total) return;
+      ensureAudio();
+      lastZone = zoneFor(effort[Math.min(29, Math.floor(elapsed / 60))]);
+      running = true;
+      timer = setInterval(tick, 1000);
+      toggleEl.textContent = "Ⅱ Pause";
+      toggleEl.classList.add("running");
+      requestWakeLock();
+    }
+
+    function stopTimer(){
+      if (timer) clearInterval(timer);
+      timer = null;
+      running = false;
+      if (elapsed < total) {
+        toggleEl.textContent = elapsed ? "▶ Resume" : "▶ Start";
+        toggleEl.classList.remove("running");
+      }
+    }
+
+    toggleEl.addEventListener("click", () => {
+      if (running) stopTimer(); else startTimer();
+    });
+
+    resetEl.addEventListener("click", () => {
+      stopTimer();
+      elapsed = 0;
+      lastZone = "low";
+      toggleEl.disabled = false;
+      toggleEl.textContent = "▶ Start";
+      render();
+    });
+
+    async function enterFullscreen(){
+      try {
+        const el = document.documentElement;
+        if (!document.fullscreenElement) {
+          await el.requestFullscreen({ navigationUI: "hide" });
+          fsEl.textContent = "↙ Exit fullscreen";
+          if (screen.orientation?.lock) {
+            try { await screen.orientation.lock("portrait"); } catch {}
+          }
+        } else {
+          await document.exitFullscreen();
+        }
+      } catch {
+        fsEl.textContent = "Fullscreen unavailable";
+      }
+    }
+
+    fsEl.addEventListener("click", enterFullscreen);
+    document.addEventListener("fullscreenchange", () => {
+      fsEl.textContent = document.fullscreenElement ? "↙ Exit fullscreen" : "⛶ Fullscreen";
+    });
+
+    async function requestWakeLock(){
+      if (!("wakeLock" in navigator)) {
+        wakeEl.textContent = "Keep-awake unsupported";
+        wakeEl.classList.add("bad");
+        return;
+      }
+      try {
+        if (!wakeLock) {
+          wakeLock = await navigator.wakeLock.request("screen");
+          wakeEl.textContent = "☀ Screen staying awake";
+          wakeEl.classList.remove("bad");
+          wakeEl.classList.add("ok");
+          wakeLock.addEventListener("release", () => {
+            wakeLock = null;
+            wakeEl.textContent = "☀ Keep screen awake";
+            wakeEl.classList.remove("ok");
+          });
+        }
+      } catch {
+        wakeEl.textContent = "Keep-awake blocked";
+        wakeEl.classList.add("bad");
+      }
+    }
+
+    wakeEl.addEventListener("click", requestWakeLock);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && running && !wakeLock) requestWakeLock();
+    });
+
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      deferredInstall = e;
+      installEl.hidden = false;
+      installEl.style.gridColumn = "1 / -1";
+    });
+
+    installEl.addEventListener("click", async () => {
+      if (!deferredInstall) return;
+      deferredInstall.prompt();
+      await deferredInstall.userChoice;
+      deferredInstall = null;
+      installEl.hidden = true;
+    });
+
+    window.addEventListener("appinstalled", () => {
+      installEl.hidden = true;
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js"));
+    }
+
+    render();
+  })();
+  </script>
+</body>
+</html>
