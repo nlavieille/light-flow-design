@@ -16,201 +16,25 @@
 <meta property="og:title" content="Motion Design Video Ads for Brands | Princess Light Media">
 <meta property="og:description" content="AI-native studio in Surrey, BC making short-form video ads, UGC and product films for DTC, ecommerce and Kickstarter brands. Days, not weeks.">
 <meta property="og:url" content="https://princesslight.com/">
-<meta property="og:image" content="https://princesslight.com/bridge-assets/poster-luppolo.jpg">
+<meta property="og:image" content="https://princesslight.com/assets/img/poster-luppolo.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Motion Design Video Ads for Brands | Princess Light Media">
-<meta name="twitter:description" content="Short-form video ads, UGC and product films for product brands. Done-for-you local marketing for Surrey service businesses.">
-<meta name="twitter:image" content="https://princesslight.com/bridge-assets/poster-luppolo.jpg">
+<meta name="twitter:description" content="AI-native studio in Surrey, BC making short-form video ads, UGC and product films for DTC, ecommerce and Kickstarter brands. Days, not weeks.">
+<meta name="twitter:image" content="https://princesslight.com/assets/img/poster-luppolo.jpg">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" href="bridge-assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#000504; --ink-cta:#111212; --paper:#fff; --surface:#F5F5F5; --border:#E5E6E5;
-  --muted:#6D6F6E; --dim:#989A99; --blue:#1823C9; --blue-deep:#131BA3; --blue-tint:rgba(24,35,201,.07);
-  --on-dark-muted:rgba(255,255,255,.62); --border-dark:rgba(255,255,255,.14);
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
-  --radius:16px; --radius-pill:980px; --maxw:1200px; --measure:880px;
-  --gut:clamp(1.25rem,5vw,2.5rem); --sp:clamp(3.5rem,7vw,6.25rem); --card-pad:clamp(1.5rem,2.6vw,2rem);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;font-weight:400;
-  line-height:1.5;letter-spacing:-.01em;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-img,video{max-width:100%;display:block}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
-::selection{background:var(--blue);color:#fff}
-.skip-link{position:absolute;left:-9999px;top:0;z-index:1000;background:var(--ink);color:#fff;
-  padding:.9rem 1.4rem;font-size:14px;font-weight:600;text-decoration:none}
-.skip-link:focus{left:0}
-.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut)}
-.eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);
-  margin-bottom:1.25rem;display:block}
-.display{font-size:clamp(2.5rem,6vw,4.25rem);font-weight:600;line-height:.96;letter-spacing:-.028em;text-wrap:balance}
-.h2{font-size:clamp(1.85rem,3.6vw,2.75rem);font-weight:600;line-height:1.02;letter-spacing:-.024em;text-wrap:balance}
-.h3{font-size:clamp(1.2rem,1.9vw,1.55rem);font-weight:600;line-height:1.12;letter-spacing:-.02em}
-.display em,.h2 em,.h3 em{font-style:normal;color:var(--blue)}
-.lede{font-size:clamp(1.0625rem,1.5vw,1.25rem);line-height:1.5;color:var(--muted);max-width:52ch;text-wrap:pretty}
-.masthead{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.86);
-  backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border)}
-.masthead-in{max-width:var(--maxw);margin:0 auto;padding:1rem var(--gut);display:flex;align-items:center;
-  justify-content:space-between;gap:1.5rem}
-.brand{font-size:15px;font-weight:600;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:.55rem}
-.brand-pip{width:8px;height:8px;border-radius:50%;background:var(--blue);flex:none}
-.nav{display:flex;align-items:center;gap:1.75rem}
-.nav a{font-size:15px;color:var(--muted);text-decoration:none;transition:color .2s;white-space:nowrap}
-.nav a:hover{color:var(--ink)}
-.nav-cta{font-size:15px;font-weight:600;padding:.6rem 1.35rem;background:var(--ink);color:#fff!important;
-  text-decoration:none;border-radius:var(--radius-pill);transition:background .2s}
-.nav-cta:hover{background:var(--blue)}
-.hero{padding:clamp(3.5rem,7vw,6rem) 0 clamp(2.5rem,4vw,3.5rem)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,380px);gap:clamp(2rem,5vw,4.5rem);align-items:center}
-.hero .display{margin-bottom:1.5rem;max-width:18ch}
-.hero .lede{font-size:clamp(1.125rem,1.7vw,1.375rem)}
-.hero-media{border-radius:var(--radius);overflow:hidden;background:var(--ink);margin:0}
-.hero-media img{width:100%;height:auto;display:block}
-.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:2rem;align-items:stretch}
-.hero-facts{display:flex;flex-wrap:wrap;gap:1.25rem 3rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
-.hero-fact dt{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin-bottom:.35rem}
-.hero-fact dd{font-size:15px;font-weight:500}
-.btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  font-family:inherit;font-size:17px;font-weight:600;letter-spacing:-.01em;padding:.9rem 1.75rem;min-height:52px;
-  border-radius:var(--radius-pill);text-decoration:none;border:1px solid transparent;transition:all .2s}
-.btn--ink{background:var(--ink);color:#fff}
-.btn--ink:hover{background:var(--blue)}
-.btn--ghost{border-color:var(--border);color:var(--ink);background:var(--paper)}
-.btn--ghost:hover{border-color:var(--ink)}
-.btn--light{background:#fff;color:var(--ink)}
-.btn--light:hover{background:var(--surface)}
-.btn--ghost-dark{border-color:var(--border-dark);color:#fff}
-.btn--ghost-dark:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-.btn-sub{display:block;font-size:13px;font-weight:400;opacity:.7;margin-top:.15rem}
-.capstrip{border-bottom:1px solid var(--border)}
-.capstrip ul{max-width:var(--maxw);margin:0 auto;padding:1.1rem var(--gut);list-style:none;display:flex;
-  flex-wrap:wrap;gap:.55rem 1.75rem;align-items:center}
-.capstrip li{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.capstrip li:first-child{color:var(--blue)}
-.section{padding:var(--sp) 0}
-.section--tint{background:var(--surface)}
-.section--dark{background:var(--ink-cta);color:#fff}
-.section--dark .lede{color:var(--on-dark-muted)}
-.section--dark .eyebrow{color:#8E96FF}
-.section--dark .h2,.section--dark .h3{color:#fff}
-.section--dark .h2 em{color:#8E96FF}
-.section-head{margin-bottom:clamp(2rem,4vw,3rem);max-width:var(--measure)}
-.section-head .lede{margin-top:1rem}
-.grid{display:grid;gap:1.25rem}
-.grid--2{grid-template-columns:repeat(2,1fr)}
-.grid--3{grid-template-columns:repeat(3,1fr)}
-.card{background:var(--paper);border:1px solid var(--border);border-radius:var(--radius);padding:var(--card-pad);overflow:hidden}
-.section--tint .card{border-color:transparent}
-.section--dark .card{background:rgba(255,255,255,.045);border-color:var(--border-dark)}
-.card-num{display:block;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:.9rem}
-.section--dark .card-num{color:#8E96FF}
-.card .h3{margin-bottom:.6rem}
-.card p{font-size:15px;line-height:1.55;color:var(--muted);text-wrap:pretty}
-.section--dark .card p{color:var(--on-dark-muted)}
-.card ul{list-style:none;margin-top:1rem;display:grid;gap:.5rem}
-.card li{font-size:15px;line-height:1.5;color:var(--muted);padding-left:1.15rem;position:relative}
-.card li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--blue)}
-.section--dark .card li{color:var(--on-dark-muted)}
-.section--dark .card li::before{background:#8E96FF}
-.card-media{margin:calc(var(--card-pad) * -1) calc(var(--card-pad) * -1) 1.4rem;aspect-ratio:3/2;overflow:hidden;background:var(--surface)}
-.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.card:hover .card-media img{transform:scale(1.035)}
-.paths{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
-.path{display:block;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--border);
-  border-radius:var(--radius);padding:clamp(1.6rem,3vw,2.25rem);transition:border-color .2s,transform .2s,box-shadow .2s}
-.path:hover{border-color:var(--ink);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,5,4,.07)}
-.path .h3{margin-bottom:.55rem}
-.path p{font-size:15px;line-height:1.55;color:var(--muted);margin-bottom:1rem}
-.path-go{font-size:15px;font-weight:600;color:var(--blue)}
-.path--dark{background:var(--ink);border-color:var(--ink);color:#fff}
-.path--dark p{color:var(--on-dark-muted)}
-.path--dark .card-num,.path--dark .path-go{color:#8E96FF}
-.path--dark:hover{border-color:var(--blue);box-shadow:0 12px 32px rgba(0,5,4,.2)}
-.tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--blue);background:var(--blue-tint);border-radius:var(--radius-pill);padding:.3rem .75rem;margin:0 .35rem .6rem 0}
-.film{background:var(--ink);width:100%;border-radius:var(--radius);overflow:hidden;margin-top:1.25rem}
-.film--v{max-width:420px;margin-inline:auto}
-.card--wide{grid-column:1 / -1}
-@media (min-width:841px){
-  .card--wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:clamp(1.5rem,3.5vw,3rem);align-items:center}
-  .card--wide .film{margin-top:0}
-}
-.trades{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;list-style:none}
-.trades li{font-size:14px;font-weight:500;color:var(--muted);background:var(--paper);border:1px solid var(--border);
-  border-radius:var(--radius-pill);padding:.45rem 1rem}
-.section--dark .trades li{background:rgba(255,255,255,.05);border-color:var(--border-dark);color:var(--on-dark-muted)}
-.section-badge{display:block;width:clamp(208px,25vw,292px);height:auto;margin-bottom:1.6rem}
-.glance{border:1px solid var(--border);border-radius:var(--radius);padding:clamp(1.4rem,2.8vw,2rem);margin-top:2.5rem}
-.glance h2{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue);margin-bottom:1.1rem}
-.glance dl{display:grid;gap:.8rem}
-.glance div{display:grid;grid-template-columns:minmax(110px,160px) 1fr;gap:1.25rem;align-items:baseline}
-.glance dt{font-size:13px;font-weight:600;color:var(--muted)}
-.glance dd{font-size:15px;line-height:1.5}
-.glance a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
-.cta-band{background:var(--ink);color:#fff;padding:clamp(4rem,8vw,6.5rem) 0;text-align:center}
-.cta-band .h2{color:#fff;margin-bottom:1rem}
-.cta-band .h2 em{color:#8E96FF}
-.cta-band .lede{color:var(--on-dark-muted);margin:0 auto 2.25rem;text-align:center}
-.cta-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;align-items:stretch}
-.site-footer{background:var(--ink);color:var(--on-dark-muted);padding:clamp(3rem,6vw,4.5rem) 0 2rem}
-.footer-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:clamp(1.75rem,4vw,3rem)}
-.footer-col h2{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:1.1rem}
-.footer-col ul{list-style:none;display:grid;gap:.65rem}
-.footer-col a{font-size:15px;color:var(--on-dark-muted);text-decoration:none;transition:color .2s}
-.footer-col a:hover{color:#fff}
-.footer-brand .h3{color:#fff;margin-bottom:.7rem}
-.footer-brand p{font-size:15px;line-height:1.55;max-width:34ch}
-.footer-bottom{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:clamp(2.5rem,5vw,3.5rem);
-  padding-top:1.5rem;border-top:1px solid var(--border-dark);font-size:13px;color:rgba(255,255,255,.42)}
-@media (max-width:1000px){.grid--3{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:2.25rem}.hero-media{max-width:360px;margin-inline:auto}}
-@media (max-width:840px){
-  .nav a:not(.nav-cta){display:none}
-  .grid--2,.grid--3,.paths{grid-template-columns:1fr}
-  .glance div{grid-template-columns:1fr;gap:.15rem}
-}
-@media (max-width:560px){.footer-grid{grid-template-columns:1fr}.hero-facts{gap:1rem 2rem}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important}}
-</style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@graph":[
-{"@type":"ProfessionalService","@id":"https://princesslight.com/#org","name":"Princess Light Media",
-"alternateName":["PLM","Admin-Busters"],"url":"https://princesslight.com/","email":"hello@princesslight.com",
-"telephone":"+1-778-238-0206","image":"https://princesslight.com/bridge-assets/poster-luppolo.jpg",
-"description":"Princess Light Media is an AI-native creative studio in Metro Vancouver. It produces short-form motion design video ads, UGC-style creative and product films for product brands, and runs done-for-you local marketing under its Admin-Busters service line.",
-"founder":{"@type":"Person","name":"Noel Lavieille"},
-"address":{"@type":"PostalAddress","addressLocality":"Surrey","addressRegion":"BC","addressCountry":"CA"},
-"areaServed":[{"@type":"AdministrativeArea","name":"Surrey"},{"@type":"AdministrativeArea","name":"Langley"},
-{"@type":"AdministrativeArea","name":"Delta"},{"@type":"AdministrativeArea","name":"Burnaby"},
-{"@type":"AdministrativeArea","name":"Richmond"},{"@type":"AdministrativeArea","name":"Vancouver"},
-{"@type":"AdministrativeArea","name":"Lower Mainland"},{"@type":"Country","name":"Canada"},{"@type":"Country","name":"United States"}],
-"sameAs":["https://www.linkedin.com/in/princesslight/","https://www.facebook.com/princesslightmedia","https://www.instagram.com/princesslightmedia/"],
-"priceRange":"$$"},
-{"@type":"WebSite","@id":"https://princesslight.com/#website","url":"https://princesslight.com/",
-"name":"Princess Light Media","publisher":{"@id":"https://princesslight.com/#org"},"inLanguage":"en-CA"},
-{"@type":"WebPage","url":"https://princesslight.com/","name":"Princess Light Media",
-"isPartOf":{"@id":"https://princesslight.com/#website"},"about":{"@id":"https://princesslight.com/#org"},"inLanguage":"en-CA"}
-]}
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/plm.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://princesslight.com/#org","name":"Princess Light Media","alternateName":["PLM","Admin-Busters"],"url":"https://princesslight.com/","email":"hello@princesslight.com","telephone":"+1-778-238-0206","image":"https://princesslight.com/assets/img/adminbusters_hero.webp","description":"Princess Light Media is an AI-native creative studio in Metro Vancouver. It produces short-form motion design video ads, UGC-style creative and product films for product brands, and runs done-for-you local marketing under its Admin-Busters service line.","founder":{"@type":"Person","@id":"https://princesslight.com/about/#noel","name":"Noel Lavieille"},"areaServed":[{"@type":"AdministrativeArea","name":"Surrey"},{"@type":"AdministrativeArea","name":"Langley"},{"@type":"AdministrativeArea","name":"Delta"},{"@type":"AdministrativeArea","name":"White Rock"},{"@type":"AdministrativeArea","name":"Burnaby"},{"@type":"AdministrativeArea","name":"Richmond"},{"@type":"AdministrativeArea","name":"Coquitlam"},{"@type":"AdministrativeArea","name":"New Westminster"},{"@type":"AdministrativeArea","name":"Vancouver"},{"@type":"AdministrativeArea","name":"Lower Mainland"},{"@type":"AdministrativeArea","name":"British Columbia"},{"@type":"Country","name":"Canada"},{"@type":"Country","name":"United States"}],"address":{"@type":"PostalAddress","addressLocality":"Surrey","addressRegion":"BC","addressCountry":"CA"},"sameAs":["https://www.linkedin.com/in/princesslight/","https://www.facebook.com/princesslightmedia","https://www.instagram.com/princesslightmedia/"],"knowsAbout":["motion design","video advertising","user generated content","short-form video","local SEO","Google Business Profile optimization","marketing automation","business intelligence","data architecture"],"priceRange":"$$"},{"@type":"WebSite","@id":"https://princesslight.com/#website","url":"https://princesslight.com/","name":"Princess Light Media","publisher":{"@id":"https://princesslight.com/#org"},"inLanguage":"en-CA"},{"@type":"SiteNavigationElement","@id":"https://princesslight.com/#nav","name":["Work","Services","Local Business Marketing","About","FAQ","Contact"],"url":["https://princesslight.com/work/","https://princesslight.com/services/","https://princesslight.com/local/","https://princesslight.com/about/","https://princesslight.com/faq/","https://princesslight.com/contact/"]},{"@type":"BreadcrumbList","@id":"#crumbs","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://princesslight.com/"}]},{"@type":"Person","@id":"https://princesslight.com/about/#noel","name":"Noel Lavieille","jobTitle":"Founder & Creative Director","worksFor":{"@id":"https://princesslight.com/#org"},"url":"https://princesslight.com/about/","description":"Noel Lavieille spent roughly twenty years in data architecture and business intelligence, most recently at VP level at State Street, before founding Princess Light Media.","knowsAbout":["motion design","video advertising","data architecture","business intelligence","marketing automation"],"address":{"@type":"PostalAddress","addressLocality":"Surrey","addressRegion":"BC","addressCountry":"CA"},"sameAs":["https://www.linkedin.com/in/princesslight/","https://www.facebook.com/princesslightmedia","https://www.instagram.com/princesslightmedia/"]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does Princess Light Media do?","acceptedAnswer":{"@type":"Answer","text":"Princess Light Media is an AI-native creative studio based in Surrey, British Columbia. It produces short-form motion design video ads, UGC-style creative and product films for product brands, and runs done-for-you local marketing for service businesses under its Admin-Busters service line."}},{"@type":"Question","name":"How fast can you turn around a video ad?","acceptedAnswer":{"@type":"Answer","text":"Most short-form ads are delivered in days rather than weeks. Production is AI-native, so a full set of assets is built in a single production pass instead of scheduling a shoot, a crew and an edit suite."}},{"@type":"Question","name":"Do you need to shoot my product?","acceptedAnswer":{"@type":"Answer","text":"No. Most projects start from existing product photography, a logo and a colour palette. The Luppolo Brewing campaign was built from one product photo."}},{"@type":"Question","name":"What does a project cost?","acceptedAnswer":{"@type":"Answer","text":"Projects are quoted per brief, based on the number of finished assets and the size of the visual world being built. Send the brief and you get a fixed number back before anything starts."}},{"@type":"Question","name":"Do you work with local businesses as well as product brands?","acceptedAnswer":{"@type":"Answer","text":"Yes. Local service businesses in Surrey and the Lower Mainland are served under the Admin-Busters name, covering online booking, automated reminders, follow-up, review generation, Google Business Profile optimisation and social content."}},{"@type":"Question","name":"Where are you based, and who can you work with?","acceptedAnswer":{"@type":"Answer","text":"The studio is based in Surrey, British Columbia and serves Metro Vancouver and the Lower Mainland in person. Video work is delivered remotely for clients anywhere in Canada, the United States and internationally."}}]},{"@type":"WebPage","@id":"https://princesslight.com/#webpage","url":"https://princesslight.com/","name":"Princess Light Media","isPartOf":{"@id":"https://princesslight.com/#website"},"about":{"@id":"https://princesslight.com/#org"},"inLanguage":"en-CA"}]}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
 <header class="masthead">
   <div class="masthead-in">
-    <a href="#main" class="brand"><span class="brand-pip" aria-hidden="true"></span>Princess Light Media</a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#work">Work</a>
-      <a href="#services">Services</a>
-      <a href="#local">Local Business</a>
-      <a href="#contact" class="nav-cta">Start a Project</a>
-    </nav>
+    <a href="index.html" class="brand" aria-label="Princess Light Media home"><span class="brand-pip" aria-hidden="true"></span>Princess Light Media</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav class="nav" id="primary-nav" aria-label="Primary"><a href="work/index.html">Work</a><a href="services/index.html">Services</a><a href="local/index.html">Local Business</a><a href="about/index.html">About</a><a href="faq/index.html">FAQ</a><a href="contact/index.html" class="nav-cta">Start a Project</a></nav>
   </div>
 </header>
 
@@ -222,14 +46,14 @@ a{color:inherit}
       <div>
         <span class="eyebrow">Motion Design Studio · Surrey &amp; Vancouver, BC</span>
         <h1 class="display">Most creators make videos. We build <em>creative systems.</em></h1>
-        <p class="lede">One brief becomes one visual world, becomes a campaign's worth of content. Short-form ads, UGC, product film... engineered for the scroll, built in a single production pass.</p>
+        <p class="lede">One brief becomes one visual world becomes a campaign's worth of content. Short-form ads, UGC, product film — engineered for the scroll, built in a single production pass.</p>
         <div class="hero-actions">
-          <a href="#work" class="btn btn--ink">See the Work</a>
-          <a href="mailto:hello@princesslight.com?subject=Project%20enquiry" class="btn btn--ghost">Send Us a Brief<span class="btn-sub">hello@princesslight.com</span></a>
+          <a href="work/index.html" class="btn btn--ink">See the Work</a>
+          <a href="contact/index.html" class="btn btn--ghost">Send Us a Brief<span class="btn-sub">hello@princesslight.com</span></a>
         </div>
       </div>
       <figure class="hero-media">
-        <img src="bridge-assets/hero-cheers.webp" width="900" height="1203" alt="Frame from the La Piazza Pilsner campaign for Luppolo Brewing... four friends clinking cans around a beach fire at dusk, Vancouver skyline behind" fetchpriority="high" decoding="async">
+        <img src="assets/img/still-luppolo-cheers.webp" width="900" height="1203" alt="Frame from the La Piazza Pilsner campaign for Luppolo Brewing — four friends clinking cans around a beach fire at dusk, Vancouver skyline behind" fetchpriority="high" decoding="async">
       </figure>
     </div>
     <dl class="hero-facts">
@@ -241,179 +65,212 @@ a{color:inherit}
   </div>
 </section>
 
-<div class="capstrip"><ul>
-  <li>Capabilities</li><li>Short-Form Video Ads</li><li>UGC &amp; Creator-Style</li>
-  <li>Product Cinematography</li><li>Release Packs</li><li>Local Marketing</li>
-</ul></div>
+<div class="capstrip"><ul><li>Capabilities</li><li>Short-Form Video Ads</li><li>UGC &amp; Creator-Style</li><li>Product Cinematography</li><li>Release Packs</li><li>Local Marketing</li></ul></div>
 
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">01 · Start here</span>
+      <span class="eyebrow">01 — Start here</span>
       <h2 class="h2">Two ways to work with us</h2>
-      <p class="lede">The studio serves two kinds of client. Pick the one that sounds like you.</p>
+      <p class="lede">The studio serves two kinds of client. Pick the one that sounds like you — everything below is the first.</p>
     </div>
     <div class="paths">
-      <a class="path" href="#services">
+      <a class="path" href="services/index.html">
         <span class="card-num">For product brands</span>
         <h3 class="h3">Motion design video ads</h3>
-        <p>Short-form ads, UGC-style creative, product films and full release packs. For DTC, ecommerce, craft beverage, beauty, spirits and Kickstarter. Anywhere in the world.</p>
+        <p>Short-form ads, UGC-style creative, product films and full release packs. For DTC, ecommerce, craft beverage, beauty, spirits and Kickstarter — anywhere in the world.</p>
         <span class="path-go">See services &rarr;</span>
       </a>
-      <a class="path path--dark" href="#local">
+      <a class="path path--dark" href="local/index.html">
         <span class="card-num">For local service businesses</span>
-        <h3 class="h3">Admin-Busters: local marketing in Surrey</h3>
+        <h3 class="h3">Admin-Busters — local marketing in Surrey</h3>
         <p>Online booking, automated reminders, follow-up, review generation, Google Business Profile and social content. Set up and run for you, across the Lower Mainland.</p>
-        <span class="path-go">See Admin-Busters &rarr;</span>
+        <span class="path-go">Open Admin-Busters &rarr;</span>
       </a>
     </div>
   </div>
 </section>
 
-<section class="section section--tint" id="work">
+<section class="section section--tint">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">02 · Selected work</span>
+      <span class="eyebrow">02 — Selected work</span>
       <h2 class="h2">Three briefs. Three <em>full campaigns.</em></h2>
-      <p class="lede">Spec commercials, built to show exactly what a product looks like when someone takes it seriously. Press play.</p>
+      <p class="lede">Stills don't do them justice. These are frames — the campaigns run on the work page.</p>
     </div>
-    <div class="grid grid--2">
-      <article class="card">
-        <span class="tag">Craft Beverage · Spec Commercial</span>
-        <h3 class="h3">La Piazza Pilsner</h3>
-        <p>Built from one product photo. Beach walks, forest rides, a firelit toast at dusk. A full lifestyle campaign for a real Vancouver brewery, with no location scout and no crew.</p>
-        <video class="film film--v" controls preload="none" playsinline poster="bridge-assets/poster-luppolo.jpg" aria-label="La Piazza Pilsner spec commercial for Luppolo Brewing">
-          <source src="bridge-assets/film-luppolo.mp4" type="video/mp4">
-        </video>
-      </article>
-      <article class="card">
-        <span class="tag">Beauty · UGC</span>
-        <h3 class="h3">Brow Stamp Kit</h3>
-        <p>A bold-claim UGC ad, character-driven start to finish. Product-in-hand, straight to camera, ending on a clean ecommerce shot. Native to the feed rather than produced for it.</p>
-        <video class="film film--v" controls preload="none" playsinline poster="bridge-assets/poster-madluvv.jpg" aria-label="Madluvv brow stamp kit UGC-style video advertisement">
-          <source src="bridge-assets/film-madluvv.mp4" type="video/mp4">
-        </video>
-      </article>
-      <article class="card card--wide">
-        <div>
-          <span class="tag">Spirits · Product Film</span>
-          <h3 class="h3">The Apology</h3>
-          <p>A spec concept built on costly-signalling psychology: a wax seal, a pour, a printed sentence. Macro cinematography designed to belong on a top shelf rather than a shelf-talker.</p>
-        </div>
-        <video class="film" controls preload="none" playsinline poster="bridge-assets/poster-apology.jpg" aria-label="The Apology product film for Penance Tonic">
-          <source src="bridge-assets/film-apology.mp4" type="video/mp4">
-        </video>
-      </article>
+    <div class="stills">
+      <a class="still" href="work/index.html">
+        <img src="assets/img/still-luppolo-stump.webp" width="900" height="1636" loading="lazy" decoding="async" alt="A Luppolo La Piazza Pilsner can resting on a weathered post at dusk — a frame from the campaign">
+        <span class="still-play">Watch &rarr;</span>
+        <span class="still-body">
+          <span class="still-tag">Craft Beverage · Spec Commercial</span>
+          <span class="still-title">La Piazza Pilsner</span>
+          <span class="still-sub">A full lifestyle campaign, built from one product photo.</span>
+        </span>
+      </a>
+      <a class="still" href="work/index.html">
+        <img src="assets/img/still-madluvv.webp" width="900" height="1600" loading="lazy" decoding="async" alt="Creator holding the Madluvv brow stamp kit to camera — a frame from the UGC-style video ad">
+        <span class="still-play">Watch &rarr;</span>
+        <span class="still-body">
+          <span class="still-tag">Beauty · UGC</span>
+          <span class="still-title">Brow Stamp Kit</span>
+          <span class="still-sub">Bold-claim UGC, native to the feed rather than produced for it.</span>
+        </span>
+      </a>
+      <a class="still" href="work/index.html">
+        <img src="assets/img/still-apology-seal.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Red wax seal on a copper bottle — a frame from The Apology product film for Penance Tonic">
+        <span class="still-play">Watch &rarr;</span>
+        <span class="still-body">
+          <span class="still-tag">Spirits · Product Film</span>
+          <span class="still-title">The Apology</span>
+          <span class="still-sub">Macro cinematography built for the top shelf.</span>
+        </span>
+      </a>
     </div>
-    <p style="margin-top:1.5rem;font-size:13px;color:var(--dim)">Spec work produced independently to demonstrate approach, not commissioned by the brands shown.</p>
-    <p style="margin-top:2rem"><a href="kaira/" class="btn btn--ink">See a Full Release Pack: KAIRA</a></p>
+    <div class="stills-cta">
+      <p>Every one of these moves. See all three campaigns play, with the brief behind each.</p>
+      <a href="work/index.html" class="btn btn--ink">See the Work in Motion</a>
+    </div>
   </div>
 </section>
 
-<section class="section" id="services">
+<section class="section">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">03 · Services</span>
+      <span class="eyebrow">03 — Services</span>
       <h2 class="h2">Four things we make</h2>
       <p class="lede">Each one starts from the same place: a brief, a product, and a decision about what world it lives in.</p>
     </div>
     <div class="grid grid--2">
-      <article class="card">
-        <figure class="card-media"><img src="bridge-assets/svc-shortform.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a Butterfly Cleaning short-form ad... a cleaner at a window with the Vancouver skyline behind"></figure>
-        <span class="card-num">01</span><h3 class="h3">Short-Form Video Ads</h3>
-        <p>Hook-first vertical ads for paid social and organic feeds. Built to survive the first second, then earn the next five.</p>
-        <ul><li>9:16, 4:5 and 1:1 cuts</li><li>Multiple hook variants for testing</li><li>Captions and on-screen text included</li></ul>
-      </article>
-      <article class="card">
-        <figure class="card-media"><img src="bridge-assets/svc-ugc.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a creator-style drink ad... a person talking straight to camera, product in hand"></figure>
-        <span class="card-num">02</span><h3 class="h3">UGC &amp; Creator-Style Ads</h3>
-        <p>Product-in-hand, straight to camera, ending on a clean ecommerce shot. Designed to feel native to the feed, not produced for it.</p>
-        <ul><li>Character-driven, bold-claim structure</li><li>No creator sourcing, no shipping samples</li><li>A new variant in hours, not weeks</li></ul>
-      </article>
-      <article class="card">
-        <figure class="card-media"><img src="bridge-assets/svc-productfilm.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a spec product film... an astronaut working at a control panel"></figure>
-        <span class="card-num">03</span><h3 class="h3">Product &amp; Brand Films</h3>
-        <p>Macro cinematography and built visual worlds for brands that need to look expensive before they are.</p>
-        <ul><li>16:9 and vertical masters</li><li>Sound design and grade included</li><li>Stills pulled from the same world</li></ul>
-      </article>
-      <article class="card">
-        <figure class="card-media"><img src="bridge-assets/svc-releasepack.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Story frame from the KAIRA Slow Burn release pack... a lamplit nightstand at night"></figure>
-        <span class="card-num">04</span><h3 class="h3">Release &amp; Launch Packs</h3>
-        <p>One brief, one production pass, a fortnight of content. Built originally for music releases; it works for any launch with a date on it.</p>
-        <ul><li>Eleven assets across formats</li><li>Fourteen-day posting timeline</li><li>Captions and hooks written to match</li></ul>
-      </article>
+      <article class="card"><figure class="card-media"><img src="assets/img/svc-shortform.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a Butterfly Cleaning short-form ad — Vancouver skyline at dusk with the line Trusted. Eco-friendly. Detailed."></figure><span class="card-num">01</span><h3 class="h3">Short-Form Video Ads</h3><p>Hook-first vertical ads for paid social and organic feeds. Built to survive the first second, then earn the next five.</p><ul><li>9:16, 4:5 and 1:1 cuts</li><li>Multiple hook variants for testing</li><li>Caption and on-screen text included</li></ul></article>
+      <article class="card"><figure class="card-media"><img src="assets/img/svc-ugc.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a creator-style drink ad — a person talking straight to camera in a car, product in hand"></figure><span class="card-num">02</span><h3 class="h3">UGC &amp; Creator-Style Ads</h3><p>Product-in-hand, straight to camera, ending on a clean ecommerce shot. Designed to feel native to the feed, not produced for it.</p><ul><li>Character-driven, bold-claim structure</li><li>No creator sourcing, no shipping samples</li><li>Reshoot a variant in hours, not weeks</li></ul></article>
+      <article class="card"><figure class="card-media"><img src="assets/img/svc-productfilm.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Frame from a spec product film — a steam-filled professional kitchen hung with copper pans"></figure><span class="card-num">03</span><h3 class="h3">Product &amp; Brand Films</h3><p>Macro cinematography and built visual worlds for brands that need to look expensive before they are.</p><ul><li>16:9 and vertical masters</li><li>Sound design and grade included</li><li>Stills pulled from the same world</li></ul></article>
+      <article class="card"><figure class="card-media"><img src="assets/img/svc-releasepack.webp" width="1200" height="800" loading="lazy" decoding="async" alt="Release-day asset from the KAIRA Slow Burn pack — a rain-streaked window at night"></figure><span class="card-num">04</span><h3 class="h3">Release &amp; Launch Packs</h3><p>One brief, one production pass, a fortnight of content. Built originally for music releases; it works for any launch with a date on it.</p><ul><li>Eleven assets across formats</li><li>Fourteen-day posting timeline</li><li>Captions and hooks written to match</li></ul></article>
+    </div>
+    <p style="margin-top:2rem"><a href="services/index.html" class="btn btn--ghost">How Projects Are Scoped</a></p>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">04 — Process</span>
+      <h2 class="h2">How a project actually <em>runs</em></h2>
+      <p class="lede">Four steps. No discovery phase that bills for six weeks before anything moves.</p>
+    </div>
+    <div class="grid grid--2">
+      <article class="card"><span class="card-num">Step 01</span><h3 class="h3">The brief</h3><p>What the product is, who it's for, and what you need it to do. A paragraph is usually enough. If you don't have one, we write it on a fifteen-minute call.</p></article>
+      <article class="card"><span class="card-num">Step 02</span><h3 class="h3">The visual world</h3><p>Before a single frame is made, we decide the world — palette, light, texture, tempo. This is the step most cheap video skips, and it is the reason cheap video looks cheap.</p></article>
+      <article class="card"><span class="card-num">Step 03</span><h3 class="h3">The production pass</h3><p>Every asset in the set is produced from that one world in a single pass. That's why eleven pieces of content cost roughly what one shoot day would.</p></article>
+      <article class="card"><span class="card-num">Step 04</span><h3 class="h3">Delivery</h3><p>Finished files in the aspect ratios you actually post in, plus captions and hooks. You get a folder, not a Dropbox link and a shrug.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — Case study</span>
+      <h2 class="h2">KAIRA · <em>Slow Burn</em></h2>
+      <p class="lede">One creative brief for an indie single release. Eleven assets. Fourteen days of content. One production pass. Three of them are below.</p>
+    </div>
+    <div class="kaira-trio">
+      <figure>
+        <img src="assets/img/kaira-cover.webp" width="760" height="760" loading="lazy" decoding="async" alt="KAIRA — Slow Burn cover art: the artist sitting on a bed at night, city lights beyond the window">
+        <figcaption>Cover art</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/kaira-quote.webp" width="760" height="760" loading="lazy" decoding="async" alt="Quote card from the pack, reading: It wasn't a fire. It was a slow burn.">
+        <figcaption>Quote card</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/img/kaira-story.webp" width="760" height="760" loading="lazy" decoding="async" alt="Countdown story frame from the pack, reading: 1 week — KAIRA, Slow Burn">
+        <figcaption>Countdown story</figcaption>
+      </figure>
     </div>
     <div class="glance">
-      <h2>How projects work</h2>
+      <h2>At a glance</h2>
       <dl>
-        <div><dt>The brief</dt><dd>A paragraph on what the product is and who it's for. If you don't have one, a fifteen-minute call produces it.</dd></div>
-        <div><dt>Starting point</dt><dd>Existing product photography, a logo and a colour palette. No shoot required.</dd></div>
-        <div><dt>Turnaround</dt><dd>Days rather than weeks. The whole asset set comes out of a single production pass.</dd></div>
-        <div><dt>Pricing</dt><dd>Fixed price quoted per brief, agreed before anything starts. No hourly, no retainer.</dd></div>
-        <div><dt>How it's made</dt><dd>AI-native production. Generative video and motion tools, directed and finished by a person. Disclosed to every client.</dd></div>
+        <div><dt>Client type</dt><dd>Independent recording artist, single release</dd></div>
+        <div><dt>Deliverables</dt><dd>Cover art, hero reel, three cut-downs, five story frames, three quote cards, Spotify Canvas loop, UGC clip</dd></div>
+        <div><dt>Production</dt><dd>One brief, one visual world, one pass</dd></div>
+        <div><dt>Campaign length</dt><dd>Fourteen days of scheduled content</dd></div>
       </dl>
     </div>
+    <p style="margin-top:2rem"><a href="kaira/index.html" class="btn btn--ink">Open the Full Release Pack</a></p>
   </div>
 </section>
 
-<section class="section section--dark" id="local">
+<section class="section section--tint">
   <div class="wrap">
-    <img class="section-badge" src="bridge-assets/adminbusters-badge.webp" width="640" height="639" loading="lazy" decoding="async" alt="Admin-Busters: done-for-you marketing for local service businesses">
     <div class="section-head">
-      <span class="eyebrow">04 · Admin-Busters</span>
+      <img class="section-badge" src="assets/img/adminbusters-badge.webp" width="640" height="639" loading="lazy" decoding="async" alt="Admin-Busters — the local business marketing service from Princess Light Media">
+      <span class="eyebrow">06 — Admin-Busters</span>
       <h2 class="h2">Local business marketing in <em>Surrey</em></h2>
-      <p class="lede">If you're covered in paint, dog hair or massage oil by two in the afternoon, video isn't your bottleneck. The admin is. We build the systems that absorb the interruptions, then run them.</p>
+      <p class="lede">If you're covered in paint, dog hair or massage oil by two in the afternoon, video isn't your bottleneck — the admin is. Booking, follow-up, reviews, content and local search, handled.</p>
     </div>
-    <div class="grid grid--3">
-      <article class="card"><span class="card-num">01</span><h3 class="h3">Booking &amp; reminders</h3><p>Twenty-four-hour online booking configured for your services and durations, with reminder sequences that cut no-shows and one-tap rescheduling.</p></article>
-      <article class="card"><span class="card-num">02</span><h3 class="h3">Follow-up &amp; reviews</h3><p>Post-appointment check-ins, rebooking prompts for regulars, and a response to every review, good or bad. This is the step that compounds.</p></article>
-      <article class="card"><span class="card-num">03</span><h3 class="h3">Google Business Profile</h3><p>Claim, verify, fix and complete the listing that decides whether a nearby search finds you or your competitor, then keep it active.</p></article>
-    </div>
-    <ul class="trades" aria-label="Trades we work with">
-      <li>Hair salons &amp; barbershops</li><li>Nail salons</li><li>Tattoo studios</li>
-      <li>Med spas &amp; aesthetic clinics</li><li>Massage therapy</li><li>Gyms &amp; fitness studios</li><li>Dog groomers</li>
-    </ul>
-    <div class="hero-actions">
-      <a href="tel:+1-778-238-0206" class="btn btn--light">Free 15-Minute Call &rarr; 778-238-0206</a>
-      <a href="maps.html" class="btn btn--ghost-dark">Google Listing Service</a>
+    <div class="index-list">
+      <a class="index-row" href="local/index.html"><span class="index-row-num">01</span><span><span class="index-row-title">Admin-Busters — done-for-you local marketing</span><span class="index-row-desc">Booking, follow-up, reviews, content and local search, set up and run for you.</span></span><span class="index-row-go">Open &rarr;</span></a>
+      <a class="index-row" href="local/google-business-profile/index.html"><span class="index-row-num">02</span><span><span class="index-row-title">Google Business Profile optimisation</span><span class="index-row-desc">The listing that decides whether a nearby search finds you or your competitor.</span></span><span class="index-row-go">Open &rarr;</span></a>
+      <a class="index-row" href="local/problems-and-fixes/index.html"><span class="index-row-num">03</span><span><span class="index-row-title">Ten industries, every problem, every fix</span><span class="index-row-desc">An honest audit of what's broken in service businesses — and what actually repairs it.</span></span><span class="index-row-go">Open &rarr;</span></a>
+      <a class="index-row" href="local/hair-salon-marketing/index.html"><span class="index-row-num">04</span><span><span class="index-row-title">Salons, clinics, studios, groomers</span><span class="index-row-desc">Seven trades, each with its own page and its own set of fixes.</span></span><span class="index-row-go">Open &rarr;</span></a>
     </div>
   </div>
 </section>
 
-<section class="cta-band" id="contact">
+<section class="section section--rule" id="faq">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">FAQ</span><h2 class="h2">Questions people actually ask</h2></div>
+    <div class="faq"><details><summary>What does Princess Light Media do?</summary><div><p>Princess Light Media is an AI-native creative studio based in Surrey, British Columbia. We make two things:</p><p><strong>Motion design video ads</strong> for product brands — short-form ads, UGC-style creative, and product films for DTC, ecommerce, craft beverage, beauty and Kickstarter. And <strong>done-for-you local marketing</strong> for service businesses in the Lower Mainland, under our <a href="local/index.html">Admin-Busters</a> line.</p></div></details><details><summary>How fast can you turn around a video ad?</summary><div><p>Days, not weeks. There is no shoot day to schedule, no crew to book and no edit suite to sit in. A brief becomes a visual world, and the whole asset set comes out of a single production pass.</p><p>The Luppolo Brewing spec commercial was built in one sitting from a single product photograph.</p></div></details><details><summary>Do you need to shoot my product?</summary><div><p>No. Most projects start from what you already have — product photography, a logo, a colour palette. If you can send a good photo of the thing, we can put it in motion.</p></div></details><details><summary>What does a project cost?</summary><div><p>Quoted per brief. The two variables are how many finished assets you need and how much visual world has to be built to make them hang together.</p><p>Send the brief, get a fixed number back before anything starts. No retainers, no hourly.</p></div></details><details><summary>Do you work with local businesses as well as product brands?</summary><div><p>Yes — that is the <a href="local/index.html">Admin-Busters</a> half of the studio. Online booking, reminders, follow-up, reviews, Google Business Profile and social content, set up and then run for you.</p><p>Different problem, same studio: take a repetitive, structured job off a busy person's plate and build something that runs without them.</p></div></details><details><summary>Where are you based, and who can you work with?</summary><div><p>Surrey, BC. Local marketing work covers Surrey, Langley, Delta, Burnaby, Richmond and Vancouver in person.</p><p>Video work is remote and has no geography — the brief arrives by email and so does the finished campaign.</p></div></details></div>
+  </div>
+</section>
+
+<section class="cta-band cta-band--plate">
+  <img class="cta-plate" src="assets/img/still-apology-pour.webp" alt="" width="1400" height="788" loading="lazy" decoding="async">
   <div class="wrap">
     <h2 class="h2">Have a product?<br>Let's put it <em>in motion.</em></h2>
-    <p class="lede">Send a paragraph about what you're launching, or call about your local business. You'll reach a real person, the one who does the work, usually the same day.</p>
+    <p class="lede">Send a paragraph about what you're launching. You'll get a real reply from a real person, usually the same day.</p>
     <div class="cta-actions">
-      <a href="mailto:hello@princesslight.com?subject=Project%20enquiry" class="btn btn--light">hello@princesslight.com</a>
-      <a href="tel:+1-778-238-0206" class="btn btn--ghost-dark">778-238-0206</a>
+      <a href="contact/index.html" class="btn btn--light">Start a Project</a>
+      <a href="work/index.html" class="btn btn--ghost-dark">See the Work</a>
     </div>
   </div>
 </section>
 
 </main>
-
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col footer-brand">
+        <h2 class="visually-hidden" hidden>About Princess Light Media</h2>
         <p class="h3">Princess Light Media</p>
-        <p>An AI-native creative studio in Metro Vancouver. Motion design video ads for product brands and done-for-you marketing for local service businesses.</p>
+        <p>An AI-native creative studio in Metro Vancouver. Motion design video ads for product brands — and done-for-you marketing for local service businesses.</p>
         <p style="margin-top:1rem"><a href="tel:+1-778-238-0206">778-238-0206</a> &nbsp;·&nbsp; <a href="mailto:hello@princesslight.com">hello@princesslight.com</a></p>
       </div>
       <div class="footer-col">
         <h2>Studio</h2>
         <ul>
-          <li><a href="#work">Selected Work</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="kaira/">Case Study: KAIRA</a></li>
-          <li><a href="work.html">Work Page</a></li>
+          <li><a href="work/index.html">Selected Work</a></li>
+          <li><a href="services/index.html">Services</a></li>
+          <li><a href="kaira/index.html">Case Study — KAIRA</a></li>
+          <li><a href="about/index.html">About Noel</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Local Business</h2>
+        <ul>
+          <li><a href="local/index.html">Admin-Busters</a></li>
+          <li><a href="local/google-business-profile/index.html">Google Business Profile</a></li>
+          <li><a href="local/hair-salon-marketing/index.html">Hair Salons</a></li>
+          <li><a href="local/med-spa-marketing/index.html">Med Spas &amp; Clinics</a></li>
+          <li><a href="local/problems-and-fixes/index.html">Problems &amp; Fixes</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h2>Contact</h2>
         <ul>
-          <li><a href="#local">Admin-Busters</a></li>
+          <li><a href="contact/index.html">Start a Project</a></li>
+          <li><a href="faq/index.html">FAQ</a></li>
           <li><a href="https://www.instagram.com/princesslightmedia/" rel="noopener me" target="_blank">Instagram</a></li>
           <li><a href="https://www.linkedin.com/in/princesslight/" rel="noopener me" target="_blank">LinkedIn</a></li>
           <li><a href="https://www.facebook.com/princesslightmedia" rel="noopener me" target="_blank">Facebook</a></li>
@@ -422,10 +279,23 @@ a{color:inherit}
     </div>
     <div class="footer-bottom">
       <span>&copy; 2026 Princess Light Media · Surrey, British Columbia · Serving the Lower Mainland &amp; worldwide</span>
-      <span><a href="privacy.html">Privacy Policy</a></span>
+      <span><a href="privacy/index.html">Privacy Policy</a></span>
     </div>
   </div>
 </footer>
-
+<div class="plm-panel" id="plm-panel" data-open="false">
+  <p class="h3">Talk to a person</p>
+  <p>Tell us what you're trying to launch, or what's eating your week. You'll get a real reply.</p>
+  <a class="plm-action" href="tel:+1-778-238-0206">Call 778-238-0206</a>
+  <a class="plm-action" href="mailto:hello@princesslight.com">Email us<span>hello@princesslight.com</span></a>
+  <a class="plm-action" href="contact/index.html">Book a 15-minute call</a>
+  <div class="plm-social">
+    <a href="https://www.instagram.com/princesslightmedia/" rel="noopener me" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/princesslight/" rel="noopener me" target="_blank">LinkedIn</a>
+    <a href="https://www.facebook.com/princesslightmedia" rel="noopener me" target="_blank">Facebook</a>
+  </div>
+</div>
+<button class="plm-launch" id="plm-launch" type="button" aria-expanded="false" aria-controls="plm-panel">Talk to a person</button>
+<script src="assets/js/plm.js" defer></script>
 </body>
 </html>
