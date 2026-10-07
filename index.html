@@ -40,6 +40,15 @@
 .creative-dating-teaser__copy strong span{color:#d526a4}
 @media(max-width:480px){.creative-dating-teaser{gap:1rem;padding:1rem}.creative-dating-teaser__portrait{flex-basis:64px}.creative-dating-teaser__portrait img{width:64px;height:80px}.creative-dating-teaser__copy strong{font-size:18px}}
 </style>
+<style>
+.path.path--motion{position:relative;isolation:isolate;overflow:hidden;background:#111 url('creative-dating/assets/Otto-Apology-Profile-Pic-Suggestion.webp') center/cover no-repeat;color:#fff;border-color:#111}
+.path-motion-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;pointer-events:none}
+.path--motion::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(0,0,0,.83),rgba(0,0,0,.57));pointer-events:none}
+.path.path--motion p{color:#f2f2f2}
+.path.path--motion .card-num,.path.path--motion .path-go{color:#fff}
+.path.path--motion .h3{text-shadow:0 1px 8px rgba(0,0,0,.35)}
+@media(prefers-reduced-motion:reduce){.path-motion-video{display:none}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -88,7 +97,8 @@
       <p class="lede">The studio serves two kinds of client. Pick the one that sounds like you — everything below is the first.</p>
     </div>
     <div class="paths">
-      <a class="path" href="services/index.html">
+      <a class="path path--motion" href="services/index.html">
+        <video class="path-motion-video" autoplay muted loop playsinline preload="none" poster="creative-dating/assets/Otto-Apology-Profile-Pic-Suggestion.webp" aria-hidden="true" tabindex="-1"><source src="creative-dating/assets/apology.mp4" type="video/mp4"></video>
         <span class="card-num">For product brands</span>
         <h3 class="h3">Motion design video ads</h3>
         <p>Short-form ads, UGC-style creative, product films and full release packs. For DTC, ecommerce, craft beverage, beauty, spirits and Kickstarter — anywhere in the world.</p>
@@ -314,5 +324,8 @@
 </div>
 <button class="plm-launch" id="plm-launch" type="button" aria-expanded="false" aria-controls="plm-panel">Talk to a person</button>
 <script src="assets/js/plm.js" defer></script>
+<script>
+(()=>{const v=document.querySelector('.path-motion-video');if(!v)return;const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');function sync(){if(reduced.matches){v.pause();v.removeAttribute('autoplay');}else{v.setAttribute('autoplay','');const playing=v.play();if(playing)playing.catch(()=>{});}}sync();reduced.addEventListener('change',sync);})();
+</script>
 </body>
 </html>
